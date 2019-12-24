@@ -35,6 +35,8 @@
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.7.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@types/jest": "^24.0.24",
+    "@types/react-native": "^0.60.26",
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
@@ -43,6 +45,7 @@
     "react-native": "^0.61.5",
     "react-native-svg": "^9.13.6",
     "react-test-renderer": "^16.9.0",
+    "ts-jest": "^24.2.0",
     "typescript": "^3.7.4"
   },
   "dependencies": {
@@ -57,8 +60,10 @@
   ],
   "jest": {
     "preset": "react-native",
+    "testEnvironment": "node",
     "modulePathIgnorePatterns": [
       "<rootDir>/examples"
     ]
-  }
+  },
+  "type": "module"
 }
