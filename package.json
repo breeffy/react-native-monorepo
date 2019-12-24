@@ -41,7 +41,8 @@
     "react": "16.9.0",
     "react-native": "^0.61.5",
     "react-native-svg": "^9.13.6",
-    "react-test-renderer": "^16.9.0"
+    "react-test-renderer": "^16.9.0",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "humps": "^2.0.1",
