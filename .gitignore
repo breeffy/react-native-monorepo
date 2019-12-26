@@ -1,3 +1,5 @@
+# Ignore auto-generated Javascript files
+dist/
 # OSX
 #
 .DS_Store
