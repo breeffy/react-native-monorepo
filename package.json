@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:types": "npx tsc -d --declarationDir dist --declarationMap --emitDeclarationOnly",
-    "build:index": "npx tsc -d --declarationMap --emitDeclarationOnly ./index.ts",
+    "build:index": "npx tsc -d --emitDeclarationOnly ./index.ts",
     "test": "jest",
     "dist:babel": "babel --config-file ./babel.dist.config.cjs src --ignore src/components/__tests__ --out-dir dist",
     "dist:typescript": "npx tsc -d --declarationDir dist --declarationMap --emitDeclarationOnly",
@@ -39,6 +39,7 @@
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.7.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@types/assert": "^1.4.3",
     "@types/jest": "^24.0.24",
     "@types/react-native": "^0.60.26",
     "babel-core": "^7.0.0-bridge",
@@ -70,6 +71,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/examples"
     ]
+  },
+  "tsd": {
+    "directory": "__type__tests__"
   },
   "type": "module"
 }

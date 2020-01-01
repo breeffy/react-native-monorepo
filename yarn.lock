@@ -1171,6 +1171,11 @@
     wcwidth "^1.0.1"
     ws "^1.1.0"
 
+"@types/assert@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/assert/-/assert-1.4.3.tgz#c3b68c062a2375647d1b9efc41e57f8286bb30fe"
+  integrity sha512-491hfOvNr0+BGOHT2m36xJ+LK68IuOshvxV0VIrKOnzBDL11WlDa3PwO+drTYkwCdfzJRN9REcDPZVVcrx1ucw==
+
 "@types/babel__core@^7.1.0":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.3.tgz#e441ea7df63cd080dfcd02ab199e6d16a735fc30"
