@@ -40,6 +40,7 @@
     "@babel/runtime": "^7.7.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@types/assert": "^1.4.3",
+    "@types/humps": "^1.1.2",
     "@types/jest": "^24.0.24",
     "@types/react-native": "^0.60.26",
     "babel-core": "^7.0.0-bridge",
