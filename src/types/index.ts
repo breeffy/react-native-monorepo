@@ -14,7 +14,7 @@ export type Keys = Key[];
 /** If type T doesn't satisfy requirements then               */
 /** type ObjectAndNotArrayOrFunction<T> will be converged     */
 /** to type never, indicating that type T is not a valid type */
-type ObjectAndNotArrayOrFunction<T> = T extends { [key in Key]: any }
+export type ObjectAndNotArrayOrFunction<T> = T extends { [key in Key]: any }
   ? T extends Array<any> | Function
     ? never
     : T
@@ -30,16 +30,17 @@ type ObjectAndNotArrayOrFunction<T> = T extends { [key in Key]: any }
 /** UnionOfObjectKeys<{ key1: string, key2: number }> becomes "key1" | "key2" type */
 /** UnionOfObjectKeys<number> becomes "never" type                                 */
 /** UnionOfObjectKeys<["first", 2]> becomes "never" type                           */
-type UnionOfObjectKeys<T, O = ObjectAndNotArrayOrFunction<T>> = T extends O
-  ? keyof T
-  : never;
+export type UnionOfObjectKeys<
+  T,
+  O = ObjectAndNotArrayOrFunction<T>
+> = T extends O ? keyof T : never;
 
 /** Type describing objects (specifically ObjectAndNotArrayOrFunction<T>), which are: */
 /** always have required key indicating as K type                                     */
 /** and values in these keys (object[key]) can't be null or undefined                 */
 /** If type T doesn't satisfy requirements then this type                             */
 /** will be converged to type "never", indicating that type T is not a valid type     */
-type ObjectWithDefinedProperty<
+export type ObjectWithDefinedProperty<
   T,
   K,
   O = ObjectAndNotArrayOrFunction<T>,
@@ -59,7 +60,7 @@ type ObjectWithDefinedProperty<
 // {
 //   [P in ValuesOf<typeof keys>]-?: Exclude<T[P], undefined | null>;
 // }
-type ObjectWithDefinedProperties<
+export type ObjectWithDefinedProperties<
   T,
   K,
   O = ObjectAndNotArrayOrFunction<T>,
@@ -79,7 +80,7 @@ type ObjectWithDefinedProperties<
 /** and values in these keys (object[key]) can't be null or undefined                 */
 /** If type T doesn't satisfy requirements then this type                             */
 /** will be converged to type "never", indicating that type T is not a valid type     */
-type ObjectWithAllDefinedProperties<
+export type ObjectWithAllDefinedProperties<
   T,
   O = ObjectAndNotArrayOrFunction<T>,
   K = UnionOfObjectKeys<O>
@@ -92,7 +93,7 @@ type ObjectWithAllDefinedProperties<
 // First, define a type that, when passed a union of keys, creates an object which
 // cannot have those properties. I couldn't find a way to use this type directly,
 // but it can be used with the below type.
-type Impossible<K extends keyof any> = {
+export type Impossible<K extends keyof any> = {
   [P in K]: never;
 };
 

@@ -1,99 +1,140 @@
 import React from 'react';
 import convert from '../converter';
-import PropTypes from 'prop-types';
-import { Dimensions, ViewPropTypes } from 'react-native';
-import { View, Text, StyleProp, ViewStyle } from 'react-native';
-import { icon, parse } from '@fortawesome/fontawesome-svg-core';
-import log from '../logger';
+import { StyleProp, ViewStyle, StyleSheet } from 'react-native';
+import {
+  icon as makeIcon,
+  parse,
+  IconProp,
+  Transform,
+  IconLookup,
+  IconPrefix,
+  IconName
+} from '@fortawesome/fontawesome-svg-core';
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
+import { isObjectHasDefinedProperty, Key } from '../types';
+import { assert } from '../assert';
 
 export const DEFAULT_SIZE = 16;
 export const DEFAULT_COLOR = '#000';
 
-// Deprecated height and width defaults
-const DEFAULT_HEIGHT = windowHeight * 0.1;
-const DEFAULT_WIDTH = windowWidth * 0.1;
-
-function objectWithKey(key, value) {
+function objectWithProperty(key: Key, value: any): object {
   return (Array.isArray(value) && value.length > 0) ||
     (!Array.isArray(value) && value)
     ? { [key]: value }
     : {};
 }
 
-function normalizeIconArgs(icon) {
-  if (icon === null) {
-    return null;
-  }
-
-  if (typeof icon === 'object' && icon.prefix && icon.iconName) {
+function normalizeIconArgs(icon: IconProp): IconLookup {
+  if (
+    isObjectHasDefinedProperty(icon, 'prefix') &&
+    isObjectHasDefinedProperty(icon, 'iconName')
+  ) {
     return icon;
   }
+
+  // FIXME: Added to fix "expression is too complex to represent"
+  // @ts-ignore
+  icon = icon as IconName | [IconPrefix, IconName];
 
   if (Array.isArray(icon) && icon.length === 2) {
     return { prefix: icon[0], iconName: icon[1] };
   }
 
-  if (typeof icon === 'string') {
-    return { prefix: 'fas', iconName: icon };
-  }
+  // FIXME: Typescript doesn't understand type reduction
+  icon = icon as IconName;
+  return { prefix: 'fas', iconName: icon };
 }
 
-interface FontAwesomeIconProps<T> {
-  style: StyleProp<ViewStyle> | {};
-  size?: number;
+export interface ExtendedViewStyle extends ViewStyle {
   fill?: string;
-  icon: object | string | T[] | null;
-  mask: object | string | T[] | null;
-  transform: object | string | null;
+}
+
+type ExtendedStyleProp = Extract<
+  StyleProp<ExtendedViewStyle>,
+  ExtendedViewStyle | ReadonlyArray<ExtendedViewStyle>
+>;
+
+interface FontAwesomeIconProps<T> {
+  icon: IconProp;
+  // FIXME: I think something weird on resulting types of StyleProp<ExtendedViewStyle>
+  // FIXME: It's included some Recursive Array, I don't think it's supported by RN
+  style?: ExtendedStyleProp;
+  size?: number;
+  mask?: IconProp;
+  transform?: string | Transform;
 }
 
 export default function FontAwesomeIcon({
-  icon: iconArgs = null,
-  mask: maskArgs = null,
-  fill = DEFAULT_COLOR,
+  icon,
+  mask,
   style = {},
   size = DEFAULT_SIZE,
-  transform = null
-}: FontAwesomeIconProps<any>) {
-  const transformObject =
-    typeof transform === 'string' ? parse.transform(transform) : transform;
-  const iconLookup = normalizeIconArgs(iconArgs);
-  const mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
-  const renderedIcon = icon(iconLookup, {
+  transform = {},
+  ...otherProps
+}: FontAwesomeIconProps<any>): JSX.Element | undefined {
+  assert(
+    typeof icon !== undefined,
+    `[ERROR]: icon parameter is required, but it is: ${icon}`
+  );
+  assert(
+    Object.getOwnPropertyNames(otherProps).length === 0,
+    `[ERROR]: properties ${Object.getOwnPropertyNames(
+      otherProps
+    )} are not recognized`
+  );
+
+  const iconLookup: IconLookup = normalizeIconArgs(icon);
+  const transformObject = objectWithProperty(
+    'transform',
+    typeof transform === 'string' ? parse.transform(transform) : transform
+  );
+  const maskObject = objectWithProperty(
+    'mask',
+    mask !== undefined ? normalizeIconArgs(mask) : mask
+  );
+  const renderedIcon = makeIcon(iconLookup, {
     ...transformObject,
-    ...mask
+    ...maskObject
   });
 
-  if (!renderedIcon) {
-    log('ERROR: icon not found for icon = ', iconArgs);
-    return null;
-  }
-
   const { abstract } = renderedIcon;
+
+  // Extract fill property from style objects
+  let finalFill: string = DEFAULT_COLOR;
+  let finalStyle: ViewStyle = {};
+
+  if (typeof style === 'object') {
+    if (Array.isArray(style)) {
+      let styles: StyleProp<ViewStyle> = style.map(
+        ({ fill, ...otherProps }) => {
+          if (fill !== undefined) finalFill = fill;
+          return otherProps;
+        }
+      );
+      finalStyle = StyleSheet.flatten(styles);
+    } else {
+      const { fill, ...otherProps } = style;
+      if (fill !== undefined) finalFill = fill;
+      finalStyle = otherProps;
+    }
+  }
 
   // FIXME Don't allow to use color property in style objects
   const extraProps = {
     height: size,
     width: size,
-    fill: fill,
-    style: style
+    fill: finalFill,
+    style: finalStyle
   };
 
   const props: FontAwesomeIconProps<any> = {
     icon,
     mask,
-    fill,
-    style,
     size,
     transform
   };
   const updatedProps = Object.assign({}, props, extraProps);
-
-  return convertCurry(abstract[0], updatedProps);
+  return convert(React.createElement, abstract[0], updatedProps);
 }
 
 FontAwesomeIcon.displayName = 'FontAwesomeIcon';
-
-const convertCurry = convert.bind(null, React.createElement);
