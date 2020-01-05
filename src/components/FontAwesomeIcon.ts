@@ -106,7 +106,6 @@ export default function FontAwesomeIcon({
     }
   }
 
-  // FIXME Don't allow to use color property in style objects
   const extraProps = {
     height: size,
     width: size,
