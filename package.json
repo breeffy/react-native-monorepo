@@ -1,7 +1,7 @@
 {
   "name": "@fortawesome/react-native-fontawesome",
   "version": "0.2.0",
-  "description": "Official React Native component for Font Awesome 5",
+  "description": "Non-Official React Native component for Font Awesome 5",
   "main": "index.js",
   "scripts": {
     "build:types": "npx tsc -d --declarationDir dist --declarationMap --emitDeclarationOnly",
@@ -25,7 +25,7 @@
     "Mike Wilkerson <mwilkerson@gmail.com>",
     "Dizy <mhisf@vip.qq.com>"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "react": "~16",
