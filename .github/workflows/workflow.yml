@@ -29,6 +29,7 @@ jobs:
           yarn test
   release:
     name: Prepare release
+    runs-on: ubuntu-latest
     if: success()
     steps:
       - name: Run semantic-release to prepare release
