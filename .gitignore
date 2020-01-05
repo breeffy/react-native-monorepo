@@ -1,4 +1,5 @@
 # Ignore auto-generated Javascript files
+.vscode/
 dist/
 # OSX
 #
