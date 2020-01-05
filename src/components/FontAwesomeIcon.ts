@@ -45,21 +45,13 @@ function normalizeIconArgs(icon: IconProp): IconLookup {
   return { prefix: 'fas', iconName: icon };
 }
 
-export interface ExtendedViewStyle extends ViewStyle {
-  fill?: string;
-}
-
-type ExtendedStyleProp = Extract<
-  StyleProp<ExtendedViewStyle>,
-  ExtendedViewStyle | ReadonlyArray<ExtendedViewStyle>
->;
-
 interface FontAwesomeIconProps<T> {
   icon: IconProp;
   // FIXME: I think something weird on resulting types of StyleProp<ExtendedViewStyle>
   // FIXME: It's included some Recursive Array, I don't think it's supported by RN
-  style?: ExtendedStyleProp;
+  style?: ViewStyle | ReadonlyArray<ViewStyle>;
   size?: number;
+  fill?: string;
   mask?: IconProp;
   transform?: string | Transform;
 }
@@ -69,18 +61,20 @@ export default function FontAwesomeIcon({
   mask,
   style = {},
   size = DEFAULT_SIZE,
+  fill = DEFAULT_COLOR,
   transform = {},
   ...otherProps
 }: FontAwesomeIconProps<any>): JSX.Element | undefined {
+  // Here we test essential invariants
   assert(
     typeof icon !== undefined,
-    `[ERROR]: icon parameter is required, but it is: ${icon}`
+    `[ERROR]: property "icon" is required, but it is: ${icon}`
   );
   assert(
     Object.getOwnPropertyNames(otherProps).length === 0,
-    `[ERROR]: properties ${Object.getOwnPropertyNames(
+    `[ERROR]: properties [${Object.getOwnPropertyNames(
       otherProps
-    )} are not recognized`
+    )}] are not supported`
   );
 
   const iconLookup: IconLookup = normalizeIconArgs(icon);
@@ -99,22 +93,15 @@ export default function FontAwesomeIcon({
 
   const { abstract } = renderedIcon;
 
-  // Extract fill property from style objects
-  let finalFill: string = DEFAULT_COLOR;
   let finalStyle: ViewStyle = {};
-
   if (typeof style === 'object') {
     if (Array.isArray(style)) {
-      let styles: StyleProp<ViewStyle> = style.map(
-        ({ fill, ...otherProps }) => {
-          if (fill !== undefined) finalFill = fill;
-          return otherProps;
-        }
+      // Extract color property from every style
+      finalStyle = StyleSheet.flatten(
+        style.map(({ color, ...otherProps }) => otherProps)
       );
-      finalStyle = StyleSheet.flatten(styles);
     } else {
-      const { fill, ...otherProps } = style;
-      if (fill !== undefined) finalFill = fill;
+      const { color, ...otherProps } = style;
       finalStyle = otherProps;
     }
   }
@@ -123,7 +110,7 @@ export default function FontAwesomeIcon({
   const extraProps = {
     height: size,
     width: size,
-    fill: finalFill,
+    fill: fill,
     style: finalStyle
   };
 

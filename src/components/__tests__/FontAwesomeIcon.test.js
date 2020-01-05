@@ -1,12 +1,8 @@
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
-import FontAwesomeIcon, {
-  DEFAULT_SIZE,
-  DEFAULT_COLOR
-} from '../FontAwesomeIcon';
+import FontAwesomeIcon, { DEFAULT_SIZE } from '../FontAwesomeIcon';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { StyleSheet } from 'react-native';
-import { find } from 'lodash';
 
 const faCoffee = {
   prefix: 'fas',
@@ -97,16 +93,18 @@ test.skip('renders transform equivalently when assigning prop as string or objec
   expect(secondTree).toMatchObject(firstTree);
 });
 
-describe('color', () => {
-  describe('when color is given in StyleSheet and NO color prop', () => {
-    test('assigns StyleSheet color to fill and removes style.color', () => {
+describe('fill', () => {
+  describe('when fill property is given and StyleSheet has color property', () => {
+    test('the fill property is used to set up color and StyleSheet color property is ignored', () => {
       const styles = StyleSheet.create({
         icon: {
           color: 'blue'
         }
       });
       const tree = renderer
-        .create(<FontAwesomeIcon icon={faCoffee} style={styles.icon} />)
+        .create(
+          <FontAwesomeIcon icon={faCoffee} style={styles.icon} fill="blue" />
+        )
         .toJSON();
       expect(tree.props.fill).toEqual('blue');
       expect(tree.props.style.filter(s => s.color === 'blue').length).toEqual(
@@ -114,7 +112,7 @@ describe('color', () => {
       );
     });
     describe('when other style properties are also given', () => {
-      test('the non-color style properties are passed through, though the color style property is not', () => {
+      test('the non-color style properties are passed through, though the color style property is ignored', () => {
         const styles = StyleSheet.create({
           icon: {
             color: 'blue',
@@ -133,11 +131,12 @@ describe('color', () => {
       });
     });
   });
-  describe('when color prop is given and NO style.color is given', () => {
-    test('renders with color given in color prop', () => {
+  describe('when fill prop is given and NO style.color is given', () => {
+    test('fill prop is used and tintColor is undefined', () => {
       const tree = renderer
-        .create(<FontAwesomeIcon icon={faCoffee} color={'purple'} />)
+        .create(<FontAwesomeIcon icon={faCoffee} fill={'purple'} />)
         .toJSON();
+
       expect(tree.props.fill).toEqual('purple');
       expect(tree.props.tintColor).toBeUndefined();
       const path = tree.children[0].children.find(c => c.type === 'RNSVGPath');
@@ -149,17 +148,18 @@ describe('color', () => {
       expect(path.props.fill).not.toEqual([2]);
     });
   });
-  describe('when color is specified both by a color prop AND StyleSheet', () => {
-    test('color prop overrides style.color', () => {
+  describe('when color is specified both by a fill prop AND StyleSheet', () => {
+    test('fill prop is used and color prop in StyleSheet is ignored', () => {
       const tree = renderer
         .create(
           <FontAwesomeIcon
             icon={faCoffee}
-            color={'blue'}
+            fill={'blue'}
             style={{ color: 'red' }}
           />
         )
         .toJSON();
+
       expect(tree.props.fill).toEqual('blue');
       expect(tree.props.tintColor).toBeUndefined();
       const path = tree.children[0].children.find(c => c.type === 'RNSVGPath');
@@ -210,37 +210,41 @@ describe('size', () => {
       console.warn = originalWarningFunc;
     });
 
-    describe('when height or width props are specified without a size prop', () => {
-      test('the specified height and width are assigned and a deprecation warning is emitted', () => {
-        const tree = renderer
-          .create(<FontAwesomeIcon icon={faCoffee} height={32} width={32} />)
-          .toJSON();
-        expect(tree.props.height).toEqual(32);
-        expect(tree.props.width).toEqual(32);
-        expect(warnings.length).toEqual(1);
-      });
-    });
+    // TODO: width and height are not supported; Add negative tests which throws errors
+    // TODO: if width / height are passed
+    // describe('when height or width props are specified without a size prop', () => {
+    //   test('the specified height and width are assigned and a deprecation warning is emitted', () => {
+    //     const tree = renderer
+    //       .create(<FontAwesomeIcon icon={faCoffee} height={32} width={32} />)
+    //       .toJSON();
+    //     expect(tree.props.height).toEqual(32);
+    //     expect(tree.props.width).toEqual(32);
+    //     expect(warnings.length).toEqual(1);
+    //   });
+    // });
 
-    describe('when height or width props are specified WITH a size prop', () => {
-      test('the size prop overrides the height and width props', () => {
-        const tree = renderer
-          .create(
-            <FontAwesomeIcon icon={faCoffee} size={64} height={32} width={32} />
-          )
-          .toJSON();
-        expect(tree.props.height).toEqual(64);
-        expect(tree.props.width).toEqual(64);
-        expect(warnings.length).toEqual(1);
-      });
-    });
+    // describe('when height or width props are specified WITH a size prop', () => {
+    //   test('the size prop overrides the height and width props', () => {
+    //     const tree = renderer
+    //       .create(
+    //         <FontAwesomeIcon icon={faCoffee} size={64} height={32} width={32} />
+    //       )
+    //       .toJSON();
+    //     expect(tree.props.height).toEqual(64);
+    //     expect(tree.props.width).toEqual(64);
+    //     expect(warnings.length).toEqual(1);
+    //   });
+    // });
   });
 });
 
-describe('when extra props are given', () => {
-  test('extra props are passed through to rendered objects', () => {
-    const tree = renderer
-      .create(<FontAwesomeIcon icon={faCoffee} color="purple" foo="bar" />)
-      .toJSON();
-    expect(tree.props.foo).toEqual('bar');
-  });
-});
+// TODO: if unsupported / extra props are passed AssertionError is thrown
+// TODO: Add negative tests
+// describe('when extra props are given', () => {
+//   test('extra props are passed through to rendered objects', () => {
+//     const tree = renderer
+//       .create(<FontAwesomeIcon icon={faCoffee} color="purple" foo="bar" />)
+//       .toJSON();
+//     expect(tree.props.foo).toEqual('bar');
+//   });
+// });
