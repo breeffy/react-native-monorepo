@@ -1,6 +1,6 @@
 import React from 'react';
 import convert from '../converter';
-import { StyleProp, ViewStyle, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   icon as makeIcon,
   parse,
@@ -13,6 +13,7 @@ import {
 
 import { isObjectHasDefinedProperty, Key } from '../types';
 import { assert } from '../assert';
+import { Styles, Color } from 'react-native-svg';
 
 export const DEFAULT_SIZE = 16;
 export const DEFAULT_COLOR = '#000';
@@ -49,9 +50,9 @@ interface FontAwesomeIconProps<T> {
   icon: IconProp;
   // FIXME: I think something weird on resulting types of StyleProp<ExtendedViewStyle>
   // FIXME: It's included some Recursive Array, I don't think it's supported by RN
-  style?: ViewStyle | ReadonlyArray<ViewStyle>;
+  style?: Styles | ReadonlyArray<Styles>;
   size?: number;
-  fill?: string;
+  color?: Color;
   mask?: IconProp;
   transform?: string | Transform;
 }
@@ -61,7 +62,7 @@ export default function FontAwesomeIcon({
   mask,
   style = {},
   size = DEFAULT_SIZE,
-  fill = DEFAULT_COLOR,
+  color,
   transform = {},
   ...otherProps
 }: FontAwesomeIconProps<any>): JSX.Element | undefined {
@@ -93,23 +94,28 @@ export default function FontAwesomeIcon({
 
   const { abstract } = renderedIcon;
 
-  let finalStyle: ViewStyle = {};
+  let styleObject: Styles = {};
   if (typeof style === 'object') {
     if (Array.isArray(style)) {
-      // Extract color property from every style
-      finalStyle = StyleSheet.flatten(
-        style.map(({ color, ...otherProps }) => otherProps)
-      );
+      styleObject = StyleSheet.flatten(style);
     } else {
-      const { color, ...otherProps } = style;
-      finalStyle = otherProps;
+      styleObject = style;
     }
+  }
+
+  const { color: styleColor, ...finalStyle } = styleObject;
+
+  let finalColor: Color = DEFAULT_COLOR;
+  if (color === undefined) {
+    if (styleColor !== undefined) finalColor = styleColor;
+  } else {
+    finalColor = color;
   }
 
   const extraProps = {
     height: size,
     width: size,
-    fill: fill,
+    fill: finalColor,
     style: finalStyle
   };
 
