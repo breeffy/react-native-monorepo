@@ -1,0 +1,15 @@
+{
+  "preset": "conventionalcommits",
+  "parserOpts": {
+    "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+  },
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "releaseRules": [{ "scope": "no-release", "release": false }]
+      }
+    ],
+    "@semantic-release/release-notes-generator"
+  ]
+}
