@@ -49,11 +49,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-      - name: Publish package to GitHub Packages
+      - name: Setup node with GitHub Packages registry
         if: success()
         uses: actions/setup-node@v1
         with:
           registry-url: 'https://npm.pkg.github.com'
+      - name: Publish package to GitHub Packages
+        if: success()
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
