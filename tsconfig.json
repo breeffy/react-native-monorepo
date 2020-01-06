@@ -5,11 +5,14 @@
     "esModuleInterop": true,
     "lib": ["es2015"],
     "strict": true,
-    "declaration": true,
     "outDir": "dist",
-    "sourceMap": true,
-    "skipLibCheck": true
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationDir": "dist",
+    "declarationMap": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "index.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
