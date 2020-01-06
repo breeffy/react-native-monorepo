@@ -42,7 +42,7 @@
       {
         "assets": [
           {
-            "path": "breeffy-react-native-svg-icons-${nextRelease.version}.tgz"
+            "path": "breeffy-react-native-svg-icons-*.tgz"
           }
         ],
         "failTitle": "Generating GitHub release failed",
