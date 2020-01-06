@@ -1,3 +1,10 @@
+### [0.3.1](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.0...v0.3.1) (2020-01-06)
+
+
+### Bug Fixes
+
+* update ci to generate changelog ([ef9041e](https://github.com/breeffy/react-native-svg-icons/commit/ef9041ed13779922b9530c59f0465f5e936aeda2))
+
 # Change Log
 
 All notable changes to this project will be documented in this file.
