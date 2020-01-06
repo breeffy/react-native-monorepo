@@ -1,4 +1,4 @@
-name: Run tests and prepare releases
+name: Validate, generate and publish releases
 
 on:
   push:
@@ -27,13 +27,28 @@ jobs:
           yarn upgrade react@${{ matrix.react }} react-dom@${{ matrix.react }} react-test-renderer@${{ matrix.react }} react-native-svg@${{ matrix.react-native-svg }}
           yarn list react react-dom react-test-renderer react-native-svg
           yarn test
+  build:
+    name: Produce files for package
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: Generate js, d.ts files in dist directory
+        run: yarn dist
+  package:
+    name: Pack files to local gzipped package
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: Run yarn pack to generate gzipped package
+        run: yarn pack
   release:
     name: Prepare release
     runs-on: ubuntu-latest
     if: success()
     steps:
-      - name: Run semantic-release to prepare release
+      - name: Run semantic-release to prepare and publish release
         env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release

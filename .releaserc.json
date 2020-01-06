@@ -10,6 +10,21 @@
         "releaseRules": [{ "scope": "no-release", "release": false }]
       }
     ],
-    "@semantic-release/release-notes-generator"
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "breeffy-react-native-svg-icons-v*.tgz",
+            "label": "Gzipped react-native-svg-icons package"
+          }
+        ],
+        "failTitle": "Generating GitHub release failed",
+        "labels": ["semantic-release", "github-release"],
+        "assignees": ["likern"],
+        "releasedLabels": ["resolved-in-release"]
+      }
+    ]
   ]
 }
