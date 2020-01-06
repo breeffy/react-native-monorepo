@@ -37,6 +37,7 @@
     "@babel/runtime": "^7.7.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/git": "^7.0.18",
     "@semantic-release/npm": "^5.3.5",
     "@types/assert": "^1.4.3",
     "@types/humps": "^1.1.2",
