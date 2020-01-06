@@ -75,5 +75,6 @@
   "tsd": {
     "directory": "__type__tests__"
   },
-  "type": "module"
+  "type": "module",
+  "private": true
 }

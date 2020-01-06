@@ -14,13 +14,15 @@
     [
       "@semantic-release/changelog",
       {
-        "changelogFile": "CHANGELOG.md"
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# ChangeLog"
       }
     ],
     [
       "@semantic-release/npm",
       {
-        "npmPublish": false
+        "npmPublish": false,
+        "tarballDir": "."
       }
     ],
     [
@@ -30,12 +32,17 @@
       }
     ],
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "ls breeffy-react-native-svg-icons-${nextRelease.version}.tgz"
+      }
+    ],
+    [
       "@semantic-release/github",
       {
         "assets": [
           {
-            "path": "breeffy-react-native-svg-icons-v*.tgz",
-            "label": "Gzipped react-native-svg-icons package"
+            "path": "breeffy-react-native-svg-icons-${nextRelease.version}.tgz"
           }
         ],
         "failTitle": "Generating GitHub release failed",

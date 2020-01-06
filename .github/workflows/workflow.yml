@@ -42,16 +42,18 @@ jobs:
       - name: Generate js, d.ts files in dist directory
         if: success()
         run: yarn dist
-      - name: Generate local gzipped package
+      - name: Prepare package and publish to GitHub releases
         if: success()
-        run: yarn pack
-      - name: Show name of gzipped package
-        if: success()
-        run: ls breeffy-react-native-svg-icons-v*.tgz
-      - name: Run semantic-release to prepare and publish release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        if: success()
         run: npx semantic-release
+      - name: Publish package to GitHub Packages
+        if: success()
+        uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
