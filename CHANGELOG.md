@@ -6,7 +6,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
-## [0.2.0](https://github.com/FortAwesome/react-native-fontawesome/releases/tag/0.2.0) - 2019-12-13
+## [0.3.0](https://github.com/breeffy/react-native-svg-icons/releases/tag/v0.3.0) - 2020-01-06
+
+### Added
+
+- Code was rewritten using Typescript
+- Project was relicensed from MIT to Apache-2.0
+
+### Changed
+
+- Extra properties to FontAwesomeIcon are not supported (AssertionError is thrown)
+- Property "icon" is required (AssertionError is thrown)
+
+### Removed
+
+- Properties "width" and "height" were removed, use "size" property instead
+
+## [0.2.0](https://github.com/breeffy/react-native-svg-icons/releases/tag/0.2.0) - 2019-12-13
 
 ### Added
 
@@ -16,7 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Loosened peer dependencies to prevent incorrect version warnings
 
-## [0.1.0](https://github.com/FortAwesome/react-native-fontawesome/releases/tag/0.1.0) - 2019-01-07
+## [0.1.0](https://github.com/breeffy/react-native-svg-icons/releases/tag/0.1.0) - 2019-01-07
 
 ### Changed
 
@@ -27,19 +43,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Add size prop
   -- Deprecate height and width props
 
-## [0.0.4](https://github.com/FortAwesome/react-native-fontawesome/releases/tag/0.0.4) - 2018-10-13
+## [0.0.4](https://github.com/breeffy/react-native-svg-icons/releases/tag/0.0.4) - 2018-10-13
 
 ### Changed
 
 - Internal clean-up, leveraging recent developments in react-native-svg
 
-## [0.0.3](https://github.com/FortAwesome/react-native-fontawesome/releases/tag/0.0.3) - 2018-10-11
+## [0.0.3](https://github.com/breeffy/react-native-svg-icons/releases/tag/0.0.3) - 2018-10-11
 
 ### Added
 
 - Add support for masking and power transforms
 
-## [0.0.2](https://github.com/FortAwesome/react-native-fontawesome/releases/tag/0.0.2) - 2018-10-11
+## [0.0.2](https://github.com/breeffy/react-native-svg-icons/releases/tag/0.0.2) - 2018-10-11
 
 ### Added
 
@@ -47,7 +63,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Re-initialize example app to allow for using it with `react-native-svg` 7.x
 
-## [0.0.1](https://github.com/FortAwesome/react-native-fontawesome/releases/tag/0.0.1) - 2018-10-08
+## [0.0.1](https://github.com/breeffy/react-native-svg-icons/releases/tag/0.0.1) - 2018-10-08
 
 ### Added
 
