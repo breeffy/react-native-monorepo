@@ -1,4 +1,4 @@
-name: Validate, generate and publish releases
+name: test code, create and publish release
 
 on:
   push:
