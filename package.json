@@ -36,6 +36,7 @@
     "@babel/preset-react": "^7.7.4",
     "@babel/runtime": "^7.7.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@semantic-release/changelog": "^3.0.6",
     "@types/assert": "^1.4.3",
     "@types/humps": "^1.1.2",
     "@types/jest": "^24.0.24",
