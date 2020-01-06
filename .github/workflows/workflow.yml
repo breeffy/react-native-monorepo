@@ -30,21 +30,21 @@ jobs:
   build:
     name: Produce files for package
     runs-on: ubuntu-latest
-    if: success()
+    needs: [test]
     steps:
       - name: Generate js, d.ts files in dist directory
         run: yarn dist
   package:
     name: Pack files to local gzipped package
     runs-on: ubuntu-latest
-    if: success()
+    needs: [test, build]
     steps:
       - name: Run yarn pack to generate gzipped package
         run: yarn pack
   release:
     name: Prepare release
     runs-on: ubuntu-latest
-    if: success()
+    needs: [test, build, package]
     steps:
       - name: Run semantic-release to prepare and publish release
         env:
