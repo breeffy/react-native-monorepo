@@ -1,1 +1,1 @@
-export { default as FontAwesomeIcon } from './dist/components/FontAwesomeIcon'
+export { default as FontAwesomeIcon } from './src/components/FontAwesomeIcon';
