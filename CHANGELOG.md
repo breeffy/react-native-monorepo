@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Code was rewritten using Typescript
 - Project was relicensed from MIT to Apache-2.0
+- Property "style" supports array of styles
 
 ### Changed
 
