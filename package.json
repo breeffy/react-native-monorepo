@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/react-native-svg-icons",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "React Native component for SVG icons",
   "main": "dist/index.js",
   "scripts": {
