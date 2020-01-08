@@ -65,7 +65,7 @@ export default function SvgIcon({
   color,
   transform = {},
   ...otherProps
-}: SvgIconProps<any>): JSX.Element | undefined {
+}: SvgIconProps<any>): JSX.Element | null {
   // Here we test essential invariants
   assert(
     typeof icon !== undefined,
