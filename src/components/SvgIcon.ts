@@ -46,7 +46,7 @@ function normalizeIconArgs(icon: IconProp): IconLookup {
   return { prefix: 'fas', iconName: icon };
 }
 
-interface FontAwesomeIconProps<T> {
+interface SvgIconProps<T> {
   icon: IconProp;
   // FIXME: I think something weird on resulting types of StyleProp<ExtendedViewStyle>
   // FIXME: It's included some Recursive Array, I don't think it's supported by RN
@@ -57,7 +57,7 @@ interface FontAwesomeIconProps<T> {
   transform?: string | Transform;
 }
 
-export default function FontAwesomeIcon({
+export default function SvgIcon({
   icon,
   mask,
   style = {},
@@ -65,7 +65,7 @@ export default function FontAwesomeIcon({
   color,
   transform = {},
   ...otherProps
-}: FontAwesomeIconProps<any>): JSX.Element | undefined {
+}: SvgIconProps<any>): JSX.Element | undefined {
   // Here we test essential invariants
   assert(
     typeof icon !== undefined,
@@ -119,7 +119,7 @@ export default function FontAwesomeIcon({
     style: finalStyle
   };
 
-  const props: FontAwesomeIconProps<any> = {
+  const props: SvgIconProps<any> = {
     icon,
     mask,
     size,
@@ -129,4 +129,4 @@ export default function FontAwesomeIcon({
   return convert(React.createElement, abstract[0], updatedProps);
 }
 
-FontAwesomeIcon.displayName = 'FontAwesomeIcon';
+SvgIcon.displayName = 'SvgIcon';

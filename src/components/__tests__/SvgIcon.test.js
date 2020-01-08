@@ -1,5 +1,5 @@
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
-import FontAwesomeIcon, { DEFAULT_SIZE } from '../FontAwesomeIcon';
+import SvgIcon, { DEFAULT_SIZE } from '../SvgIcon';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { StyleSheet } from 'react-native';
@@ -31,25 +31,19 @@ const faCircle = {
 fontawesome.library.add(faCoffee, faCircle);
 
 test.skip('renders with icon specified as array', () => {
-  const tree = renderer
-    .create(<FontAwesomeIcon icon={['fas', 'coffee']} />)
-    .toJSON();
+  const tree = renderer.create(<SvgIcon icon={['fas', 'coffee']} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test.skip('renders with icon object prop', () => {
-  const tree = renderer.create(<FontAwesomeIcon icon={faCoffee} />).toJSON();
+  const tree = renderer.create(<SvgIcon icon={faCoffee} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test.skip('renders with mask and transform', () => {
   const tree = renderer
     .create(
-      <FontAwesomeIcon
-        icon={faCircle}
-        mask={faCoffee}
-        transform="shrink-9 right-4"
-      />
+      <SvgIcon icon={faCircle} mask={faCoffee} transform="shrink-9 right-4" />
     )
     .toJSON();
   // modify the clipPath and mask identifiers to be fixed, so they aren't regenerated each time and thus
@@ -78,13 +72,13 @@ test.skip('renders with mask and transform', () => {
 
 test.skip('renders transform equivalently when assigning prop as string or object', () => {
   const firstTree = renderer
-    .create(<FontAwesomeIcon icon={faCoffee} transform="shrink-9 right-4" />)
+    .create(<SvgIcon icon={faCoffee} transform="shrink-9 right-4" />)
     .toJSON();
   expect(firstTree).toMatchSnapshot();
 
   const secondTree = renderer
     .create(
-      <FontAwesomeIcon
+      <SvgIcon
         icon={faCoffee}
         transform={fontawesome.parse.transform('shrink-9 right-4')}
       />
@@ -102,7 +96,7 @@ describe('color', () => {
         }
       });
       const tree = renderer
-        .create(<FontAwesomeIcon icon={faCoffee} style={styles.icon} />)
+        .create(<SvgIcon icon={faCoffee} style={styles.icon} />)
         .toJSON();
       expect(tree.props.fill).toEqual('blue');
       expect(tree.props.style.filter(s => s.color === 'blue').length).toEqual(
@@ -118,7 +112,7 @@ describe('color', () => {
           }
         });
         const tree = renderer
-          .create(<FontAwesomeIcon icon={faCoffee} style={styles.icon} />)
+          .create(<SvgIcon icon={faCoffee} style={styles.icon} />)
           .toJSON();
         expect(
           tree.props.style.filter(s => s.backgroundColor === 'yellow').length
@@ -132,7 +126,7 @@ describe('color', () => {
   describe('when color prop is given and NO style.color is given', () => {
     test('renders with color given in color prop', () => {
       const tree = renderer
-        .create(<FontAwesomeIcon icon={faCoffee} color={'purple'} />)
+        .create(<SvgIcon icon={faCoffee} color={'purple'} />)
         .toJSON();
       expect(tree.props.fill).toEqual('purple');
       expect(tree.props.tintColor).toBeUndefined();
@@ -149,11 +143,7 @@ describe('color', () => {
     test('color prop overrides style.color', () => {
       const tree = renderer
         .create(
-          <FontAwesomeIcon
-            icon={faCoffee}
-            color={'blue'}
-            style={{ color: 'red' }}
-          />
+          <SvgIcon icon={faCoffee} color={'blue'} style={{ color: 'red' }} />
         )
         .toJSON();
       expect(tree.props.fill).toEqual('blue');
@@ -167,9 +157,7 @@ describe('color', () => {
 describe('size', () => {
   describe('when no size, width, or height props are specified', () => {
     test('default size is assigned', () => {
-      const tree = renderer
-        .create(<FontAwesomeIcon icon={faCoffee} />)
-        .toJSON();
+      const tree = renderer.create(<SvgIcon icon={faCoffee} />).toJSON();
       expect(tree.props.height).toEqual(DEFAULT_SIZE);
       expect(tree.props.width).toEqual(DEFAULT_SIZE);
     });
@@ -177,7 +165,7 @@ describe('size', () => {
   describe('when only a size prop is specified', () => {
     test('the given size is assigned', () => {
       const tree = renderer
-        .create(<FontAwesomeIcon icon={faCoffee} size={32} />)
+        .create(<SvgIcon icon={faCoffee} size={32} />)
         .toJSON();
       expect(tree.props.height).toEqual(32);
       expect(tree.props.width).toEqual(32);

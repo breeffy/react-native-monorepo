@@ -1,5 +1,5 @@
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
-import FontAwesomeIcon from '../FontAwesomeIcon';
+import SvgIcon from '../SvgIcon';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { AssertionError } from '../../assert';
@@ -44,7 +44,7 @@ describe('test assertions in FontAwesomeIcon component', () => {
       let catchedAssertionError = false;
       try {
         renderer
-          .create(<FontAwesomeIcon icon={faCoffee} height={32} width={32} />)
+          .create(<SvgIcon icon={faCoffee} height={32} width={32} />)
           .toJSON();
       } catch (error) {
         if (error instanceof AssertionError) {
@@ -61,9 +61,7 @@ describe('test assertions in FontAwesomeIcon component', () => {
       let catchedAssertionError = false;
       try {
         renderer
-          .create(
-            <FontAwesomeIcon icon={faCoffee} size={64} height={32} width={32} />
-          )
+          .create(<SvgIcon icon={faCoffee} size={64} height={32} width={32} />)
           .toJSON();
       } catch (error) {
         if (error instanceof AssertionError) {
@@ -81,7 +79,7 @@ describe('test assertions in FontAwesomeIcon component', () => {
       let catchedAssertionError = false;
       try {
         renderer
-          .create(<FontAwesomeIcon icon={faCoffee} color="purple" foo="bar" />)
+          .create(<SvgIcon icon={faCoffee} color="purple" foo="bar" />)
           .toJSON();
       } catch (error) {
         if (error instanceof AssertionError) {

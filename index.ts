@@ -1,1 +1,1 @@
-export { default as FontAwesomeIcon } from './src/components/FontAwesomeIcon';
+export { default as SvgIcon } from './src/components/SvgIcon';
