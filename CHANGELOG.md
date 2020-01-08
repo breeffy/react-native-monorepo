@@ -1,18 +1,22 @@
 # ChangeLog
 
-### [0.3.3](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.2...v0.3.3) (2020-01-06)
+### [0.4.0](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.0...v0.4.0) (2020-01-08)
 
+### BREAKING CHANGE
+
+- FontAwesomeIcon was renamed to SvgIcon
+
+### [0.3.3](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.2...v0.3.3) (2020-01-06)
 
 ### Bug Fixes
 
-* errors in ci build ([1281e41](https://github.com/breeffy/react-native-svg-icons/commit/1281e41e6bcc403579bb04c364911462f2ea2753))
+- errors in ci build ([1281e41](https://github.com/breeffy/react-native-svg-icons/commit/1281e41e6bcc403579bb04c364911462f2ea2753))
 
 ### [0.3.2](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.1...v0.3.2) (2020-01-06)
 
-
 ### Bug Fixes
 
-* publish package to GitHub Packages automatically ([470276f](https://github.com/breeffy/react-native-svg-icons/commit/470276fea864e961acd44091d1abc94512fe7692))
+- publish package to GitHub Packages automatically ([470276f](https://github.com/breeffy/react-native-svg-icons/commit/470276fea864e961acd44091d1abc94512fe7692))
 
 ### [0.3.1](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.0...v0.3.1) (2020-01-06)
 
