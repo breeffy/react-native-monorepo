@@ -1,6 +1,6 @@
 # react-native-svg-icons
 
-![npm](https://img.shields.io/npm/v/@breeffy/react-native-svg-icons/latest?style=flat-square)
+![npm](https://img.shields.io/npm/v/@breeffy/react-native-svg-icons/latest)
 ![npm](https://img.shields.io/npm/l/@breeffy/react-native-svg-icons)
 
 ## Introduction
