@@ -1,10 +1,7 @@
 # react-native-svg-icons
 
-[![npm](https://img.shields.io/npm/v/@breeffy/react-native-svg-icons/latest?style=flat-square)]
-[![npm](https://img.shields.io/npm/l/@breeffy/react-native-svg-icons)]
-
-
-> React Native Component for SVG Icons
+![npm](https://img.shields.io/npm/v/@breeffy/react-native-svg-icons/latest?style=flat-square)
+![npm](https://img.shields.io/npm/l/@breeffy/react-native-svg-icons)
 
 ## Introduction
 This React Native component aims to be improved drop-in replacement for [react-native-fontawesome](https://github.com/FortAwesome/react-native-fontawesome). It allows to use **FontAwesome 5** / **FontAwesome 5 Pro** icons as SVG icons.
@@ -54,6 +51,19 @@ import { SvgIcon } from '@breeffy/react-native-svg-icons';
 <SvgIcon
   color={'#262F56'}
   icon={['far', 'coffee']}
+  size={24}
+/>
+```
+Also you can use **SvgIcon** with [styled-components](https://styled-components.com). Below example shows how to use **styled-components [css prop](https://styled-components.com/docs/api#css-prop)**
+```typescript
+import 'styled-components/macro';
+...
+<SvgIcon
+  css={`
+    margin-top: 15px;
+  `}
+  color={iconColor}
+  icon={['far', iconName]}
   size={24}
 />
 ```
