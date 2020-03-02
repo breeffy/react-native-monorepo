@@ -19,7 +19,7 @@ function convert(
   createElement: typeof React.createElement,
   element: string | AbstractElement,
   extraProps = {}
-): JSX.Element | undefined {
+): JSX.Element | null {
   if (typeof element === 'string') {
     return createElement(element);
   }
@@ -61,7 +61,7 @@ function convert(
       ...children
     );
   }
-  return undefined;
+  return null;
 }
 
 export default convert;

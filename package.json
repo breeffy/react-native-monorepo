@@ -1,11 +1,11 @@
 {
   "name": "@breeffy/react-native-svg-icons",
-  "version": "0.4.0",
+  "version": "0.4.0-alpha.0",
   "description": "React Native component for SVG icons",
   "main": "dist/index.js",
   "scripts": {
     "build:index": "npx tsc -d --emitDeclarationOnly ./index.ts",
-    "test": "jest",
+    "test": "npx jest",
     "dist": "npx tsc",
     "set.rnsvg": "yarn upgrade react-native-svg@$RNSVG_VERSION"
   },
@@ -76,6 +76,5 @@
   },
   "tsd": {
     "directory": "__type__tests__"
-  },
-  "type": "module"
+  }
 }

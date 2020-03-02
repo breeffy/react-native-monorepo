@@ -70,7 +70,7 @@ test.skip('renders with mask and transform', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test.skip('renders transform equivalently when assigning prop as string or object', () => {
+test('renders transform equivalently when assigning prop as string or object', () => {
   const firstTree = renderer
     .create(<SvgIcon icon={faCoffee} transform="shrink-9 right-4" />)
     .toJSON();
@@ -172,3 +172,5 @@ describe('size', () => {
     });
   });
 });
+
+export default {};
