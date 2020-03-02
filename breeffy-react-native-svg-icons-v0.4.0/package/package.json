@@ -1,0 +1,80 @@
+{
+  "name": "@breeffy/react-native-svg-icons",
+  "version": "0.4.0",
+  "description": "React Native component for SVG icons",
+  "main": "dist/index.js",
+  "scripts": {
+    "build:index": "npx tsc -d --emitDeclarationOnly ./index.ts",
+    "test": "npx jest",
+    "dist": "npx tsc",
+    "set.rnsvg": "yarn upgrade react-native-svg@$RNSVG_VERSION"
+  },
+  "types": "dist/index.d.ts",
+  "homepage": "https://github.com/breeffy/react-native-svg-icons.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/breeffy/react-native-svg-icons.git"
+  },
+  "contributors": [
+    "Victor Malov <malvikus@gmail.com>",
+    "Travis Chase <travis@fontawesome.com>",
+    "Rob Madole <rob@fontawesome.com>",
+    "Mike Wilkerson <mwilkerson@gmail.com>",
+    "Dizy <mhisf@vip.qq.com>"
+  ],
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "react": "~16",
+    "react-native": "^0.57",
+    "react-native-svg": "^7.0 || ^8.0 || ^9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/runtime": "^7.7.6",
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/exec": "^3.3.8",
+    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/npm": "^5.3.5",
+    "@types/assert": "^1.4.3",
+    "@types/humps": "^1.1.2",
+    "@types/jest": "^24.0.24",
+    "@types/react-native": "^0.60.26",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^24.9.0",
+    "conventional-changelog-conventionalcommits": "^4.2.3",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.57.0",
+    "react": "16.9.0",
+    "react-native": "^0.61.5",
+    "react-native-svg": "^9.13.6",
+    "react-test-renderer": "^16.9.0",
+    "semantic-release": "^15.14.0",
+    "ts-jest": "^24.2.0",
+    "tsd": "^0.11.0",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "humps": "^2.0.1",
+    "prop-types": "^15.7.2"
+  },
+  "files": [
+    "dist/"
+  ],
+  "jest": {
+    "preset": "react-native",
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/examples"
+    ]
+  },
+  "tsd": {
+    "directory": "__type__tests__"
+  }
+}
