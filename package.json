@@ -76,5 +76,12 @@
   },
   "tsd": {
     "directory": "__type__tests__"
-  }
+  },
+  "keywords": [
+    "breeffy",
+    "react-native",
+    "react-native-svg-icons",
+    "react-native-svg",
+    "icons"
+  ]
 }
