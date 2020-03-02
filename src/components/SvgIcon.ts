@@ -63,7 +63,7 @@ export default function SvgIcon({
   style = {},
   size = DEFAULT_SIZE,
   color,
-  transform = {},
+  transform,
   ...otherProps
 }: SvgIconProps<any>): JSX.Element | null {
   // Here we test essential invariants
