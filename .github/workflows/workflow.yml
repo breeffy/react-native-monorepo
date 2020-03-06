@@ -12,9 +12,9 @@ jobs:
 
     strategy:
       matrix:
-        node: [12.x, 13.x]
+        node: [10.x, 12.x, 13.x]
         react: [16.9.x]
-        react-native-svg: [7.x, 8.x, 9.x, 10.x]
+        react-native-svg: [7.x, 8.x, 9.x, 10.x, 11.x, 12.x]
 
     steps:
       - uses: actions/checkout@v2
