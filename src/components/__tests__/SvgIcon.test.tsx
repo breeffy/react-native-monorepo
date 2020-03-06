@@ -30,154 +30,147 @@ const faCircle: fontawesome.IconDefinition = {
 
 fontawesome.library.add(faCoffee, faCircle);
 
-it.only('test SvgIcon renders without errors', () => {
-  const result = renderer.create(
-    <SvgIcon color={'#262F56'} icon={['fas', 'circle']} size={24} />
-  );
-  const t = result;
+test.skip('renders with icon specified as array', () => {
+  const tree = renderer.create(<SvgIcon icon={['fas', 'coffee']} />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
 
-// test.skip('renders with icon specified as array', () => {
-//   const tree = renderer.create(<SvgIcon icon={['fas', 'coffee']} />).toJSON();
-//   expect(tree).toMatchSnapshot();
-// });
+test.skip('renders with icon object prop', () => {
+  const tree = renderer.create(<SvgIcon icon={faCoffee} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
-// test.skip('renders with icon object prop', () => {
-//   const tree = renderer.create(<SvgIcon icon={faCoffee} />).toJSON();
-//   expect(tree).toMatchSnapshot();
-// });
+test.skip('renders with mask and transform', () => {
+  const tree = renderer
+    .create(
+      <SvgIcon icon={faCircle} mask={faCoffee} transform="shrink-9 right-4" />
+    )
+    .toJSON();
+  // modify the clipPath and mask identifiers to be fixed, so they aren't regenerated each time and thus
+  // our snapshot will remain stable across test runs
+  const maskId = 'mask-1';
+  const clipId = 'clip-1';
 
-// test.skip('renders with mask and transform', () => {
-//   const tree = renderer
-//     .create(
-//       <SvgIcon icon={faCircle} mask={faCoffee} transform="shrink-9 right-4" />
-//     )
-//     .toJSON();
-//   // modify the clipPath and mask identifiers to be fixed, so they aren't regenerated each time and thus
-//   // our snapshot will remain stable across test runs
-//   const maskId = 'mask-1';
-//   const clipId = 'clip-1';
+  // clip id
+  tree.children[0].children[0].children[0].props.name = clipId;
+  tree.children[0].children[1].props.clipPath = clipId;
 
-//   // clip id
-//   tree.children[0].children[0].children[0].props.name = clipId;
-//   tree.children[0].children[1].props.clipPath = clipId;
+  // mask id
+  tree.children[0].children[0].children[1].props.name = maskId;
+  tree.children[0].children[1].props.mask = maskId;
 
-//   // mask id
-//   tree.children[0].children[0].children[1].props.name = maskId;
-//   tree.children[0].children[1].props.mask = maskId;
+  // remove the clipPath prop, if present, to normalize the shape across versions of react-native-svg.
+  // in version ^7.1.2, there was a clipRule prop here. in version ^8.0.8 there's not.
+  // normalizing this lets us match more fuzzily and have this same test work in both version scenarios.
+  tree.children[0].children[1].props = {
+    ...tree.children[0].children[1].props,
+    clipRule: undefined
+  };
 
-//   // remove the clipPath prop, if present, to normalize the shape across versions of react-native-svg.
-//   // in version ^7.1.2, there was a clipRule prop here. in version ^8.0.8 there's not.
-//   // normalizing this lets us match more fuzzily and have this same test work in both version scenarios.
-//   tree.children[0].children[1].props = {
-//     ...tree.children[0].children[1].props,
-//     clipRule: undefined
-//   };
+  expect(tree).toMatchSnapshot();
+});
 
-//   expect(tree).toMatchSnapshot();
-// });
+test('renders transform equivalently when assigning prop as string or object', () => {
+  const firstTree = renderer
+    .create(<SvgIcon icon={faCoffee} transform="shrink-9 right-4" />)
+    .toJSON();
+  expect(firstTree).toMatchSnapshot();
 
-// test('renders transform equivalently when assigning prop as string or object', () => {
-//   const firstTree = renderer
-//     .create(<SvgIcon icon={faCoffee} transform="shrink-9 right-4" />)
-//     .toJSON();
-//   expect(firstTree).toMatchSnapshot();
+  const secondTree = renderer
+    .create(
+      <SvgIcon
+        icon={faCoffee}
+        transform={fontawesome.parse.transform('shrink-9 right-4')}
+      />
+    )
+    .toJSON();
+  expect(secondTree).toMatchObject(firstTree);
+});
 
-//   const secondTree = renderer
-//     .create(
-//       <SvgIcon
-//         icon={faCoffee}
-//         transform={fontawesome.parse.transform('shrink-9 right-4')}
-//       />
-//     )
-//     .toJSON();
-//   expect(secondTree).toMatchObject(firstTree);
-// });
+describe('color', () => {
+  describe('when color is given in StyleSheet and NO color prop', () => {
+    test('assigns StyleSheet color to fill and removes style.color', () => {
+      const styles = StyleSheet.create({
+        icon: {
+          color: 'blue'
+        }
+      });
+      const tree = renderer
+        .create(<SvgIcon icon={faCoffee} style={styles.icon} />)
+        .toJSON();
+      expect(tree.props.fill).toEqual('blue');
+      expect(tree.props.style.filter(s => s.color === 'blue').length).toEqual(
+        0
+      );
+    });
+    describe('when other style properties are also given', () => {
+      test('the non-color style properties are passed through, though the color style property is not', () => {
+        const styles = StyleSheet.create({
+          icon: {
+            color: 'blue',
+            backgroundColor: 'yellow'
+          }
+        });
+        const tree = renderer
+          .create(<SvgIcon icon={faCoffee} style={styles.icon} />)
+          .toJSON();
+        expect(
+          tree.props.style.filter(s => s.backgroundColor === 'yellow').length
+        ).toEqual(1);
+        expect(tree.props.style.filter(s => s.color === 'blue').length).toEqual(
+          0
+        );
+      });
+    });
+  });
+  describe('when color prop is given and NO style.color is given', () => {
+    test('renders with color given in color prop', () => {
+      const tree = renderer
+        .create(<SvgIcon icon={faCoffee} color={'purple'} />)
+        .toJSON();
+      expect(tree.props.fill).toEqual('purple');
+      expect(tree.props.tintColor).toBeUndefined();
+      const path = tree.children[0].children.find(c => c.type === 'RNSVGPath');
 
-// describe('color', () => {
-//   describe('when color is given in StyleSheet and NO color prop', () => {
-//     test('assigns StyleSheet color to fill and removes style.color', () => {
-//       const styles = StyleSheet.create({
-//         icon: {
-//           color: 'blue'
-//         }
-//       });
-//       const tree = renderer
-//         .create(<SvgIcon icon={faCoffee} style={styles.icon} />)
-//         .toJSON();
-//       expect(tree.props.fill).toEqual('blue');
-//       expect(tree.props.style.filter(s => s.color === 'blue').length).toEqual(
-//         0
-//       );
-//     });
-//     describe('when other style properties are also given', () => {
-//       test('the non-color style properties are passed through, though the color style property is not', () => {
-//         const styles = StyleSheet.create({
-//           icon: {
-//             color: 'blue',
-//             backgroundColor: 'yellow'
-//           }
-//         });
-//         const tree = renderer
-//           .create(<SvgIcon icon={faCoffee} style={styles.icon} />)
-//           .toJSON();
-//         expect(
-//           tree.props.style.filter(s => s.backgroundColor === 'yellow').length
-//         ).toEqual(1);
-//         expect(tree.props.style.filter(s => s.color === 'blue').length).toEqual(
-//           0
-//         );
-//       });
-//     });
-//   });
-//   describe('when color prop is given and NO style.color is given', () => {
-//     test('renders with color given in color prop', () => {
-//       const tree = renderer
-//         .create(<SvgIcon icon={faCoffee} color={'purple'} />)
-//         .toJSON();
-//       expect(tree.props.fill).toEqual('purple');
-//       expect(tree.props.tintColor).toBeUndefined();
-//       const path = tree.children[0].children.find(c => c.type === 'RNSVGPath');
+      // A fill of [2] on an RNSVGPath would correspond to fill="currentColor".
+      // react-native-svg seems to have sort of handling of currentColor, but it doesn't seem to accomplish
+      // what we want, so our component's convert() should be stripping out any fill="currentColor" that the
+      // fontawesome-svg-core adds to the elements it renders.
+      expect(path.props.fill).not.toEqual([2]);
+    });
+  });
+  describe('when color is specified both by a color prop AND StyleSheet', () => {
+    test('color prop overrides style.color', () => {
+      const tree = renderer
+        .create(
+          <SvgIcon icon={faCoffee} color={'blue'} style={{ color: 'red' }} />
+        )
+        .toJSON();
+      expect(tree.props.fill).toEqual('blue');
+      expect(tree.props.tintColor).toBeUndefined();
+      const path = tree.children[0].children.find(c => c.type === 'RNSVGPath');
+      expect(path.fill).toBeUndefined();
+    });
+  });
+});
 
-//       // A fill of [2] on an RNSVGPath would correspond to fill="currentColor".
-//       // react-native-svg seems to have sort of handling of currentColor, but it doesn't seem to accomplish
-//       // what we want, so our component's convert() should be stripping out any fill="currentColor" that the
-//       // fontawesome-svg-core adds to the elements it renders.
-//       expect(path.props.fill).not.toEqual([2]);
-//     });
-//   });
-//   describe('when color is specified both by a color prop AND StyleSheet', () => {
-//     test('color prop overrides style.color', () => {
-//       const tree = renderer
-//         .create(
-//           <SvgIcon icon={faCoffee} color={'blue'} style={{ color: 'red' }} />
-//         )
-//         .toJSON();
-//       expect(tree.props.fill).toEqual('blue');
-//       expect(tree.props.tintColor).toBeUndefined();
-//       const path = tree.children[0].children.find(c => c.type === 'RNSVGPath');
-//       expect(path.fill).toBeUndefined();
-//     });
-//   });
-// });
-
-// describe('size', () => {
-//   describe('when no size, width, or height props are specified', () => {
-//     test('default size is assigned', () => {
-//       const tree = renderer.create(<SvgIcon icon={faCoffee} />).toJSON();
-//       expect(tree.props.height).toEqual(DEFAULT_SIZE);
-//       expect(tree.props.width).toEqual(DEFAULT_SIZE);
-//     });
-//   });
-//   describe('when only a size prop is specified', () => {
-//     test('the given size is assigned', () => {
-//       const tree = renderer
-//         .create(<SvgIcon icon={faCoffee} size={32} />)
-//         .toJSON();
-//       expect(tree.props.height).toEqual(32);
-//       expect(tree.props.width).toEqual(32);
-//     });
-//   });
-// });
+describe('size', () => {
+  describe('when no size, width, or height props are specified', () => {
+    test('default size is assigned', () => {
+      const tree = renderer.create(<SvgIcon icon={faCoffee} />).toJSON();
+      expect(tree.props.height).toEqual(DEFAULT_SIZE);
+      expect(tree.props.width).toEqual(DEFAULT_SIZE);
+    });
+  });
+  describe('when only a size prop is specified', () => {
+    test('the given size is assigned', () => {
+      const tree = renderer
+        .create(<SvgIcon icon={faCoffee} size={32} />)
+        .toJSON();
+      expect(tree.props.height).toEqual(32);
+      expect(tree.props.width).toEqual(32);
+    });
+  });
+});
 
 export default {};
