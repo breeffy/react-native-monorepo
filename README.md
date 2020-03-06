@@ -2,6 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/@breeffy/react-native-svg-icons/latest)
 ![npm](https://img.shields.io/npm/l/@breeffy/react-native-svg-icons)
+![tests on master](https://github.com/breeffy/react-native-svg-icons/workflows/tests%20on%20master/badge.svg?branch=master)
 
 ## Introduction
 This React Native component aims to be improved drop-in replacement for [react-native-fontawesome](https://github.com/FortAwesome/react-native-fontawesome). It allows to use **FontAwesome 5** / **FontAwesome 5 Pro** icons as SVG icons.
