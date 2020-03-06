@@ -1,5 +1,20 @@
 # ChangeLog
 
+### [0.4.1](https://github.com/breeffy/react-native-svg-icons/compare/v0.4.0...v0.4.1) (2020-01-08)
+
+### Added
+
+- Additional assertions to SvgIcon were added
+- Declare to be compatible with react-native-svg 11.x and 12.x versions
+
+### Internal
+
+- Use Typescript 3.8.3
+- Jest tests refactoring
+- New jest assertion test was added
+- Use Typescript for Jest tests
+- GitHub Actions additionally tests compatibility against react-native-svg 11.x and 12.x versions
+
 ### [0.4.0](https://github.com/breeffy/react-native-svg-icons/compare/v0.3.0...v0.4.0-alpha.0) (2020-01-08)
 
 ### BREAKING CHANGE
