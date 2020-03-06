@@ -8,7 +8,8 @@ import {
   Transform,
   IconLookup,
   IconPrefix,
-  IconName
+  IconName,
+  findIconDefinition
 } from '@fortawesome/fontawesome-svg-core';
 
 import { isObjectHasDefinedProperty, Key } from '../types';
@@ -79,6 +80,12 @@ export default function SvgIcon({
   );
 
   const iconLookup: IconLookup = normalizeIconArgs(icon);
+
+  assert(
+    findIconDefinition(iconLookup) !== undefined,
+    `[ERROR]: can't find icon definition for [${iconLookup.prefix}, ${iconLookup.iconName}]`
+  );
+
   const transformObject = objectWithProperty(
     'transform',
     typeof transform === 'string' ? parse.transform(transform) : transform
@@ -91,6 +98,12 @@ export default function SvgIcon({
     ...transformObject,
     ...maskObject
   });
+
+  assert(
+    renderedIcon === undefined || renderedIcon === null,
+    `[ERROR]: icon for [${(iconLookup.prefix,
+    iconLookup.iconName)}] is undefined or null`
+  );
 
   const { abstract } = renderedIcon;
 
