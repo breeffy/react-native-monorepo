@@ -100,7 +100,7 @@ export default function SvgIcon({
   });
 
   assert(
-    renderedIcon === undefined || renderedIcon === null,
+    renderedIcon !== undefined || renderedIcon !== null,
     `[ERROR]: icon for [${(iconLookup.prefix,
     iconLookup.iconName)}] is undefined or null`
   );
