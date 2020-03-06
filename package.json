@@ -6,7 +6,8 @@
   "scripts": {
     "build:index": "npx tsc -d --emitDeclarationOnly ./index.ts",
     "test": "npx jest",
-    "dist": "npx tsc",
+    "prepack": "npx tsc",
+    "postpack": "npx rimraf dist/",
     "set.rnsvg": "yarn upgrade react-native-svg@$RNSVG_VERSION"
   },
   "types": "dist/index.d.ts",
@@ -57,6 +58,7 @@
     "react-native": "^0.61.5",
     "react-native-svg": "^12.0.2",
     "react-test-renderer": "^16.9.0",
+    "rimraf": "^3.0.2",
     "semantic-release": "^15.14.0",
     "typescript": "^3.8.3"
   },
