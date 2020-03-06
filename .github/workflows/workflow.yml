@@ -1,4 +1,4 @@
-name: test code, create and publish release
+name: tests on master
 
 on:
   push:
