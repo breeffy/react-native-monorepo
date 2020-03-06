@@ -1,5 +1,5 @@
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
-import SvgIcon, { DEFAULT_SIZE } from '../SvgIcon';
+import SvgIcon, { DEFAULT_SIZE } from '../src/components/SvgIcon';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { StyleSheet } from 'react-native';

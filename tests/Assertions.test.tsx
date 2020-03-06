@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
-import SvgIcon from '../SvgIcon';
 
-import { AssertionError } from '../../assert';
+import SvgIcon from '../src/components/SvgIcon';
+import { AssertionError } from '../src/assert';
 
 const faCoffee: fontawesome.IconDefinition = {
   prefix: 'fas',
