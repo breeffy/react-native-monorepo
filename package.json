@@ -42,6 +42,7 @@
     "@semantic-release/exec": "^3.3.8",
     "@semantic-release/git": "^7.0.18",
     "@semantic-release/npm": "^5.3.5",
+    "@testing-library/react-native": "^5.0.3",
     "@types/assert": "^1.4.3",
     "@types/humps": "^1.1.2",
     "@types/jest": "^24.0.24",

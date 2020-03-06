@@ -1,5 +1,5 @@
 module.exports = {
-  preset: 'react-native',
+  preset: '@testing-library/react-native',
   roots: ['<rootDir>/src'],
   modulePathIgnorePatterns: ['<rootDir>/examples']
 };
