@@ -16,7 +16,7 @@
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
     "react-native-svg": "^9.5.3",
-    "react-native-web": "^0.11.4"
+    "react-native-web": "^0.13.3"
   },
   "devDependencies": {
     "babel-preset-expo": "^6.0.0"
