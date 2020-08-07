@@ -12,8 +12,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.0",
     "@fortawesome/react-native-fontawesome": "^0.1.0",
     "expo": "^34.0.1",
-    "react": "16.8.3",
-    "react-dom": "^16.8.6",
+    "react": "16.13.1",
+    "react-dom": "^16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
     "react-native-svg": "^9.5.3",
     "react-native-web": "^0.13.3"
