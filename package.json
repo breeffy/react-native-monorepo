@@ -38,7 +38,7 @@
   ],
   "repository": "https://github.com/breeffy/react-native-calendar",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "bugs": {
     "url": "https://github.com/breeffy/react-native-calendar/issues"
   },
@@ -64,12 +64,16 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-builder-bob": "^0.17.1",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-reanimated": "2.0.0-rc.1",
     "release-it": "^14.2.2",
-    "typescript": "^4.1.3"
+    "typescript": "^4.2.0-beta"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-gesture-handler": ">=1.9.0",
+    "react-native-reanimated": ">=2.0.0-rc.1"
   },
   "jest": {
     "preset": "react-native",
@@ -119,7 +123,7 @@
           "quoteProps": "consistent",
           "singleQuote": true,
           "tabWidth": 2,
-          "trailingComma": "es5",
+          "trailingComma": "none",
           "useTabs": false
         }
       ]
@@ -133,7 +137,7 @@
     "quoteProps": "consistent",
     "singleQuote": true,
     "tabWidth": 2,
-    "trailingComma": "es5",
+    "trailingComma": "none",
     "useTabs": false
   },
   "react-native-builder-bob": {
@@ -149,5 +153,14 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "@breeffy/react-native-invariant": "^1.0.0",
+    "@types/luxon": "^1.25.0",
+    "luxon": "^1.25.0",
+    "react-native-redash": "^16.0.6",
+    "react-native-svg": "^12.1.0",
+    "recyclerlistview": "3.0.5-beta.1",
+    "use-memo-one": "^1.1.1"
   }
 }

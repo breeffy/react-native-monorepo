@@ -1,32 +1,34 @@
 import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AppearanceProvider from './components/appearanceProvider';
+import type { AppStackParamsList } from './types';
+import RootScreen from './screens/Root';
+import { FlatListExampleScreen } from './screens/basic/BasicExamples';
 
-import { StyleSheet, View, Text } from 'react-native';
-import ReactNativeCalendar from '@breeffy/react-native-calendar';
-
-
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    ReactNativeCalendar.multiply(3, 7).then(setResult);
-  }, []);
-
+const Stack = createStackNavigator<AppStackParamsList>();
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <AppearanceProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Root">
+          <Stack.Screen
+            name="Root"
+            getComponent={() => RootScreen}
+            options={{ headerShown: false }}
+          />
+          {/* static examples */}
+          <Stack.Screen
+            name="Basic/FlatListExample"
+            options={{
+              title: 'Selection Mode'
+            }}
+            getComponent={() => FlatListExampleScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppearanceProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+export default App;
