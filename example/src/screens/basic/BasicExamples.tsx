@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { CalendarSheet } from '@breeffy/react-native-calendar';
+import { CalendarSheet } from '../../components/calendarSheet';
 
 interface ExampleScreenProps {
   title: string;

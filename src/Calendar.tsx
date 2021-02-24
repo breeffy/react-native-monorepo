@@ -85,7 +85,6 @@ export type CalendarProps = {
 export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
   (
     {
-      kind = 'gregorian',
       initialCalendarYearAndMonth: _initialCalendarYearAndMonth,
       monthsBefore = 50,
       monthsAfter = 50,
@@ -93,8 +92,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       scrollMode = 'multipleMonths',
       scrollModeDeceleration = 'normal',
       activeCalendarDay: _activeCalendarDay,
-      style,
-      onDaySelectionChange
+      style
     }: CalendarProps,
     ref
   ) => {
