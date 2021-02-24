@@ -26,7 +26,6 @@
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
-    "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods"
@@ -49,7 +48,6 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@release-it/conventional-changelog": "^2.0.0",
     "@types/jest": "^26.0.0",
     "@types/react": "^16.9.19",
     "@types/react-native": "0.62.13",
@@ -66,7 +64,6 @@
     "react-native-builder-bob": "^0.17.1",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-reanimated": "2.0.0-rc.1",
-    "release-it": "^14.2.2",
     "typescript": "^4.2.0-beta"
   },
   "peerDependencies": {
@@ -92,23 +89,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
-    }
   },
   "eslintConfig": {
     "root": true,
@@ -160,7 +140,6 @@
     "luxon": "^1.25.0",
     "react-native-redash": "^16.0.6",
     "react-native-svg": "^12.1.0",
-    "recyclerlistview": "3.0.5-beta.1",
     "use-memo-one": "^1.1.1"
   }
 }
