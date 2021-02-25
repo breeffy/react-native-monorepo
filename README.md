@@ -26,6 +26,78 @@ High-quality, modern, fast interactive calendar built specifically with performa
 :construction: - in progress
 :x: - not supported
 
+## Usage
+```ts
+import React from 'react';
+import { View } from 'react-native';
+import { Calendar } from '@breeffy/react-native-calendar';
+
+export const CalendarSheet = () => {
+  return (
+    <Calendar
+      selectionMode="singleDay"
+      scrollMode="multipleMonths"
+      monthsBefore={12}
+      monthsAfter={24}
+    />
+  );
+};
+```
+
+## Calendar properties
+```ts
+type CalendarProps = {
+  /**
+   * Initial month to be shown.
+   * If not provided, year and month of current local datetime will be selected.
+   */
+  initialCalendarYearAndMonth?: CalendarYearAndMonth;
+
+  /**
+   * Amount of months, before initial year and month,
+   * which will be shown in a calendar.
+   * @defaultValue `50`
+   */
+  monthsBefore?: number;
+
+  /**
+   * Amount of months, after initial year and month,
+   * which will be shown in a calendar.
+   * @defaultValue `50`
+   */
+  monthsAfter?: number;
+  
+  /**
+   * How much days can be selected simultaneously.
+   * @defaultValue `singleDay`
+   */
+  selectionMode?: 'singleDay' | 'multipleDays';
+  
+  /**
+   * How much months can be scrolled over.
+   * @defaultValue `multipleMonths`
+   */
+  scrollMode?: 'oneMonth' | 'multipleMonths' | 'anyOffset';
+  
+  /**
+   * How quickly the calendar scrolling decelerates after the user lifts their finger.
+   * @defaultValue `normal`
+   */
+  scrollModeDeceleration?: FlatListProps<any>['decelerationRate'];
+  
+  /**
+   * Active (current) calendar day.
+   * If provided, will be highlighted in active color.
+   */
+  activeCalendarDay?: CalendarDate;
+
+  /**
+   * Container style
+   */
+  style?: StyleProp<ViewStyle>
+};
+```
+
 ## Dependencies
 
 Under the hood **react-native-calendar** uses [react-native-reanimated v2](https://github.com/software-mansion/react-native-reanimated) and [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler). These packages need to be installed before using **react-native-calendar**.
