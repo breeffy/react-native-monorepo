@@ -6,6 +6,8 @@
 
 High-quality, modern, fast interactive calendar built specifically with performance in mind. Supports gestures and animations.
 
+![React Native Calendar](./preview.gif)
+
 ## Main Features
 
 | Feature                  |       Status       | Description                                                                                                         |
@@ -27,6 +29,7 @@ High-quality, modern, fast interactive calendar built specifically with performa
 :x: - not supported
 
 ## Usage
+
 ```ts
 import React from 'react';
 import { View } from 'react-native';
@@ -45,6 +48,7 @@ export const CalendarSheet = () => {
 ```
 
 ## Calendar properties
+
 ```ts
 type CalendarProps = {
   /**
@@ -66,25 +70,25 @@ type CalendarProps = {
    * @defaultValue `50`
    */
   monthsAfter?: number;
-  
+
   /**
    * How much days can be selected simultaneously.
    * @defaultValue `singleDay`
    */
   selectionMode?: 'singleDay' | 'multipleDays';
-  
+
   /**
    * How much months can be scrolled over.
    * @defaultValue `multipleMonths`
    */
   scrollMode?: 'oneMonth' | 'multipleMonths' | 'anyOffset';
-  
+
   /**
    * How quickly the calendar scrolling decelerates after the user lifts their finger.
    * @defaultValue `normal`
    */
   scrollModeDeceleration?: FlatListProps<any>['decelerationRate'];
-  
+
   /**
    * Active (current) calendar day.
    * If provided, will be highlighted in active color.
@@ -94,7 +98,7 @@ type CalendarProps = {
   /**
    * Container style
    */
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
 };
 ```
 
