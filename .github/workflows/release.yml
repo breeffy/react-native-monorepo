@@ -15,67 +15,67 @@ jobs:
   release-package:
     runs-on: ubuntu-latest
     steps:
-    - name: Check version input
-      uses: actions/github-script@v3.1.0
-      with:
-        result-encoding: string
-        script: |
-          if (!['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
-            core.setFailed('input version [${{ github.event.inputs.version }}] is not "patch", "minor" or "major"')
-          }
-    - name: Check draft input
-      id: draft-option
-      uses: actions/github-script@v3.1.0
-      with:
-        result-encoding: string
-        script: |
-          if (!['true', 'false'].includes('${{ github.event.inputs.draft }}')) {
-            core.setFailed('input draft [${{ github.event.inputs.draft }}] is not "true" or "false"')
-          } else {
-            return '${{ github.event.inputs.draft }}' === 'true' ? '--github.draft' : '--no-github.draft'
-          }
-    - name: Import Feeve Bot GPG Key
-      env:
-        FEEVE_BOT_GPG_KEY: ${{ secrets.FEEVE_BOT_GPG_KEY }}
-      run: echo -e "$FEEVE_BOT_GPG_KEY" | gpg --import
-    - name: Checkout source code
-      uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-      with:
-        token: ${{ secrets.FEEVE_BOT_TOKEN }}
-    - name: Setup git config
-      run: |
-        git config user.name "Feeve Bot"
-        git config user.email feevebot@breeffy.com
-        git config user.signingkey C240C98C495BC1A3
-        git config commit.gpgSign true
-        git config tag.gpgSign true
-    - name: Setup Node.js
-      uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
-      with:
-        node-version: 14.x
-    - name: Cache yarn dependencies
-      uses: c-hive/gha-yarn-cache@f23816cdbc6d287b7982b4a08096db01a6329c12
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile --non-interactive
-    - name: Create release
-      run: yarn release -- ${{ github.event.inputs.version }} ${{steps.draft-option.outputs.result}} --ci
-      env:
-        GITHUB_TOKEN: ${{ secrets.FEEVE_BOT_TOKEN }}
-    - name: Publish to NPM Registry
-      uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
-      with:
-        node-version: 14.x
-        registry-url: 'https://registry.npmjs.org'
-        scope: '@breeffy' 
-    - run: yarn publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_BREEFFY_ORG_PUBLISH_TOKEN }}
-    - name: Publish to GitHub Registry
-      uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
-      with:
-        node-version: 14.x
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@breeffy'
-    - run: yarn publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.FEEVE_BOT_TOKEN }}
+      - name: Check version input
+        uses: actions/github-script@v3.1.0
+        with:
+          result-encoding: string
+          script: |
+            if (!['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
+              core.setFailed('input version [${{ github.event.inputs.version }}] is not "patch", "minor" or "major"')
+            }
+      - name: Check draft input
+        id: draft-option
+        uses: actions/github-script@v3.1.0
+        with:
+          result-encoding: string
+          script: |
+            if (!['true', 'false'].includes('${{ github.event.inputs.draft }}')) {
+              core.setFailed('input draft [${{ github.event.inputs.draft }}] is not "true" or "false"')
+            } else {
+              return '${{ github.event.inputs.draft }}' === 'true' ? '--github.draft' : '--no-github.draft'
+            }
+      - name: Import Feeve Bot GPG Key
+        env:
+          FEEVE_BOT_GPG_KEY: ${{ secrets.FEEVE_BOT_GPG_KEY }}
+        run: echo -e "$FEEVE_BOT_GPG_KEY" | gpg --import
+      - name: Checkout source code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          token: ${{ secrets.FEEVE_BOT_TOKEN }}
+      - name: Setup git config
+        run: |
+          git config user.name "BreeffyBot"
+          git config user.email bot@breeffy.com
+          git config user.signingkey C240C98C495BC1A3
+          git config commit.gpgSign true
+          git config tag.gpgSign true
+      - name: Setup Node.js
+        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
+        with:
+          node-version: 14.x
+      - name: Cache yarn dependencies
+        uses: c-hive/gha-yarn-cache@f23816cdbc6d287b7982b4a08096db01a6329c12
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --non-interactive
+      - name: Create release
+        run: yarn release -- ${{ github.event.inputs.version }} ${{steps.draft-option.outputs.result}} --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.FEEVE_BOT_TOKEN }}
+      - name: Publish to NPM Registry
+        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
+        with:
+          node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@breeffy'
+      - run: yarn publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BREEFFY_ORG_PUBLISH_TOKEN }}
+      - name: Publish to GitHub Registry
+        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
+        with:
+          node-version: 14.x
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@breeffy'
+      - run: yarn publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.FEEVE_BOT_TOKEN }}
