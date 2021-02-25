@@ -2,6 +2,12 @@
 
 [![npm](https://img.shields.io/github/license/breeffy/react-native-calendar)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) ![github](https://img.shields.io/badge/license-Commercial-orange) [![npm](https://img.shields.io/badge/types-included-blue)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
 
+<p float="left">
+  <img src="./assets/singleDay.mp4" width="100" />
+  <img src="./assets/singleDay.mp4" width="100" />
+  <img src="./assets/singleDay.mp4" width="100" />
+</p>
+
 ## Overview
 
 High-quality, modern, fast interactive calendar built specifically with performance in mind. Supports gestures and animations.
@@ -27,6 +33,7 @@ High-quality, modern, fast interactive calendar built specifically with performa
 :x: - not supported
 
 ## Usage
+
 ```ts
 import React from 'react';
 import { View } from 'react-native';
@@ -45,6 +52,7 @@ export const CalendarSheet = () => {
 ```
 
 ## Calendar properties
+
 ```ts
 type CalendarProps = {
   /**
@@ -66,25 +74,25 @@ type CalendarProps = {
    * @defaultValue `50`
    */
   monthsAfter?: number;
-  
+
   /**
    * How much days can be selected simultaneously.
    * @defaultValue `singleDay`
    */
   selectionMode?: 'singleDay' | 'multipleDays';
-  
+
   /**
    * How much months can be scrolled over.
    * @defaultValue `multipleMonths`
    */
   scrollMode?: 'oneMonth' | 'multipleMonths' | 'anyOffset';
-  
+
   /**
    * How quickly the calendar scrolling decelerates after the user lifts their finger.
    * @defaultValue `normal`
    */
   scrollModeDeceleration?: FlatListProps<any>['decelerationRate'];
-  
+
   /**
    * Active (current) calendar day.
    * If provided, will be highlighted in active color.
@@ -94,7 +102,7 @@ type CalendarProps = {
   /**
    * Container style
    */
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
 };
 ```
 
