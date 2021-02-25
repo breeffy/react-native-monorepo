@@ -33,6 +33,25 @@ categories:
       - 'example application'
       - 'example-app'
       - 'example-application'
+autolabeler:
+  - label: 'documentation'
+    branch:
+      - '/docs{0,1}\/.+/'
+      - '/documentation\/.+/'
+  - label: 'bugfix'
+    branch:
+      - '/fix\/.+/'
+  - label: 'update'
+    branch:
+      - '/update\/.+/'
+  - label: 'feature'
+    branch:
+      - '/feat\/.+/'
+      - '/feature\/.+/'
+      - '/enhancement\/.+/'
+  - label: 'example'
+    branch:
+      - '/example\/.+/'
 version-resolver:
   major:
     labels:
