@@ -54,28 +54,47 @@ export type CalendarProps = {
    * @defaultValue `gregorian`
    */
   kind?: CalendarKind;
+
   /**
    * Initial month to be shown.
    * If not provided, year and month of current local datetime will be selected.
    */
   initialCalendarYearAndMonth?: CalendarYearAndMonth;
+
   /**
    * Amount of months before initial year and month,
    * which will be shown in a calendar.
    * @defaultValue `50`
    */
   monthsBefore?: number;
+
   /**
    * Amount of months after initial year and month,
    * which will be shown in a calendar.
    * @defaultValue `50`
    */
   monthsAfter?: number;
-  selectionMode?: CalendarSelectionMode;
-  scrollMode?: 'oneMonth' | 'multipleMonths' | 'anyOffset';
-  scrollModeDeceleration?: FlatListProps<any>['decelerationRate'];
+
   /**
-   * Current calendar day.
+   * How much days can be selected simultaneously.
+   * @defaultValue `singleDay`
+   */
+  selectionMode?: CalendarSelectionMode;
+
+  /**
+   * How much months can be scrolled over.
+   * @defaultValue `multipleMonths`
+   */
+  scrollMode?: 'oneMonth' | 'multipleMonths' | 'anyOffset';
+
+  /**
+   * How quickly the calendar scrolling decelerates after the user lifts their finger.
+   * @defaultValue `normal`
+   */
+  scrollModeDeceleration?: FlatListProps<any>['decelerationRate'];
+
+  /**
+   * Active (current) calendar day.
    * If provided, will be highlighted in active color.
    */
   activeCalendarDay?: CalendarDate;
