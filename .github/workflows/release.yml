@@ -67,7 +67,7 @@ jobs:
           node-version: 14.x
           registry-url: 'https://registry.npmjs.org'
           scope: '@breeffy'
-      - run: yarn publish --access public
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_BREEFFY_ORG_PUBLISH_TOKEN }}
       - name: Publish to GitHub Registry
@@ -76,6 +76,6 @@ jobs:
           node-version: 14.x
           registry-url: 'https://npm.pkg.github.com'
           scope: '@breeffy'
-      - run: yarn publish --access public
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.BREEFFYBOT_TOKEN }}
