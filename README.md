@@ -1,6 +1,6 @@
 # React Native Calendar
-
-[![npm](https://img.shields.io/github/license/breeffy/react-native-calendar)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) ![github](https://img.shields.io/badge/license-Commercial-orange) [![npm](https://img.shields.io/badge/types-included-blue)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/breeffy/react-native-calendar?color=blue&style=flat-square)
+![npm](https://img.shields.io/npm/v/@breeffy/react-native-calendar?color=yellow&label=npm%40latest&style=flat-square) [![npm](https://img.shields.io/github/license/breeffy/react-native-calendar?color=green&style=flat-square)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) ![github](https://img.shields.io/badge/license-Commercial-orange?color=green&style=flat-square) [![npm](https://img.shields.io/badge/types-Typescript-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
 
 ## Overview
 
