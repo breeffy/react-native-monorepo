@@ -34,7 +34,10 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "breeffy",
+    "calendar",
+    "reanimated"
   ],
   "repository": "https://github.com/breeffy/react-native-calendar",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
