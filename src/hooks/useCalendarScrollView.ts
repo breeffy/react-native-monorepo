@@ -10,22 +10,13 @@ import type {
 } from 'react-native';
 
 export const useCalendarScroll = () => {
-  const scrollState = useSharedValue<ScrollState>(
-    ScrollState.UNDETERMINED,
-    false
-  );
-  const scrollContentSize = useSharedValue<NativeScrollSize>(
-    { width: 0, height: 0 },
-    false
-  );
-  const scrollContentOffset = useSharedValue<NativeScrollPoint>(
-    { x: 0, y: 0 },
-    false
-  );
-  const scrollVelocity = useSharedValue<NativeScrollVelocity>(
-    { x: 0, y: 0 },
-    false
-  );
+  const scrollState = useSharedValue<ScrollState>(ScrollState.UNDETERMINED);
+  const scrollContentSize = useSharedValue<NativeScrollSize>({
+    width: 0,
+    height: 0
+  });
+  const scrollContentOffset = useSharedValue<NativeScrollPoint>({ x: 0, y: 0 });
+  const scrollVelocity = useSharedValue<NativeScrollVelocity>({ x: 0, y: 0 });
   const scrollLayoutMeasurement = useSharedValue<NativeScrollSize>({
     width: 0,
     height: 0

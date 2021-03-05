@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  ListRenderItem,
-  ViewStyle
-} from 'react-native';
+import { FlatList, FlatListProps, ListRenderItem } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -26,10 +21,7 @@ import type { CalendarDayKind } from './CalendarDay';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(
   FlatList
-) as React.ComponentClass<
-  Animated.AnimateProps<ViewStyle, FlatListProps<any>>,
-  any
->;
+) as React.ComponentClass<Animated.AnimateProps<FlatListProps<any>>, any>;
 
 export interface CalendarScrollableMonthsProps {
   scrollMode: CalendarProps['scrollMode'];
@@ -74,7 +66,6 @@ export const CalendarScrollableMonths = ({
     calendarEndMonthFromCommonEra
   } = useCalendarAnimated();
 
-  // @ts-expect-error
   useDerivedValue(() => {
     if (scrollState.value !== ScrollState.UNDETERMINED) {
       calendarAnimatedCommonEraMonth.value = round(
@@ -98,6 +89,7 @@ export const CalendarScrollableMonths = ({
   }, [calendarStartMonthFromCommonEra, calendarEndMonthFromCommonEra]);
 
   const calendarMonths = useMemoOne(() => {
+    console.log(`calendarMonths: created new instance`);
     return getStartOfEveryMonth(calendarInterval).map<CalendarYearAndMonth>(
       (dt) => {
         return {

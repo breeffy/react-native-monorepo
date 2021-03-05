@@ -189,16 +189,18 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       return initialCalendarYearAndMonth.month;
     }, [initialCalendarYearAndMonth]);
 
-    const calendarInitialScrollProgress = useMemoOne(() => {
+    const calendarInitialScrollProgress = (useMemoOne(() => {
       return runOnJS(calculateScrollProgress)(calendarAnimatedCommonEraMonth, [
         calendarStartMonthFromCommonEra,
         calendarEndMonthFromCommonEra
       ]);
-    }, [calendarStartMonthFromCommonEra, calendarEndMonthFromCommonEra]);
+    }, [
+      calendarStartMonthFromCommonEra,
+      calendarEndMonthFromCommonEra
+    ]) as unknown) as number;
 
     const calendarAnimatedScrollProgress = useSharedValue(
-      calendarInitialScrollProgress,
-      false
+      calendarInitialScrollProgress
     );
 
     const animatedContextVariables = useMemo<CalendarAnimatedContextInterface>(
