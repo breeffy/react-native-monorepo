@@ -21,10 +21,10 @@ export const CalendarSheet = ({
         style={styles.calendar}
         ref={calendarRef}
         selectionMode="singleDay"
-        scrollMode="multipleMonths"
-        scrollModeDeceleration="fast"
-        monthsBefore={12}
-        monthsAfter={24}
+        scrollMode="anyOffset"
+        scrollModeDeceleration="normal"
+        monthsBefore={50}
+        monthsAfter={50}
         onDaySelectionChange={onDaySelectionChange}
       />
     </View>
