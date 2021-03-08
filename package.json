@@ -4,8 +4,8 @@
   "description": "High-quality, modern, fast interactive calendar built specifically with performance in mind. Supports gestures and animations.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
+  "react-native": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
-  "react-native": "src/index",
   "source": "src/index",
   "files": [
     "src",
