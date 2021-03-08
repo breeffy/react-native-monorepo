@@ -111,7 +111,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       scrollMode = 'multipleMonths',
       scrollModeDeceleration = 'normal',
       activeCalendarDay: _activeCalendarDay,
-      style
+      style: _containerStyle
     }: CalendarProps,
     ref
   ) => {
@@ -290,9 +290,14 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
 
     const [calendarHeader] = useState(40);
 
+    const containerStyle = useMemoOne(
+      () => [styles.containerStyle, _containerStyle],
+      [styles.containerStyle, _containerStyle]
+    );
+
     return (
-      <CalendarProvider value={externalContextVariables}>
-        <View style={style}>
+      <View style={containerStyle}>
+        <CalendarProvider value={externalContextVariables}>
           <CalendarInternalProvider value={internalContextVariables}>
             <CalendarAnimatedProvider value={animatedContextVariables}>
               <CalendarHeaderDecorator style={styles.headerDecoratorStyle}>
@@ -313,13 +318,14 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
               />
             </CalendarAnimatedProvider>
           </CalendarInternalProvider>
-        </View>
-      </CalendarProvider>
+        </CalendarProvider>
+      </View>
     );
   }
 );
 
 const styles = StyleSheet.create({
+  containerStyle: { backgroundColor: 'rgba(255, 255, 255, 1)' },
   headerDecoratorStyle: {
     marginBottom: 4,
     marginTop: 4
