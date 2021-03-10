@@ -1,7 +1,12 @@
 import { DateTime } from 'luxon';
+import type { TextStyle } from 'react-native';
 import type {
   CalendarDate,
+  CalendarDaysOfWeekTheme,
+  CalendarDayTheme,
+  CalendarHeaderTheme,
   CalendarMonth,
+  CalendarTextTheme,
   CalendarWeek,
   CalendarYearAndMonth
 } from './types';
@@ -162,4 +167,49 @@ export const calendarYearAndMonthToMonths = (
   calendarYearAndMonth: CalendarYearAndMonth
 ): CalendarMonth => {
   return calendarYearAndMonth.year * 12 + calendarYearAndMonth.month;
+};
+
+const calendarTextThemeToTextStyle = (
+  calendarTextTheme: CalendarTextTheme
+): TextStyle => {
+  return {
+    fontFamily: calendarTextTheme.textFont,
+    fontWeight: calendarTextTheme.textWeight,
+    fontSize: calendarTextTheme.textSize,
+    color: calendarTextTheme.textColor
+  };
+};
+
+export const calendarDayThemeToTextStyle = (
+  calendarDayTheme: CalendarDayTheme
+): TextStyle => {
+  return calendarTextThemeToTextStyle(calendarDayTheme);
+};
+
+export const calendarHeaderThemeToTextStyle = (
+  calendarHeaderTheme: CalendarHeaderTheme
+): TextStyle => {
+  return calendarTextThemeToTextStyle(calendarHeaderTheme);
+};
+
+export const calendarDaysOfWeekToTextStyle = (
+  calendarDaysOfWeekTheme: CalendarDaysOfWeekTheme
+): TextStyle => {
+  return calendarTextThemeToTextStyle(calendarDaysOfWeekTheme);
+};
+
+export const deepFreeze = <T extends { [key: string]: any }>(object: T) => {
+  // Retrieve the property names defined on object
+  const propNames = Object.getOwnPropertyNames(object);
+
+  // Freeze properties before freezing self
+  for (const name of propNames) {
+    const value = object[name];
+
+    if (value && typeof value === 'object') {
+      deepFreeze(value);
+    }
+  }
+
+  return Object.freeze(object);
 };

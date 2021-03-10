@@ -2,10 +2,14 @@ import React from 'react';
 import { Text, View, ViewStyle } from 'react-native';
 import { useMemoOne } from 'use-memo-one';
 import { useCalendarInternal } from '../../hooks/useCalendarInternal';
-import { calendarYearAndMonthToMonths } from '../../helpers';
+import {
+  calendarHeaderThemeToTextStyle,
+  calendarYearAndMonthToMonths
+} from '../../helpers';
 import { getMonthInterpolateConfig, getStartOfEveryMonth } from '../../utils';
 import { CalendarAnimatedHeader } from './CalendarAnimatedHeader';
-import { headerStyles } from './styles';
+import { styles } from './styles';
+import { useCalendarTheme } from '../../hooks';
 
 export interface CalendarHeaderMonthProps {
   height?: number;
@@ -44,6 +48,15 @@ export const CalendarHeaderMonth = ({
     );
   }, [height, startCalendarYearAndMonth, endCalendarYearAndMonth]);
 
+  const theme = useCalendarTheme();
+  const textStyle = useMemoOne(
+    () => [
+      styles.headerText,
+      calendarHeaderThemeToTextStyle(theme.header.month)
+    ],
+    [styles.headerText, theme]
+  );
+
   return (
     <View style={style}>
       <CalendarAnimatedHeader
@@ -53,7 +66,7 @@ export const CalendarHeaderMonth = ({
       >
         {arrayOfMonthText.map((monthText, index) => {
           return (
-            <Text key={`${index}-${monthText}`} style={headerStyles.text}>
+            <Text key={`${index}-${monthText}`} style={textStyle}>
               {monthText}
             </Text>
           );

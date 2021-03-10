@@ -39,8 +39,11 @@ import type {
   CalendarMethods,
   CalendarYearAndMonth,
   ViewStyleProp,
-  CalendarSelectionMode
+  CalendarSelectionMode,
+  CalendarTheme
 } from './types';
+import { CalendarThemeLight } from './themes';
+import { CalendarThemeProvider } from './contexts/theme';
 
 // @ts-expect-error
 const AnimatedTapGestureHandler: typeof TapGestureHandler = Animated.createAnimatedComponent(
@@ -98,6 +101,10 @@ export type CalendarProps = {
    * If provided, will be highlighted in active color.
    */
   activeCalendarDay?: CalendarDate;
+  /**
+   * Theme object to customize calendar appearance
+   */
+  theme: CalendarTheme;
   onDaySelectionChange?: (day: DateTime) => void;
 } & ViewStyleProp;
 
@@ -111,6 +118,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       scrollMode = 'multipleMonths',
       scrollModeDeceleration = 'normal',
       activeCalendarDay: _activeCalendarDay,
+      theme = CalendarThemeLight,
       style: _containerStyle
     }: CalendarProps,
     ref
@@ -296,36 +304,37 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
     );
 
     return (
-      <View style={containerStyle}>
-        <CalendarProvider value={externalContextVariables}>
-          <CalendarInternalProvider value={internalContextVariables}>
-            <CalendarAnimatedProvider value={animatedContextVariables}>
-              <CalendarHeaderDecorator style={styles.headerDecoratorStyle}>
-                <CalendarHeaderMonth
-                  style={styles.headerMonthStyle}
-                  height={calendarHeader}
-                />
-                <CalendarHeaderYear height={calendarHeader} />
-              </CalendarHeaderDecorator>
+      <View style={theme.sheet}>
+        <CalendarThemeProvider value={theme}>
+          <CalendarProvider value={externalContextVariables}>
+            <CalendarInternalProvider value={internalContextVariables}>
+              <CalendarAnimatedProvider value={animatedContextVariables}>
+                <CalendarHeaderDecorator style={styles.headerDecoratorStyle}>
+                  <CalendarHeaderMonth
+                    style={styles.headerMonthStyle}
+                    height={calendarHeader}
+                  />
+                  <CalendarHeaderYear height={calendarHeader} />
+                </CalendarHeaderDecorator>
 
-              <CalendarDaysOfWeekHeader />
-              <CalendarScrollableMonths
-                scrollMode={scrollMode}
-                scrollModeDeceleration={scrollModeDeceleration}
-                activeCalendarDay={activeCalendarDay}
-                selectedDates={selectedDates}
-                onCalendarDayPress={onCalendarDayStateChange}
-              />
-            </CalendarAnimatedProvider>
-          </CalendarInternalProvider>
-        </CalendarProvider>
+                <CalendarDaysOfWeekHeader />
+                <CalendarScrollableMonths
+                  scrollMode={scrollMode}
+                  scrollModeDeceleration={scrollModeDeceleration}
+                  activeCalendarDay={activeCalendarDay}
+                  selectedDates={selectedDates}
+                  onCalendarDayPress={onCalendarDayStateChange}
+                />
+              </CalendarAnimatedProvider>
+            </CalendarInternalProvider>
+          </CalendarProvider>
+        </CalendarThemeProvider>
       </View>
     );
   }
 );
 
 const styles = StyleSheet.create({
-  containerStyle: { backgroundColor: 'rgba(255, 255, 255, 1)' },
   headerDecoratorStyle: {
     marginBottom: 4,
     marginTop: 4
