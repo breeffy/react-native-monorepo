@@ -110,7 +110,7 @@ export default function SvgIcon({
   let styleObject: Styles = {};
   if (typeof style === 'object') {
     if (Array.isArray(style)) {
-      styleObject = StyleSheet.flatten(style);
+      styleObject = StyleSheet.flatten<Styles>(style as Styles[]);
     } else {
       styleObject = style;
     }
