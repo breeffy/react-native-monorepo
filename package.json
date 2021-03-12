@@ -8,6 +8,7 @@
     "test": "npx jest",
     "prepack": "npx tsc",
     "postpack": "npx rimraf dist/",
+    "release": "release-it",
     "set.rnsvg": "yarn upgrade react-native-svg@$RNSVG_VERSION"
   },
   "types": "dist/index.d.ts",
@@ -58,6 +59,7 @@
     "react-native": "^0.61.5",
     "react-native-svg": "^12.1.0",
     "react-test-renderer": "^17.0.1",
+    "release-it": "^14.4.1",
     "rimraf": "^3.0.2",
     "semantic-release": "^17.4.2",
     "typescript": "^4.2.3"
@@ -74,5 +76,17 @@
     "react-native-svg-icons",
     "react-native-svg",
     "icons"
-  ]
+  ],
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}",
+      "tagName": "v${version}"
+    },
+    "npm": {
+      "publish": false
+    },
+    "github": {
+      "release": false
+    }
+  } 
 }
