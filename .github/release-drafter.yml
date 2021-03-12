@@ -1,0 +1,69 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '💥 Breaking Changes'
+    labels:
+      - 'breaking-change'
+      - 'breaking-changes'
+      - 'breaking change'
+      - 'breaking changes'
+  - title: '🚀 New Features'
+    labels:
+      - 'feat'
+      - 'feature'
+      - 'enhancement'
+  - title: '🌟 Updates'
+    labels:
+      - 'update'
+      - 'updates'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bug'
+      - 'bugfix'
+      - 'fix'
+  - title: '📖 Documentation'
+    labels:
+      - 'doc'
+      - 'docs'
+      - 'documentation'
+  - title: '🎁 Example App'
+    labels:
+      - 'example'
+      - 'example app'
+      - 'example application'
+      - 'example-app'
+      - 'example-application'
+autolabeler:
+  - label: 'documentation'
+    branch:
+      - '/docs{0,1}\/.+/'
+      - '/documentation\/.+/'
+  - label: 'bugfix'
+    branch:
+      - '/fix\/.+/'
+  - label: 'update'
+    branch:
+      - '/update\/.+/'
+  - label: 'feature'
+    branch:
+      - '/feat\/.+/'
+      - '/feature\/.+/'
+      - '/enhancement\/.+/'
+  - label: 'example'
+    branch:
+      - '/example\/.+/'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+template: |
+  ## What’s Changed
+
+  $CHANGES

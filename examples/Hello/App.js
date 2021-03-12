@@ -1,9 +1,10 @@
 import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCoffee, faBeer, faCircle, faCheck } from '@fortawesome/free-solid-svg-icons'
-import SampleRNSVGMaskedIcon from './SampleRNSVGMaskedIcon'
-import SampleRNSVGPlainIcon from './SampleRNSVGPlainIcon'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { SvgIcon } from '@breeffy/react-native-svg-icons'
+import {faCoffee, faBeer, faCircle, faCheck} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faCoffee, faBeer, faCircle, faCheck);
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,13 +22,13 @@ export default function App() {
       <Text style={styles.instructions}>And now, for some icons:</Text>
 
       <Text>Default style</Text>
-      <FontAwesomeIcon icon={ faCoffee } />
+      <SvgIcon icon={'beer'} size={32} />
 
       <Text>Icon with different color:</Text>
-      <FontAwesomeIcon icon={ faBeer } style={ styles.icon } />
+      <SvgIcon icon={'beer'} size={32} style={{color: 'green'}} />
 
-      <Text>Icon with mask and transform:</Text>
-      <FontAwesomeIcon icon={ faCheck } mask={ faCircle } transform="shrink-5" />
+      <Text>Icon with mask:</Text>
+      <SvgIcon icon={'check'} size={32} mask={'circle'} style={{color: 'red'}} />
 
       {
         // Uncomment to render an icon that uses the react-native-svg elements directly.
@@ -44,9 +45,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    color: 'green'
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
