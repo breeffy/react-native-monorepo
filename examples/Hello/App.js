@@ -2,8 +2,8 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCoffee, faBeer, faCircle, faCheck } from '@fortawesome/free-solid-svg-icons'
-import SampleRNSVGMaskedIcon from './SampleRNSVGMaskedIcon'
-import SampleRNSVGPlainIcon from './SampleRNSVGPlainIcon'
+// import SampleRNSVGMaskedIcon from './SampleRNSVGMaskedIcon'
+// import SampleRNSVGPlainIcon from './SampleRNSVGPlainIcon'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
