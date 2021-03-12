@@ -11,15 +11,15 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.20",
     "@fortawesome/free-solid-svg-icons": "^5.10.0",
     "@fortawesome/react-native-fontawesome": "^0.1.0",
-    "expo": "^34.0.1",
+    "expo": "^40.0.0",
     "react": "16.13.1",
-    "react-dom": "^16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
-    "react-native-svg": "^9.5.3",
-    "react-native-web": "^0.13.3"
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
+    "react-native-svg": "12.1.0",
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "babel-preset-expo": "^6.0.0"
+    "babel-preset-expo": "8.3.0"
   },
   "private": true
 }
