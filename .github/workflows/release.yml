@@ -13,6 +13,7 @@ on:
 
 jobs:
   release-package:
+    environment: release
     runs-on: ubuntu-latest
     steps:
       - name: Check version input
