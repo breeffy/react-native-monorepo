@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Line } from './Svg';
+import { SvgLine } from './shapes';
 import { dayOfWeekWidth } from '../constants';
 import { useMemoOne } from 'use-memo-one';
 import { useCalendarTheme } from '../hooks';
@@ -46,7 +46,7 @@ export const CalendarDaysOfWeekHeader = ({
         })}
       </View>
       {showBottomLine && (
-        <Line
+        <SvgLine
           color={theme.lineDelimiter.lineColor}
           width={theme.lineDelimiter.lineWidth}
           style={styles.line}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useMemoOne } from 'use-memo-one';
-import { Circle } from './components/Svg';
+import { SvgCircle } from './components/shapes';
 import { dayOfWeekWidth } from './constants';
 import { calendarDayThemeToTextStyle } from './helpers';
 import { useCalendarTheme } from './hooks/useCalendarTheme';
@@ -50,7 +50,7 @@ export const CalendarDay = ({
   return (
     <View style={containerStyle}>
       {kind === CalendarDayKind.SELECTED && (
-        <Circle color={calendarDayTheme.circleColor} style={styles.circle} />
+        <SvgCircle color={calendarDayTheme.circleColor} style={styles.circle} />
       )}
       <Text style={textStyle}>{String(day)}</Text>
     </View>

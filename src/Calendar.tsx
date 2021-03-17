@@ -104,7 +104,7 @@ export type CalendarProps = {
   /**
    * Theme object to customize calendar appearance
    */
-  theme: CalendarTheme;
+  theme?: CalendarTheme;
   onDaySelectionChange?: (day: DateTime) => void;
 } & ViewStyleProp;
 
@@ -297,11 +297,6 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
     );
 
     const [calendarHeader] = useState(40);
-
-    const containerStyle = useMemoOne(
-      () => [styles.containerStyle, _containerStyle],
-      [styles.containerStyle, _containerStyle]
-    );
 
     return (
       <View style={theme.sheet}>
