@@ -1,0 +1,76 @@
+import React, { useMemo } from 'react';
+import { default as ShowcaseTemplate } from '@gorhom/showcase-template';
+import { useNavigation } from '@react-navigation/native';
+import { useSafeArea } from 'react-native-safe-area-context';
+import { version, description } from '../../../../package.json';
+import { Header } from './Header';
+import { useAppContext } from '../../hooks/useAppContext';
+
+const data = [
+  {
+    title: 'Features',
+    data: [
+      {
+        name: 'One Day',
+        slug: 'OneDaySelection'
+      },
+      {
+        name: 'Multiple Days',
+        slug: 'Basic/ScrollViewExample'
+      },
+      {
+        name: 'With BottomSheet',
+        slug: 'Basic/WithBottomSheet'
+      }
+    ]
+  },
+  {
+    title: 'Pagination Mode',
+    data: [
+      {
+        name: 'Enabled',
+        slug: 'Basic/ViewExample'
+      },
+      {
+        name: 'Disabled',
+        slug: 'Basic/ScrollViewExample'
+      }
+    ]
+  }
+];
+
+export const Showcase = () => {
+  // hooks
+  const { navigate } = useNavigation();
+  const { theme } = useAppContext();
+  const safeInsets = useSafeArea();
+  console.log(`Showcase: theme is ${theme}`);
+
+  // variables
+  const author = useMemo(
+    () => ({
+      username: 'Victor Malov',
+      url: 'https://github.com/breeffy/react-native-calendar'
+    }),
+    []
+  );
+
+  // callbacks
+  const handleOnPress = (slug: string) => navigate(slug);
+
+  // renders
+  return (
+    <>
+      <ShowcaseTemplate
+        theme={theme}
+        version={version}
+        name="Calendar"
+        description={description}
+        author={author}
+        data={data}
+        safeInsets={safeInsets}
+        handleOnPress={handleOnPress}
+      />
+    </>
+  );
+};

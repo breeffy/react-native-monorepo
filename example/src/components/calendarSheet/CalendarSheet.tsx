@@ -1,5 +1,11 @@
-import React, { useRef } from 'react';
-import { Calendar, CalendarProps } from '@breeffy/react-native-calendar';
+import React, { useMemo, useRef } from 'react';
+import {
+  Calendar,
+  CalendarProps,
+  CalendarThemeLight,
+  CalendarThemeDark
+} from '@breeffy/react-native-calendar';
+import { useAppContext } from '../../hooks';
 import type { CalendarMethods } from '@breeffy/react-native-calendar';
 import type { ViewStyleProp } from '../../../../src/types';
 
@@ -10,6 +16,10 @@ export type CalendarSheetProps = {
 
 export const CalendarSheet = ({ onDaySelectionChange }: CalendarSheetProps) => {
   const calendarRef = useRef<CalendarMethods>(null);
+  const { theme } = useAppContext();
+  const calendarTheme = useMemo(() => {
+    return theme === 'light' ? CalendarThemeLight : CalendarThemeDark;
+  }, [theme]);
 
   return (
     <Calendar
@@ -19,6 +29,7 @@ export const CalendarSheet = ({ onDaySelectionChange }: CalendarSheetProps) => {
       scrollModeDeceleration="fast"
       monthsBefore={12}
       monthsAfter={24}
+      theme={calendarTheme}
       onDaySelectionChange={onDaySelectionChange}
     />
   );
