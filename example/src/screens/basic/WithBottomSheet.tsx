@@ -1,7 +1,6 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { CalendarSheet } from '../../components/calendarSheet';
 
 interface WithBottomSheetProps {
   title: string;
@@ -24,6 +23,7 @@ export const WithBottomSheet = ({}: WithBottomSheetProps) => {
   // renders
   return (
     <View style={styles.container}>
+      {/* @ts-ignore */}
       <BottomSheet
         ref={bottomSheetRef}
         index={1}
@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column-reverse',
     padding: 24,
     backgroundColor: 'grey'
-    // backgroundColor: 'orange'
-    // padding: 64
   },
   contentContainer: {
     flex: 1,

@@ -6,11 +6,11 @@ import {
   StyleSheet,
   Dimensions,
   StatusBar,
-  Button as RNButton,
+  Button as RNButton
 } from 'react-native';
 import Animated, {
   useAnimatedStyle,
-  useSharedValue,
+  useSharedValue
 } from 'react-native-reanimated';
 import { useSafeArea } from 'react-native-safe-area-context';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -38,7 +38,7 @@ const BasicExample = () => {
   const containerStyle = useMemo(
     () => ({
       ...styles.container,
-      paddingTop: topSafeArea,
+      paddingTop: topSafeArea
     }),
     [topSafeArea]
   );
@@ -47,8 +47,8 @@ const BasicExample = () => {
     () => [
       styles.line,
       {
-        height: snapPoints[0],
-      },
+        height: snapPoints[0]
+      }
     ],
     [snapPoints]
   );
@@ -57,8 +57,8 @@ const BasicExample = () => {
     () => [
       styles.line,
       {
-        height: snapPoints[1],
-      },
+        height: snapPoints[1]
+      }
     ],
     [snapPoints]
   );
@@ -67,14 +67,14 @@ const BasicExample = () => {
     () => [
       styles.line,
       {
-        height: bottomSafeArea,
-      },
+        height: bottomSafeArea
+      }
     ],
     [bottomSafeArea]
   );
 
   const sheetLineAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: animatedPosition.value }],
+    transform: [{ translateY: animatedPosition.value }]
   }));
   const sheetLineStyle = useMemo(
     () => [styles.sheetLine, sheetLineAnimatedStyle],
@@ -86,14 +86,14 @@ const BasicExample = () => {
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
-  const handleSnapPress = useCallback(index => {
+  const handleSnapPress = useCallback((index) => {
     bottomSheetRef.current?.snapTo(index);
   }, []);
   const handleClosePress = useCallback(() => {
     bottomSheetRef.current?.close();
   }, []);
   const handleIncreaseDynamicSnapPoint = useCallback(() => {
-    setDynamicSnapPoint(state => state + 50);
+    setDynamicSnapPoint((state) => state + 50);
   }, []);
   //#endregion
 
@@ -130,7 +130,7 @@ const BasicExample = () => {
         <View
           style={{
             height: dynamicSnapPoint,
-            backgroundColor: 'black',
+            backgroundColor: 'black'
           }}
         >
           <RNButton
@@ -146,7 +146,7 @@ const BasicExample = () => {
               bottom: 0,
               height: bottomSafeArea,
               borderWidth: 1,
-              backgroundColor: 'white',
+              backgroundColor: 'white'
             }}
           />
         </View>
@@ -162,17 +162,17 @@ const BasicExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   buttonContainer: {
-    marginBottom: 6,
+    marginBottom: 6
   },
   line: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-    borderWidth: 1,
+    borderWidth: 1
   },
   sheetLine: {
     position: 'absolute',
@@ -180,8 +180,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: 1,
-    backgroundColor: 'red',
-  },
+    backgroundColor: 'red'
+  }
 });
 
 export default BasicExample;

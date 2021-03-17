@@ -19,10 +19,10 @@ const DynamicSnapPointExample = () => {
 
   // callbacks
   const handleIncreaseContentPress = useCallback(() => {
-    setCount(state => state + 1);
+    setCount((state) => state + 1);
   }, []);
   const handleDecreaseContentPress = useCallback(() => {
-    setCount(state => Math.max(state - 1, 0));
+    setCount((state) => Math.max(state - 1, 0));
   }, []);
   const handleExpandPress = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -33,8 +33,8 @@ const DynamicSnapPointExample = () => {
   const handleOnLayout = useCallback(
     ({
       nativeEvent: {
-        layout: { height },
-      },
+        layout: { height }
+      }
     }) => {
       setContentHeight(height);
     },
@@ -45,14 +45,14 @@ const DynamicSnapPointExample = () => {
   const contentContainerStyle = useMemo(
     () => ({
       ...styles.contentContainerStyle,
-      paddingBottom: safeBottomArea,
+      paddingBottom: safeBottomArea
     }),
     [safeBottomArea]
   );
   const emojiContainerStyle = useMemo(
     () => ({
       ...styles.emojiContainer,
-      height: 50 * count,
+      height: 50 * count
     }),
     [count]
   );
@@ -113,34 +113,34 @@ const DynamicSnapPointExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   background: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   buttonContainer: {
-    marginBottom: 6,
+    marginBottom: 6
   },
   contentContainerStyle: {
     paddingTop: 12,
     paddingHorizontal: 24,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   message: {
     fontSize: 24,
     fontWeight: '600',
-    marginBottom: 12,
+    marginBottom: 12
   },
   emoji: {
     fontSize: 156,
     textAlign: 'center',
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
   emojiContainer: {
     overflow: 'hidden',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });
 
 export default DynamicSnapPointExample;

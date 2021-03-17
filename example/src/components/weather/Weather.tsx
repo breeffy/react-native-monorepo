@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
-  useAnimatedStyle,
+  useAnimatedStyle
 } from 'react-native-reanimated';
 import { useAppearance } from '../../hooks';
 import Text from '../text';
@@ -22,7 +22,7 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const Weather = ({
   animatedIndex,
   animatedPosition,
-  snapPoints,
+  snapPoints
 }: WeatherProps) => {
   // hooks
   const { appearance } = useAppearance();
@@ -44,7 +44,7 @@ const Weather = ({
           translateY:
             animatedPosition.value > lockedYPosition
               ? animatedPosition.value - 24
-              : lockedYPosition - 24,
+              : lockedYPosition - 24
         },
         {
           scale: interpolate(
@@ -52,9 +52,9 @@ const Weather = ({
             [1, 1.25],
             [1, 0],
             Extrapolate.CLAMP
-          ),
-        },
-      ],
+          )
+        }
+      ]
     }),
     [snapPoints, lockedYPosition]
   );
@@ -62,7 +62,7 @@ const Weather = ({
     () => [
       styles.container,
       { backgroundColor: appearance === 'dark' ? '#333' : '#FCFCFC' },
-      containerAnimatedStyle,
+      containerAnimatedStyle
     ],
     [appearance, containerAnimatedStyle]
   );
@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
     top: 0,
     padding: 2,
     marginTop: 0,
-    borderRadius: 4,
+    borderRadius: 4
   },
   label: {
     fontSize: 16,
-    lineHeight: 16,
-  },
+    lineHeight: 16
+  }
 });
 
 export default Weather;

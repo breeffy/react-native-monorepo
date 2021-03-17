@@ -17,8 +17,8 @@ const LocationItemComponent = ({ title, subTitle }: LocationItemProps) => {
         backgroundColor:
           appearance === 'light'
             ? 'rgba(0,0,0,0.125)'
-            : 'rgba(255,255,255,0.125)',
-      },
+            : 'rgba(255,255,255,0.125)'
+      }
     ],
     [appearance]
   );
@@ -42,33 +42,33 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'center',
     alignItems: 'center',
-    marginVertical: 12,
+    marginVertical: 12
   },
   contentContainer: {
     flex: 1,
     alignSelf: 'center',
-    marginLeft: 12,
+    marginLeft: 12
   },
   thumbnail: {
     width: 32,
     height: 32,
     borderRadius: 32,
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)'
   },
   title: {
     fontSize: 16,
     marginBottom: 4,
-    textTransform: 'capitalize',
+    textTransform: 'capitalize'
   },
   subtitle: {
     color: '#666',
     fontSize: 14,
-    textTransform: 'capitalize',
+    textTransform: 'capitalize'
   },
   separator: {
     flex: 1,
-    height: 1,
-  },
+    height: 1
+  }
 });
 
 const LocationItem = memo(LocationItemComponent);

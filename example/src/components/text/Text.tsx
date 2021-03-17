@@ -11,7 +11,7 @@ interface TextProps {
 const TextComponent = ({
   color = ['black', 'white'],
   style,
-  children,
+  children
 }: TextProps) => {
   // hooks
   const { appearance } = useAppearance();
@@ -21,8 +21,8 @@ const TextComponent = ({
     () => [
       style,
       {
-        color: color[appearance === 'light' ? 0 : 1],
-      },
+        color: color[appearance === 'light' ? 0 : 1]
+      }
     ],
     [appearance, style, color]
   );

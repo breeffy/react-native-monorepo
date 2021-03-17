@@ -1,30 +1,17 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import {
-  createStackNavigator,
-  StackNavigationOptions
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { AppearanceProvider } from './components/appearanceProvider';
-import { Showcase, ThemeSwitch } from './screens/showcase';
+import { Showcase } from './screens/showcase';
 import { OneDaySelection } from './screens/basic/OneDaySelection';
 import { WithBottomSheet } from './screens/basic/WithBottomSheet';
 import { AppProvider } from './contexts/internal';
+import { Header } from './screens/showcase/Header';
+import type { TextStyle, ViewStyle } from 'react-native';
 import type { AppContextState } from './contexts/internal';
 import type { AppStackParamsList } from './types';
-import type { ComponentProps } from 'react';
-import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
-import { Switch } from './components/switch';
-import { Header } from './screens/showcase/Header';
 
 const Stack = createStackNavigator<AppStackParamsList>();
-
-// const Showcase = () => {
-//   return (
-//     <View style={{ width: '100%', height: '100%', backgroundColor: 'orange' }}>
-//       <Text>Some text!</Text>
-//     </View>
-//   );
-// };
 
 export const App = () => {
   const [state, setState] = useState<AppContextState>({
@@ -100,9 +87,3 @@ export const App = () => {
     </AppProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  switch: {
-    marginRight: 24
-  }
-});

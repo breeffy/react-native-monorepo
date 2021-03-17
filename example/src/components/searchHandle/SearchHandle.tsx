@@ -4,11 +4,11 @@ import {
   StyleSheet,
   Dimensions,
   NativeSyntheticEvent,
-  TextInputChangeEventData,
+  TextInputChangeEventData
 } from 'react-native';
-import { useBottomSheet } from '@gorhom/bottom-sheet';
+import isEqual from 'fast-deep-equal';
 import { TextInput } from 'react-native-gesture-handler';
-import isEqual from 'lodash.isequal';
+import { useBottomSheet } from '@gorhom/bottom-sheet';
 import { useAppearance } from '../../hooks';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('screen');
@@ -30,8 +30,8 @@ const BottomSheetHandleComponent = () => {
         backgroundColor:
           appearance === 'light'
             ? 'rgba(0, 0, 0, 0.25)'
-            : 'rgba(255, 255, 255, 0.25)',
-      },
+            : 'rgba(255, 255, 255, 0.25)'
+      }
     ],
     [appearance]
   );
@@ -39,7 +39,7 @@ const BottomSheetHandleComponent = () => {
   // callbacks
   const handleInputChange = useCallback(
     ({
-      nativeEvent: { text },
+      nativeEvent: { text }
     }: NativeSyntheticEvent<TextInputChangeEventData>) => {
       setValue(text);
     },
@@ -70,14 +70,14 @@ const BottomSheetHandle = memo(BottomSheetHandleComponent, isEqual);
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    paddingVertical: 5,
+    paddingVertical: 5
   },
   indicator: {
     alignSelf: 'center',
     width: (8 * SCREEN_WIDTH) / 100,
     height: 5,
     borderRadius: 4,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
   },
   input: {
     marginTop: 8,
@@ -86,8 +86,8 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 20,
     padding: 8,
-    backgroundColor: 'rgba(151, 151, 151, 0.25)',
-  },
+    backgroundColor: 'rgba(151, 151, 151, 0.25)'
+  }
 });
 
 export default BottomSheetHandle;

@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 import { BottomSheetBackgroundProps } from '@gorhom/bottom-sheet';
 import Animated, {
   useAnimatedStyle,
-  interpolateColor,
+  interpolateColor
 } from 'react-native-reanimated';
 
 interface CustomBackgroundProps extends BottomSheetBackgroundProps {}
 
 const CustomBackground: React.FC<CustomBackgroundProps> = ({
   style,
-  animatedIndex,
+  animatedIndex
 }) => {
   //#region styles
   const containerAnimatedStyle = useAnimatedStyle(() => ({
@@ -19,7 +19,7 @@ const CustomBackground: React.FC<CustomBackgroundProps> = ({
       animatedIndex.value,
       [0, 1],
       ['#ffffff', '#a8b5eb']
-    ),
+    )
   }));
   const containerStyle = useMemo(
     () => [styles.container, style, containerAnimatedStyle],
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
   container: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#fff'
+  }
 });

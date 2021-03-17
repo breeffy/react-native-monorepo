@@ -3,7 +3,7 @@ import { default as ShowcaseTemplate } from '@gorhom/showcase-template';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { version, description } from '../../../../package.json';
-import { Header } from './Header';
+// import { Header } from './Header';
 import { useAppContext } from '../../hooks/useAppContext';
 
 const data = [

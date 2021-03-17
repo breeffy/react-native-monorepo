@@ -15,7 +15,7 @@ const CustomHandleExample = () => {
   // styles
 
   // callbacks
-  const handleSnapPress = useCallback(index => {
+  const handleSnapPress = useCallback((index) => {
     bottomSheetRef.current?.snapTo(index);
   }, []);
   const handleExpandPress = useCallback(() => {
@@ -84,12 +84,12 @@ const CustomHandleExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   contentContainerStyle: {
     paddingTop: 12,
     paddingHorizontal: 24,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   shadowOverlay: {
     position: 'absolute',
@@ -97,20 +97,20 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)'
   },
   title: {
     fontSize: 46,
     lineHeight: 46,
-    fontWeight: '800',
+    fontWeight: '800'
   },
   headerContainer: {
     paddingVertical: 24,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   buttonContainer: {
-    marginBottom: 6,
-  },
+    marginBottom: 6
+  }
 });
 
 export default CustomHandleExample;

@@ -4,14 +4,14 @@ import React, {
   useLayoutEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 import {
   useSharedValue,
   useAnimatedStyle,
-  useDerivedValue,
+  useDerivedValue
 } from 'react-native-reanimated';
 import { useSafeArea } from 'react-native-safe-area-context';
 import {
@@ -19,16 +19,16 @@ import {
   BottomSheetScrollView,
   BottomSheetBackdrop,
   TouchableOpacity,
-  BottomSheetBackdropProps,
+  BottomSheetBackdropProps
 } from '@gorhom/bottom-sheet';
 import withModalProvider from '../withModalProvider';
 import { createLocationListMockData } from '../../utilities';
 import SearchHandle, {
-  SEARCH_HANDLE_HEIGHT,
+  SEARCH_HANDLE_HEIGHT
 } from '../../components/searchHandle';
 import LocationItem from '../../components/locationItem';
 import LocationDetails, {
-  LOCATION_DETAILS_HEIGHT,
+  LOCATION_DETAILS_HEIGHT
 } from '../../components/locationDetails';
 import LocationDetailsHandle from '../../components/locationDetailsHandle';
 import Weather from '../../components/weather';
@@ -54,7 +54,7 @@ const MapExample = () => {
     () => [
       SEARCH_HANDLE_HEIGHT,
       LOCATION_DETAILS_HEIGHT + bottomSafeArea,
-      SCREEN_HEIGHT,
+      SCREEN_HEIGHT
     ],
     [bottomSafeArea]
   );
@@ -66,12 +66,12 @@ const MapExample = () => {
     () => ({
       center: {
         latitude: 52.3791,
-        longitude: 4.9003,
+        longitude: 4.9003
       },
       heading: 0,
       pitch: 0,
       zoom: 0,
-      altitude: 40000,
+      altitude: 40000
     }),
     []
   );
@@ -112,7 +112,7 @@ const MapExample = () => {
 
   //#region styles
   const scrollViewAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: animatedPOIListIndex.value,
+    opacity: animatedPOIListIndex.value
   }));
   const scrollViewStyle = useMemo(
     () => [styles.scrollView, scrollViewAnimatedStyle],
@@ -121,7 +121,7 @@ const MapExample = () => {
   const scrollViewContentContainer = useMemo(
     () => [
       styles.scrollViewContentContainer,
-      { paddingBottom: bottomSafeArea },
+      { paddingBottom: bottomSafeArea }
     ],
     [bottomSafeArea]
   );
@@ -229,17 +229,17 @@ const MapExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   mapContainer: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   scrollView: {
-    flex: 1,
+    flex: 1
   },
   scrollViewContentContainer: {
-    paddingHorizontal: 16,
-  },
+    paddingHorizontal: 16
+  }
 });
 
 export default withModalProvider(MapExample);

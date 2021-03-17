@@ -40,11 +40,11 @@ const BackdropExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   buttonContainer: {
-    marginBottom: 6,
-  },
+    marginBottom: 6
+  }
 });
 
 export default withModalProvider(BackdropExample);

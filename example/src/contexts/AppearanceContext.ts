@@ -5,5 +5,5 @@ interface AppearanceContextType {
 }
 
 export const AppearanceContext = createContext<AppearanceContextType>({
-  appearance: 'light',
+  appearance: 'light'
 });

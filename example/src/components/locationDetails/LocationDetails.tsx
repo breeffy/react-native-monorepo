@@ -20,7 +20,7 @@ const LocationDetails = ({
   name,
   address,
   photos,
-  onClose,
+  onClose
 }: LocationDetailsProps) => {
   const renderPhoto = useCallback(({ item }) => {
     return (
@@ -98,21 +98,21 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     paddingBottom: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   headerContentContainer: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   name: {
     fontSize: 22,
     lineHeight: 22,
-    fontWeight: '700',
+    fontWeight: '700'
   },
   address: {
     marginTop: 4,
     fontSize: 14,
     lineHeight: 14,
-    fontWeight: '400',
+    fontWeight: '400'
   },
   closeButton: {
     alignContent: 'center',
@@ -120,12 +120,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    padding: 0,
+    padding: 0
   },
   closeText: {
     fontSize: 15,
     fontWeight: '600',
-    lineHeight: 30,
+    lineHeight: 30
   },
   directionsButton: {
     alignItems: 'center',
@@ -134,22 +134,22 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 10,
-    backgroundColor: '#027AFF',
+    backgroundColor: '#027AFF'
   },
   // photos
   flatListContainer: {
-    paddingVertical: 8,
+    paddingVertical: 8
   },
   flatListContentContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   separator: {
-    width: 4,
+    width: 4
   },
   photo: {
     width: photoSize,
     height: photoSize / 1.5,
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)'
   },
   // actions
   actionsContainer: {
@@ -157,18 +157,18 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 8,
     flexDirection: 'row',
-    alignContent: 'space-between',
+    alignContent: 'space-between'
   },
   actionButton: {
     flex: 1,
     marginRight: 8,
     alignItems: 'center',
     borderRadius: 10,
-    minHeight: 40,
+    minHeight: 40
   },
   actionButtonLabel: {
-    color: '#027AFF',
-  },
+    color: '#027AFF'
+  }
 });
 
 export default LocationDetails;

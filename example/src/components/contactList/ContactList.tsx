@@ -6,11 +6,11 @@ import {
   BottomSheetFlatList,
   BottomSheetScrollView,
   BottomSheetSectionList,
-  BottomSheetView,
+  BottomSheetView
 } from '@gorhom/bottom-sheet';
 import {
   createContactListMockData,
-  createContactSectionsMockData,
+  createContactSectionsMockData
 } from '../../utilities';
 import ContactItem from '../contactItem';
 
@@ -29,7 +29,7 @@ const ContactList = ({
   count = 25,
   header = null,
   style,
-  onItemPress,
+  onItemPress
 }: ContactListProps) => {
   // hooks
   const { bottom: bottomSafeArea } = useSafeArea();
@@ -44,7 +44,7 @@ const ContactList = ({
     () => ({
       ...styles.contentContainer,
       ...style,
-      paddingBottom: bottomSafeArea,
+      paddingBottom: bottomSafeArea
     }),
     [style, bottomSafeArea]
   );
@@ -104,7 +104,7 @@ const ContactList = ({
         renderItem={renderFlatListItem}
         {...(header && {
           stickyHeaderIndices: stickyHeaderIndices,
-          ListHeaderComponent: header,
+          ListHeaderComponent: header
         })}
         style={styles.container}
         contentContainerStyle={contentContainerStyle}
@@ -139,7 +139,7 @@ const ContactList = ({
         renderItem={renderSectionItem}
         {...(header && {
           stickyHeaderIndices: [0],
-          ListHeaderComponent: header,
+          ListHeaderComponent: header
         })}
         focusHook={useFocusEffect}
         removeClippedSubviews={Platform.OS === 'android' && sections.length > 0}
@@ -161,19 +161,19 @@ const styles = StyleSheet.create({
   sectionHeaderContainer: {
     paddingTop: 24,
     paddingBottom: 6,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   sectionHeaderTitle: {
     fontSize: 16,
-    textTransform: 'uppercase',
+    textTransform: 'uppercase'
   },
   container: {
-    overflow: 'visible',
+    overflow: 'visible'
   },
   contentContainer: {
     paddingHorizontal: 24,
-    overflow: 'visible',
-  },
+    overflow: 'visible'
+  }
 });
 
 export default ContactList;

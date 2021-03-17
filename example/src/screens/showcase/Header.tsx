@@ -1,11 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useAppContext } from '../../hooks/useAppContext';
-import { Switch, SwitchType } from '../../components/switch';
+// import { Switch, SwitchType } from '../../components/switch';
 import { ThemeSwitch } from './ThemeSwitch';
 
 export const Header = () => {
-  const { theme, toggleTheme } = useAppContext();
+  const { theme } = useAppContext();
 
   const containerStyle = useMemo(() => {
     return [

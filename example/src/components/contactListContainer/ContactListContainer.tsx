@@ -11,7 +11,7 @@ const ContactListContainerComponent = ({
   count,
   type,
   title,
-  onItemPress,
+  onItemPress
 }: ContactListContainerProps) => {
   // renders
   const renderHeader = useCallback(() => {
@@ -36,12 +36,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     lineHeight: 46,
-    fontWeight: '800',
+    fontWeight: '800'
   },
   headerContainer: {
     paddingVertical: 24,
-    backgroundColor: 'white',
-  },
+    backgroundColor: 'white'
+  }
 });
 
 const ContactListContainer = memo(ContactListContainerComponent);
