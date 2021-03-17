@@ -68,6 +68,7 @@
     "react-native-builder-bob": "^0.17.1",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-reanimated": "2.0.0-rc.1",
+    "react-native-svg": "^12.1.0",
     "release-it": "^14.2.2",
     "typescript": "^4.2.3"
   },
@@ -75,7 +76,8 @@
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": ">=1.9.0",
-    "react-native-reanimated": ">=2.0.0-rc.1"
+    "react-native-reanimated": ">=2.0.0-rc.1",
+    "react-native-svg": "^12.1.0"
   },
   "jest": {
     "preset": "react-native",
@@ -156,7 +158,6 @@
     "@types/luxon": "^1.25.0",
     "luxon": "^1.25.0",
     "react-native-redash": "^16.0.6",
-    "react-native-svg": "^12.1.0",
     "recyclerlistview": "3.0.5-beta.1",
     "use-memo-one": "^1.1.1"
   }
