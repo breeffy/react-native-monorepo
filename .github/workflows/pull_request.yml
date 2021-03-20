@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: TypeScript compiles
-      run: yarn typescript 
+        run: yarn typescript
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Linting checks are passed
-      run: yarn lint
+        run: yarn lint
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Test checks are passed
-      run: yarn test --passWithNoTests
+        run: yarn test --passWithNoTests
