@@ -1,4 +1,3 @@
-name: Check pull request
 on:
   push:
     branches:
@@ -10,7 +9,7 @@ on:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    steps:
+    Validation:
       - name: Checkout source code
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
         with:
