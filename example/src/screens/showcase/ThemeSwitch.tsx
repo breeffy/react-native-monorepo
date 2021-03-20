@@ -1,23 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useAppContext } from '../../hooks/useAppContext';
 import { Switch, SwitchType } from '../../components/switch';
 
 export const ThemeSwitch = () => {
-  const [switchType, setSwitchType] = useState(SwitchType.ENABLED);
-  const { toggleTheme } = useAppContext();
+  const { theme, toggleTheme } = useAppContext();
 
-  const toggleSwitch = useCallback(() => {
-    setSwitchType((prev) => {
-      return prev === SwitchType.DISABLED
-        ? SwitchType.ENABLED
-        : SwitchType.DISABLED;
-    });
-  }, [setSwitchType]);
+  const switchType = useMemo(() => {
+    return theme === 'light' ? SwitchType.ENABLED : SwitchType.DISABLED;
+  }, [theme]);
 
-  const onSwitchPress = useCallback(() => {
-    toggleSwitch();
-    toggleTheme();
-  }, [toggleSwitch, toggleTheme]);
-
-  return <Switch type={switchType} onPress={onSwitchPress} />;
+  return <Switch type={switchType} onPress={toggleTheme} />;
 };

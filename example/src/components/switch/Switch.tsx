@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo, useRef, useState } from 'react';
 import {
   TouchableOpacityProps,
   Animated,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { usePrevious } from '../../hooks';
 import { Svg, Rect, Circle } from 'react-native-svg';
+import isEqual from 'fast-deep-equal';
 
 export enum SwitchType {
   ENABLED,
@@ -47,7 +48,7 @@ const getSwitcherValuesForAnimation = (
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-export const Switch = ({
+const SwitchComponent = ({
   type = SwitchType.ENABLED,
   style,
   onPress,
@@ -104,3 +105,5 @@ export const Switch = ({
     </>
   );
 };
+
+export const Switch = memo(SwitchComponent, isEqual);
