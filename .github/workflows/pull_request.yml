@@ -1,3 +1,5 @@
+- name: checks
+
 on:
   push:
     branches:
@@ -7,7 +9,7 @@ on:
       - main
 
 jobs:
-  Validation:
+  compile:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -17,10 +19,23 @@ jobs:
       - run: yarn install --frozen-lockfile --non-interactive
       - name: TypeScript compiles
         run: yarn typescript
-        if: ${{ always() }}
-      - name: Linting checks are passed
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          token: ${{ secrets.BREEFFYBOT_TOKEN }}
+      - run: yarn install --frozen-lockfile --non-interactive
+      - name: Linting passes
         run: yarn lint
-        if: ${{ always() }}
-      - name: Test checks are passed
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          token: ${{ secrets.BREEFFYBOT_TOKEN }}
+      - run: yarn install --frozen-lockfile --non-interactive
+      - name: Tests passes
         run: yarn test --passWithNoTests
-        if: ${{ always() }}
