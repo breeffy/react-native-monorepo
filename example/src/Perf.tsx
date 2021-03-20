@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -32,7 +32,7 @@ const App = () => {
 
   const handleMountPress = useCallback(() => {
     startPerfTime.current = Date.now();
-    setMount(state => !state);
+    setMount((state) => !state);
   }, []);
 
   const handleAutoAnimatePress = useCallback(() => {
@@ -44,7 +44,7 @@ const App = () => {
     const timer = setInterval(() => {
       if (loop === 4) {
         clearInterval(timer);
-        setEnd(state => !state);
+        setEnd((state) => !state);
         return;
       }
 
@@ -110,32 +110,32 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#555',
+    backgroundColor: '#555'
   },
   endContainer: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: 'red'
   },
   content: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   buttonContainer: {
     marginHorizontal: 24,
-    marginBottom: 6,
+    marginBottom: 6
   },
   measure: {
     marginHorizontal: 24,
     fontSize: 64,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'white'
   },
   version: {
     marginHorizontal: 24,
     marginTop: 12,
     color: 'white',
-    fontSize: 20,
-  },
+    fontSize: 20
+  }
 });
 
 export default App;

@@ -150,11 +150,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: '#dfdfdf',
+    backgroundColor: '#dfdfdf'
   },
   buttonContainer: {
-    marginBottom: 6,
-  },
+    marginBottom: 6
+  }
 });
 
 export default withModalProvider(StackExample);

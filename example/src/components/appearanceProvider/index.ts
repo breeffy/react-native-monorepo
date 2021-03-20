@@ -1,1 +1,1 @@
-export { default } from './AppearanceProvider';
+export { AppearanceProvider } from './AppearanceProvider';

@@ -1,0 +1,27 @@
+name: Check pull request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          token: ${{ secrets.BREEFFYBOT_TOKEN }}
+      - run: yarn install --frozen-lockfile --non-interactive
+      - name: TypeScript compiles
+        run: yarn typescript
+        if: ${{ always() }}
+      - name: Linting checks are passed
+        run: yarn lint
+        if: ${{ always() }}
+      - name: Test checks are passed
+        run: yarn test --passWithNoTests
+        if: ${{ always() }}

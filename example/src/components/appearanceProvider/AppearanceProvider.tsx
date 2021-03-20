@@ -3,7 +3,7 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react';
 // @ts-ignore
 import { Appearance } from 'react-native';
@@ -15,7 +15,7 @@ interface AppearanceProviderProps {
 
 const _colorScheme = Appearance.getColorScheme();
 
-const AppearanceProvider = ({ children }: AppearanceProviderProps) => {
+export const AppearanceProvider = ({ children }: AppearanceProviderProps) => {
   // state
   const [appearance, setAppearance] = useState(_colorScheme);
 
@@ -41,5 +41,3 @@ const AppearanceProvider = ({ children }: AppearanceProviderProps) => {
     </AppearanceContext.Provider>
   );
 };
-
-export default AppearanceProvider;

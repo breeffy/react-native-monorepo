@@ -4,7 +4,7 @@ import {
   createStackNavigator,
   HeaderBackButton,
   StackNavigationOptions,
-  TransitionPresets,
+  TransitionPresets
 } from '@react-navigation/stack';
 import BottomSheet, { TouchableOpacity } from '@gorhom/bottom-sheet';
 import Button from '../../components/button';
@@ -14,28 +14,28 @@ const Stack = createStackNavigator();
 const ScreenA = createDummyScreen({
   title: 'FlatList Screen',
   nextScreen: 'ScreenB',
-  type: 'FlatList',
+  type: 'FlatList'
 });
 
 const ScreenB = createDummyScreen({
   title: 'ScrollView Screen',
   nextScreen: 'ScreenC',
   type: 'ScrollView',
-  count: 25,
+  count: 25
 });
 
 const ScreenC = createDummyScreen({
   title: 'SectionList Screen',
   nextScreen: 'ScreenD',
   type: 'SectionList',
-  count: 20,
+  count: 20
 });
 
 const ScreenD = createDummyScreen({
   title: 'View Screen',
   nextScreen: 'ScreenA',
   type: 'View',
-  count: 5,
+  count: 5
 });
 
 const Navigator = () => {
@@ -51,8 +51,8 @@ const Navigator = () => {
       ),
       cardStyle: {
         backgroundColor: 'white',
-        overflow: 'visible',
-      },
+        overflow: 'visible'
+      }
     }),
     []
   );
@@ -80,10 +80,10 @@ const NavigatorExample = () => {
   const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
 
   // callbacks
-  const handleSheetChange = useCallback(index => {
+  const handleSheetChange = useCallback((index) => {
     console.log('handleSheetChange', index);
   }, []);
-  const handleSnapPress = useCallback(index => {
+  const handleSnapPress = useCallback((index) => {
     bottomSheetRef.current?.snapTo(index);
   }, []);
   const handleExpandPress = useCallback(() => {
@@ -145,11 +145,11 @@ const NavigatorExample = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 24
   },
   buttonContainer: {
-    marginBottom: 6,
-  },
+    marginBottom: 6
+  }
 });
 
 export default NavigatorExample;

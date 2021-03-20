@@ -40,20 +40,20 @@ const ViewPagerScreen = () => {
 
 const styles = StyleSheet.create({
   scene: {
-    flex: 1,
+    flex: 1
   },
   firstScene: {
-    backgroundColor: '#ff4081',
+    backgroundColor: '#ff4081'
   },
   secondScene: {
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#673ab7',
+    backgroundColor: '#673ab7'
   },
   emoji: {
-    fontSize: 46,
-  },
+    fontSize: 46
+  }
 });
 
 export default ViewPagerScreen;

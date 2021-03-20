@@ -6,6 +6,6 @@ export const transformOrigin = ({ x, y }, ...transformations) => {
     { translateY: y },
     ...transformations,
     { translateX: x * -1 },
-    { translateY: y * -1 },
+    { translateY: y * -1 }
   ];
 };

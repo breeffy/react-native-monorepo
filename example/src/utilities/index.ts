@@ -1,6 +1,6 @@
 export {
   createContactListMockData,
   createContactSectionsMockData,
-  createLocationListMockData,
+  createLocationListMockData
 } from './createMockData';
 export { transformOrigin } from './transformOrigin';

@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useMemoOne } from 'use-memo-one';
-import { Circle } from './components/Svg';
+import { SvgCircle } from './components/shapes';
 import { dayOfWeekWidth } from './constants';
+import { calendarDayThemeToTextStyle } from './helpers';
+import { useCalendarTheme } from './hooks/useCalendarTheme';
 import type { ViewStyleProp } from './types';
 
 export enum CalendarDayKind {
@@ -23,30 +25,33 @@ export const CalendarDay = ({
   style
 }: CalendarDayProps) => {
   // console.log(`CalendarDay: kind: ${kind}, day: ${day}`);
-  const textColor = useMemoOne(() => {
+  const theme = useCalendarTheme();
+  const calendarDayTheme = useMemoOne(() => {
     switch (kind) {
       case CalendarDayKind.DEFAULT:
-        return 'rgba(68, 82, 95, 0.9)';
+        return theme.day.default;
       case CalendarDayKind.DISABLED:
-        return 'rgba(68, 82, 95, 0.3)';
+        return theme.day.disabled;
       case CalendarDayKind.ACTIVE:
-        return 'rgba(45, 154, 252, 1)';
+        return theme.day.active;
       case CalendarDayKind.SELECTED:
-        return 'rgba(45, 154, 252, 1)';
+        return theme.day.selected;
     }
-  }, [kind]);
+  }, [kind, theme]);
 
   const containerStyle = useMemoOne(() => {
     return [styles.container, style];
   }, [styles.container, style]);
 
   const textStyle = useMemoOne(() => {
-    return [styles.text, { color: textColor }];
-  }, [styles.text, textColor]);
+    return [styles.text, calendarDayThemeToTextStyle(calendarDayTheme)];
+  }, [styles.text, calendarDayTheme]);
 
   return (
     <View style={containerStyle}>
-      {kind === CalendarDayKind.SELECTED && <Circle style={styles.circle} />}
+      {kind === CalendarDayKind.SELECTED && (
+        <SvgCircle color={calendarDayTheme.circleColor} style={styles.circle} />
+      )}
       <Text style={textStyle}>{String(day)}</Text>
     </View>
   );
@@ -64,8 +69,6 @@ const styles = StyleSheet.create({
   },
   text: {
     flexGrow: 1,
-    fontFamily: 'Gilroy-Medium',
-    fontSize: 16,
     textAlign: 'center',
     textAlignVertical: 'center'
   }

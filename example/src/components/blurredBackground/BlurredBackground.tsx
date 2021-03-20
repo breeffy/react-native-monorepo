@@ -10,8 +10,8 @@ const BlurredBackground = () => {
       styles.container,
       {
         backgroundColor: appearance === 'light' ? 'white' : 'black',
-        opacity: 0.95,
-      },
+        opacity: 0.95
+      }
     ],
     [appearance]
   );
@@ -26,14 +26,14 @@ const BlurredBackground = () => {
 
 const styles = StyleSheet.create({
   blurView: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   container: {
     ...StyleSheet.absoluteFillObject,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    overflow: 'hidden',
-  },
+    overflow: 'hidden'
+  }
 });
 
 export default BlurredBackground;

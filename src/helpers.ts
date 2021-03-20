@@ -1,7 +1,12 @@
 import { DateTime } from 'luxon';
+import type { TextStyle } from 'react-native';
 import type {
   CalendarDate,
+  CalendarDaysOfWeekTheme,
+  CalendarDayTheme,
+  CalendarHeaderTheme,
   CalendarMonth,
+  CalendarTextTheme,
   CalendarWeek,
   CalendarYearAndMonth
 } from './types';
@@ -162,4 +167,33 @@ export const calendarYearAndMonthToMonths = (
   calendarYearAndMonth: CalendarYearAndMonth
 ): CalendarMonth => {
   return calendarYearAndMonth.year * 12 + calendarYearAndMonth.month;
+};
+
+const calendarTextThemeToTextStyle = (
+  calendarTextTheme: CalendarTextTheme
+): TextStyle => {
+  return {
+    fontFamily: calendarTextTheme.textFont,
+    fontWeight: calendarTextTheme.textWeight,
+    fontSize: calendarTextTheme.textSize,
+    color: calendarTextTheme.textColor
+  };
+};
+
+export const calendarDayThemeToTextStyle = (
+  calendarDayTheme: CalendarDayTheme
+): TextStyle => {
+  return calendarTextThemeToTextStyle(calendarDayTheme);
+};
+
+export const calendarHeaderThemeToTextStyle = (
+  calendarHeaderTheme: CalendarHeaderTheme
+): TextStyle => {
+  return calendarTextThemeToTextStyle(calendarHeaderTheme);
+};
+
+export const calendarDaysOfWeekToTextStyle = (
+  calendarDaysOfWeekTheme: CalendarDaysOfWeekTheme
+): TextStyle => {
+  return calendarTextThemeToTextStyle(calendarDaysOfWeekTheme);
 };

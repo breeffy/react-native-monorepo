@@ -9,6 +9,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^3.4.0",
     "@gorhom/showcase-template": "^1.0.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.8.10",

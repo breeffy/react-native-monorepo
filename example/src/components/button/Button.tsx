@@ -6,7 +6,7 @@ import {
   TextStyle,
   View,
   Platform,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 // import { TouchableOpacity } from '@gorhom/bottom-sheet';
 // import { TouchableOpacity } from '@gorhom/bottom-sheet';
@@ -27,7 +27,7 @@ const Button = ({
   labelStyle: _labelStyle,
   containerColor,
   style,
-  onPress,
+  onPress
 }: ButtonProps) => {
   // hooks
   const { appearance } = useAppearance();
@@ -39,8 +39,8 @@ const Button = ({
       style,
       containerColor && {
         backgroundColor:
-          appearance === 'light' ? containerColor[0] : containerColor[1],
-      },
+          appearance === 'light' ? containerColor[0] : containerColor[1]
+      }
     ],
     [style, containerColor, appearance]
   );
@@ -49,8 +49,8 @@ const Button = ({
       styles.label,
       _labelStyle,
       labelColor && {
-        color: appearance === 'light' ? labelColor[0] : labelColor[1],
-      },
+        color: appearance === 'light' ? labelColor[0] : labelColor[1]
+      }
     ],
     [_labelStyle, labelColor, appearance]
   );
@@ -76,11 +76,11 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 4,
     backgroundColor: '#333',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   label: {
-    color: 'white',
-  },
+    color: 'white'
+  }
 });
 
 export default Button;

@@ -8,15 +8,12 @@ import {
   PanGestureHandlerGestureEvent
 } from 'react-native-gesture-handler';
 import { snapPoint } from 'react-native-redash';
-import type { GESTURE } from '../constants';
 
 type InteractivePanGestureHandlerContextType = {
   lastAnimatedPosition: number;
 };
 
 export const usePanGestureHandler = (
-  // @ts-ignore
-  type: GESTURE,
   animatedPosition: Animated.SharedValue<number>,
   snapPoints: number[],
   animateToPoint: (point: number) => void

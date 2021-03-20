@@ -1,6 +1,11 @@
-import React, { useRef } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Calendar, CalendarProps } from '@breeffy/react-native-calendar';
+import React, { useMemo, useRef } from 'react';
+import {
+  Calendar,
+  CalendarProps,
+  CalendarThemeLight,
+  CalendarThemeDark
+} from '@breeffy/react-native-calendar';
+import { useAppContext } from '../../hooks';
 import type { CalendarMethods } from '@breeffy/react-native-calendar';
 import type { ViewStyleProp } from '../../../../src/types';
 
@@ -9,31 +14,23 @@ export type CalendarSheetProps = {
   onDaySelectionChange?: CalendarProps['onDaySelectionChange'];
 } & ViewStyleProp;
 
-export const CalendarSheet = ({
-  style,
-  onDaySelectionChange
-}: CalendarSheetProps) => {
+export const CalendarSheet = ({ onDaySelectionChange }: CalendarSheetProps) => {
   const calendarRef = useRef<CalendarMethods>(null);
+  const { theme } = useAppContext();
+  const calendarTheme = useMemo(() => {
+    return theme === 'light' ? CalendarThemeLight : CalendarThemeDark;
+  }, [theme]);
 
   return (
-    <View style={[styles.container, style]}>
-      <Calendar
-        style={styles.calendar}
-        ref={calendarRef}
-        selectionMode="singleDay"
-        scrollMode="multipleMonths"
-        scrollModeDeceleration="fast"
-        monthsBefore={12}
-        monthsAfter={24}
-        onDaySelectionChange={onDaySelectionChange}
-      />
-    </View>
+    <Calendar
+      ref={calendarRef}
+      selectionMode="singleDay"
+      scrollMode="multipleMonths"
+      scrollModeDeceleration="fast"
+      monthsBefore={12}
+      monthsAfter={24}
+      theme={calendarTheme}
+      onDaySelectionChange={onDaySelectionChange}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'rgba(255, 255, 255, 1)'
-  },
-  calendar: {}
-});

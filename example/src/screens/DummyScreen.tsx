@@ -15,7 +15,7 @@ const createDummyScreen = ({
   title,
   nextScreen,
   type,
-  count = 50,
+  count = 50
 }: DummyScreenProps) =>
   memo(() => {
     const { navigate } = useNavigation();
@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 46,
     lineHeight: 46,
-    fontWeight: '800',
+    fontWeight: '800'
   },
   headerContainer: {
     paddingVertical: 24,
-    backgroundColor: 'white',
-  },
+    backgroundColor: 'white'
+  }
 });
 
 export default createDummyScreen;

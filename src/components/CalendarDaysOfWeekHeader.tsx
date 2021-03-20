@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Line } from './Svg';
+import { SvgLine } from './shapes';
 import { dayOfWeekWidth } from '../constants';
+import { useMemoOne } from 'use-memo-one';
+import { useCalendarTheme } from '../hooks';
+import { calendarDaysOfWeekToTextStyle } from '../helpers';
 
 interface DayOfWeek {
   id: string;
@@ -25,18 +28,30 @@ export interface CalendarDaysOfWeekHeaderProps {
 export const CalendarDaysOfWeekHeader = ({
   showBottomLine = true
 }: CalendarDaysOfWeekHeaderProps) => {
+  const theme = useCalendarTheme();
+  const textStyle = useMemoOne(
+    () => [styles.rowText, calendarDaysOfWeekToTextStyle(theme.daysOfWeek)],
+    [styles.rowText, theme]
+  );
+
   return (
     <>
       <View style={styles.container}>
         {DaysOfWeek.map((dayOfWeek, _) => {
           return (
             <View key={dayOfWeek.id} style={styles.rowView}>
-              <Text style={styles.rowText}>{dayOfWeek.name}</Text>
+              <Text style={textStyle}>{dayOfWeek.name}</Text>
             </View>
           );
         })}
       </View>
-      {showBottomLine && <Line style={styles.line} />}
+      {showBottomLine && (
+        <SvgLine
+          color={theme.lineDelimiter.lineColor}
+          width={theme.lineDelimiter.lineWidth}
+          style={styles.line}
+        />
+      )}
     </>
   );
 };
@@ -54,9 +69,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   rowText: {
-    fontFamily: 'Gilroy-SemiBold',
-    fontSize: 14,
-    color: 'rgba(68, 82, 95, 0.4)',
     textAlign: 'center',
     textAlignVertical: 'center'
   },
