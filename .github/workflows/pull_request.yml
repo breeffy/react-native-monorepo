@@ -1,0 +1,25 @@
+name: Check pull request
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: TypeScript compiles
+      run: yarn typescript 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Linting checks are passed
+      run: yarn lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test checks are passed
+      run: yarn test --passWithNoTests
