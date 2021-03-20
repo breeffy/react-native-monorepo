@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community', 'prettier'],
+  extends: ['@breeffy/eslint-config-react-native', 'prettier'],
   rules: {
     'no-undef': 'off',
     'no-shadow': 'off',
