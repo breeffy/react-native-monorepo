@@ -8,18 +8,16 @@ on:
       - main
 
 jobs:
-  typescript:
+  checks:
     runs-on: ubuntu-latest
     steps:
+      - run: yarn install --frozen-lockfile --non-interactive
       - name: TypeScript compiles
         run: yarn typescript
-  lint:
-    runs-on: ubuntu-latest
-    steps:
+        if: ${{ always() }}
       - name: Linting checks are passed
         run: yarn lint
-  test:
-    runs-on: ubuntu-latest
-    steps:
+        if: ${{ always() }}
       - name: Test checks are passed
         run: yarn test --passWithNoTests
+        if: ${{ always() }}
