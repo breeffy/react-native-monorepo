@@ -36,5 +36,5 @@ jobs:
         with:
           token: ${{ secrets.BREEFFYBOT_TOKEN }}
       - run: yarn install --frozen-lockfile --non-interactive
-      - name: Tests passes
+      - name: Testing passes
         run: yarn test --passWithNoTests
