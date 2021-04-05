@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import {
   FlatList,
   FlatListProps,
@@ -39,10 +39,10 @@ export interface CalendarScrollableMonthsProps {
   onCalendarDayPress?: (day: CalendarDate, kind: CalendarDayKind) => void;
 }
 
-export const CalendarScrollableMonths = ({
-  scrollMode,
-  scrollModeDeceleration
-}: CalendarScrollableMonthsProps) => {
+export const CalendarScrollableMonths = forwardRef<
+  any,
+  CalendarScrollableMonthsProps
+>(({ scrollMode, scrollModeDeceleration }, ref) => {
   const scrollModeProps = useMemoOne<Partial<FlatListProps<any>>>(() => {
     if (scrollMode === 'oneMonth') {
       return {
@@ -60,11 +60,15 @@ export const CalendarScrollableMonths = ({
   const { monthsBefore, calendarInterval } = useCalendarInternal();
 
   const {
+    scrollRef,
     scrollHandler,
     scrollState,
     scrollContentOffset,
     scrollContentSize
   } = useCalendarScroll();
+
+  // useImperativeHandle(ref, () => scrollRef.current);
+  useImperativeHandle(ref, () => scrollRef);
 
   const {
     calendarAnimatedCommonEraMonth,
@@ -135,6 +139,9 @@ export const CalendarScrollableMonths = ({
 
   return (
     <AnimatedFlatList
+      // @ts-ignore
+      ref={scrollRef}
+      // ref={scrollRef}
       data={calendarMonths}
       initialScrollIndex={monthsBefore}
       horizontal
@@ -150,4 +157,4 @@ export const CalendarScrollableMonths = ({
       {...scrollModeProps}
     />
   );
-};
+});
