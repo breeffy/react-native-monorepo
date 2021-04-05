@@ -10,7 +10,7 @@ import { useContainerStyle } from './hooks';
 import { Button, ButtonType } from '../../components/button';
 import { BottomSheetHandle } from '../bottomsheet/BottomSheetHandle';
 
-export const WithBottomSheet = () => {
+export const ModalBottomSheet = () => {
   const [contentHeight, setContentHeight] = useState(0);
   const snapPoints = useMemo(() => [contentHeight], [contentHeight]);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -40,7 +40,7 @@ export const WithBottomSheet = () => {
     <View style={containerStyle}>
       <View style={styles.buttonGroup}>
         <Button
-          label="Present"
+          label="Show"
           type={ButtonType.SECONDARY}
           style={styles.buttonContainer}
           onPress={handlePresentPress}

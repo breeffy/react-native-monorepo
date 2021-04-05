@@ -1,12 +1,12 @@
 export type AppStackParamsList = {
   Showcase: undefined;
   // basic
-  ['OneDaySelection']: undefined;
-  ['Basic/FlatListExample']: undefined;
-  ['Basic/SectionListExample']: undefined;
-  ['Basic/ScrollViewExample']: undefined;
-  ['Basic/ViewExample']: undefined;
-  ['Basic/WithBottomSheet']: undefined;
+  ['SingleDaySelectionMode']: undefined;
+  ['MultipleDaysSelectionMode']: undefined;
+  ['OneMonthScrollMode']: undefined;
+  ['MultipleMonthsScrollMode']: undefined;
+  ['AnyOffsetScrollMode']: undefined;
+  ['ModalBottomSheet']: undefined;
 
   // modal
   ['Modal/SimpleExample']: undefined;

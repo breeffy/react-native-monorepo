@@ -8,32 +8,41 @@ import { useAppContext } from '../../hooks/useAppContext';
 
 const data = [
   {
-    title: 'Features',
+    title: 'Selection Mode',
     data: [
       {
-        name: 'One Day',
-        slug: 'OneDaySelection'
+        name: 'Single Day',
+        slug: 'SingleDaySelectionMode'
       },
       {
         name: 'Multiple Days',
-        slug: 'Basic/ScrollViewExample'
-      },
-      {
-        name: 'With BottomSheet',
-        slug: 'Basic/WithBottomSheet'
+        slug: 'MultipleDaysSelectionMode'
       }
     ]
   },
   {
-    title: 'Pagination Mode',
+    title: 'Scroll Mode',
     data: [
       {
-        name: 'Enabled',
-        slug: 'Basic/ViewExample'
+        name: 'One Month',
+        slug: 'OneMonthScrollMode'
       },
       {
-        name: 'Disabled',
-        slug: 'Basic/ScrollViewExample'
+        name: 'Multiple Months',
+        slug: 'MultipleMonthsScrollMode'
+      },
+      {
+        name: 'Any Offset',
+        slug: 'AnyOffsetScrollMode'
+      }
+    ]
+  },
+  {
+    title: 'Integrations',
+    data: [
+      {
+        name: 'Modal BottomSheet',
+        slug: 'ModalBottomSheet'
       }
     ]
   }
