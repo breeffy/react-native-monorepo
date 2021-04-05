@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
+import React, { forwardRef, useMemo, useRef, useState } from 'react';
 import { View, StyleSheet, FlatListProps } from 'react-native';
 import Animated, {
   runOnJS,
@@ -241,10 +235,10 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       [selectDate, deselectDate]
     );
 
-    useImperativeHandle(ref, () => ({
-      select: selectDate,
-      deselect: deselectDate
-    }));
+    // useImperativeHandle(ref, () => ({
+    //   select: selectDate,
+    //   deselect: deselectDate
+    // }));
 
     const contentWrapperRef = useRef<typeof AnimatedTapGestureHandler>(null);
 
@@ -314,6 +308,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
 
                 <CalendarDaysOfWeekHeader />
                 <CalendarScrollableMonths
+                  ref={ref}
                   scrollMode={scrollMode}
                   scrollModeDeceleration={scrollModeDeceleration}
                   activeCalendarDay={activeCalendarDay}
