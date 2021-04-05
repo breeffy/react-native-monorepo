@@ -41,7 +41,7 @@
   ],
   "repository": "https://github.com/breeffy/react-native-calendar",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
-  "license": "AGPL-3.0-or-later",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/breeffy/react-native-calendar/issues"
   },
