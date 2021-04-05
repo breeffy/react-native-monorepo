@@ -1,10 +1,5 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  ListRenderItem,
-  ViewStyle
-} from 'react-native';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import { FlatList, FlatListProps, ListRenderItem } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -24,12 +19,11 @@ import type { CalendarDate, CalendarYearAndMonth } from './types';
 import type { CalendarProps } from './Calendar';
 import type { CalendarDayKind } from './CalendarDay';
 
-const AnimatedFlatList = Animated.createAnimatedComponent(
+// @ts-expect-error
+const AnimatedFlatList: typeof FlatList = Animated.createAnimatedComponent(
+  // @ts-ignore
   FlatList
-) as React.ComponentClass<
-  Animated.AnimateProps<ViewStyle, FlatListProps<any>>,
-  any
->;
+);
 
 export interface CalendarScrollableMonthsProps {
   scrollMode: CalendarProps['scrollMode'];
@@ -78,7 +72,6 @@ export const CalendarScrollableMonths = forwardRef<
     calendarEndMonthFromCommonEra
   } = useCalendarAnimated();
 
-  // @ts-expect-error
   useDerivedValue(() => {
     if (scrollState.value !== ScrollState.UNDETERMINED) {
       calendarAnimatedCommonEraMonth.value = round(

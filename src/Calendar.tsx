@@ -192,15 +192,14 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
     }, [initialCalendarYearAndMonth]);
 
     const calendarInitialScrollProgress = useMemoOne(() => {
-      return runOnJS(calculateScrollProgress)(calendarAnimatedCommonEraMonth, [
+      return (runOnJS(calculateScrollProgress)(calendarAnimatedCommonEraMonth, [
         calendarStartMonthFromCommonEra,
         calendarEndMonthFromCommonEra
-      ]);
+      ]) as unknown) as number;
     }, [calendarStartMonthFromCommonEra, calendarEndMonthFromCommonEra]);
 
     const calendarAnimatedScrollProgress = useSharedValue(
-      calendarInitialScrollProgress,
-      false
+      calendarInitialScrollProgress
     );
 
     const animatedContextVariables = useMemo<CalendarAnimatedContextInterface>(
