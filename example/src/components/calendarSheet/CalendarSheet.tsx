@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { forwardRef, useMemo, useRef } from 'react';
 import {
   Calendar,
   CalendarProps,
@@ -14,23 +14,25 @@ export type CalendarSheetProps = {
   onDaySelectionChange?: CalendarProps['onDaySelectionChange'];
 } & ViewStyleProp;
 
-export const CalendarSheet = ({ onDaySelectionChange }: CalendarSheetProps) => {
-  const calendarRef = useRef<CalendarMethods>(null);
-  const { theme } = useAppContext();
-  const calendarTheme = useMemo(() => {
-    return theme === 'light' ? CalendarThemeLight : CalendarThemeDark;
-  }, [theme]);
+export const CalendarSheet = forwardRef<CalendarMethods, CalendarSheetProps>(
+  ({ onDaySelectionChange }, ref) => {
+    console.log(`Calendar: ref is ${JSON.stringify(ref)}`);
+    const { theme } = useAppContext();
+    const calendarTheme = useMemo(() => {
+      return theme === 'light' ? CalendarThemeLight : CalendarThemeDark;
+    }, [theme]);
 
-  return (
-    <Calendar
-      ref={calendarRef}
-      selectionMode="singleDay"
-      scrollMode="multipleMonths"
-      scrollModeDeceleration="fast"
-      monthsBefore={12}
-      monthsAfter={24}
-      theme={calendarTheme}
-      onDaySelectionChange={onDaySelectionChange}
-    />
-  );
-};
+    return (
+      <Calendar
+        ref={ref}
+        selectionMode="singleDay"
+        scrollMode="multipleMonths"
+        scrollModeDeceleration="fast"
+        monthsBefore={12}
+        monthsAfter={24}
+        theme={calendarTheme}
+        onDaySelectionChange={onDaySelectionChange}
+      />
+    );
+  }
+);
