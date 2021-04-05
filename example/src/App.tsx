@@ -43,7 +43,10 @@ export const App = () => {
     return {
       elevation: 0,
       shadowOpacity: 0,
-      backgroundColor: state.theme === 'light' ? 'white' : 'black'
+      backgroundColor:
+        state.theme === 'light'
+          ? 'rgba(255, 255, 255, 0.1)'
+          : 'rgba(0, 0, 0, 0.9)'
     };
   }, [state.theme]);
 
