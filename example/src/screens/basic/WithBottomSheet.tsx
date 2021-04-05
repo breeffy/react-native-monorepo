@@ -1,40 +1,72 @@
-import React, { useCallback, useMemo, useRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import BottomSheet from '@gorhom/bottom-sheet';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import {
+  BottomSheetModal,
+  BottomSheetView,
+  BottomSheetModalProvider
+} from '@gorhom/bottom-sheet';
+import { CalendarSheet } from '../../components/calendarSheet';
+import { useContainerStyle } from './hooks';
+import { Button, ButtonType } from '../../components/button';
+import { BottomSheetHandle } from '../bottomsheet/BottomSheetHandle';
 
-interface WithBottomSheetProps {
-  title: string;
-  type: 'FlatList' | 'SectionList' | 'ScrollView' | 'View';
-  count?: number;
-}
+export const WithBottomSheet = () => {
+  const [contentHeight, setContentHeight] = useState(0);
+  const snapPoints = useMemo(() => [contentHeight], [contentHeight]);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-export const WithBottomSheet = ({}: WithBottomSheetProps) => {
-  // ref
-  const bottomSheetRef = useRef<BottomSheet>(null);
-
-  // variables
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-  // callbacks
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
+  const handlePresentPress = useCallback(() => {
+    bottomSheetRef.current?.present();
   }, []);
 
-  // renders
+  const handleDismissPress = useCallback(() => {
+    bottomSheetRef.current?.dismiss();
+  }, []);
+
+  const handleOnLayout = useCallback(
+    ({
+      nativeEvent: {
+        layout: { height }
+      }
+    }) => {
+      setContentHeight(height);
+    },
+    []
+  );
+
+  const containerStyle = useContainerStyle(styles.container);
+
   return (
-    <View style={styles.container}>
-      {/* @ts-ignore */}
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-        // handleComponent={}
-      >
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
-      </BottomSheet>
+    <View style={containerStyle}>
+      <View style={styles.buttonGroup}>
+        <Button
+          label="Present"
+          type={ButtonType.SECONDARY}
+          style={styles.buttonContainer}
+          onPress={handlePresentPress}
+        />
+        <Button
+          label="Dismiss"
+          type={ButtonType.SECONDARY}
+          style={styles.buttonContainer}
+          onPress={handleDismissPress}
+        />
+      </View>
+
+      <BottomSheetModalProvider>
+        {/* @ts-ignore */}
+        <BottomSheetModal
+          ref={bottomSheetRef}
+          index={0}
+          snapPoints={snapPoints}
+          handleComponent={BottomSheetHandle}
+          activeOffsetY={[-20, 20]}
+        >
+          <BottomSheetView onLayout={handleOnLayout}>
+            <CalendarSheet />
+          </BottomSheetView>
+        </BottomSheetModal>
+      </BottomSheetModalProvider>
     </View>
   );
 };
@@ -42,24 +74,15 @@ export const WithBottomSheet = ({}: WithBottomSheetProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column-reverse',
-    padding: 24,
-    backgroundColor: 'grey'
+    flexDirection: 'column',
+    alignItems: 'stretch'
   },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 46,
-    lineHeight: 46,
-    fontWeight: '800'
-  },
-  headerContainer: {
-    paddingVertical: 24,
-    backgroundColor: 'white'
+  buttonGroup: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    paddingHorizontal: 12
   },
   buttonContainer: {
-    marginBottom: 6
+    marginTop: 6
   }
 });
