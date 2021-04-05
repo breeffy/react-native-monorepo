@@ -3,8 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppearanceProvider } from './components/appearanceProvider';
 import { Showcase } from './screens/showcase';
-import { OneDaySelection } from './screens/basic/OneDaySelection';
-import { WithBottomSheet } from './screens/basic/WithBottomSheet';
+import { ModalBottomSheet, ScrollMode, SelectionMode } from './screens/basic';
 import { AppProvider } from './contexts/internal';
 import { Header } from './screens/showcase/Header';
 import type { TextStyle, ViewStyle } from 'react-native';
@@ -43,7 +42,10 @@ export const App = () => {
     return {
       elevation: 0,
       shadowOpacity: 0,
-      backgroundColor: state.theme === 'light' ? 'white' : 'black'
+      backgroundColor:
+        state.theme === 'light'
+          ? 'rgba(255, 255, 255, 0.1)'
+          : 'rgba(0, 0, 0, 0.9)'
     };
   }, [state.theme]);
 
@@ -66,20 +68,53 @@ export const App = () => {
                 header: Header
               }}
             />
-            {/* static examples */}
             <Stack.Screen
-              name="OneDaySelection"
+              name="SingleDaySelectionMode"
               options={{
-                title: 'Selection Mode'
+                title: 'Selection Mode: Single Day'
               }}
-              getComponent={() => OneDaySelection}
+              getComponent={() => () => (
+                <SelectionMode selectionMode="singleDay" />
+              )}
             />
             <Stack.Screen
-              name="Basic/WithBottomSheet"
+              name="MultipleDaysSelectionMode"
               options={{
-                title: 'With BottomSheet'
+                title: 'Selection Mode: Multiple Days'
               }}
-              getComponent={() => WithBottomSheet}
+              getComponent={() => () => (
+                <SelectionMode selectionMode="multipleDays" />
+              )}
+            />
+            <Stack.Screen
+              name="OneMonthScrollMode"
+              options={{
+                title: 'Scroll Mode: One Month'
+              }}
+              getComponent={() => () => <ScrollMode scrollMode="oneMonth" />}
+            />
+            <Stack.Screen
+              name="MultipleMonthsScrollMode"
+              options={{
+                title: 'Scroll Mode: Multiple Months'
+              }}
+              getComponent={() => () => (
+                <ScrollMode scrollMode="multipleMonths" />
+              )}
+            />
+            <Stack.Screen
+              name="AnyOffsetScrollMode"
+              options={{
+                title: 'Scroll Mode: Any Offset'
+              }}
+              getComponent={() => () => <ScrollMode scrollMode="anyOffset" />}
+            />
+            <Stack.Screen
+              name="ModalBottomSheet"
+              options={{
+                title: 'Modal BottomSheet'
+              }}
+              getComponent={() => ModalBottomSheet}
             />
           </Stack.Navigator>
         </NavigationContainer>

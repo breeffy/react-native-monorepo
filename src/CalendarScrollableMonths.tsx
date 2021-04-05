@@ -1,10 +1,5 @@
-import React from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  ListRenderItem,
-  ViewStyle
-} from 'react-native';
+import React, { forwardRef, useImperativeHandle } from 'react';
+import { FlatList, FlatListProps, ListRenderItem } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -24,12 +19,11 @@ import type { CalendarDate, CalendarYearAndMonth } from './types';
 import type { CalendarProps } from './Calendar';
 import type { CalendarDayKind } from './CalendarDay';
 
-const AnimatedFlatList = Animated.createAnimatedComponent(
+// @ts-expect-error
+const AnimatedFlatList: typeof FlatList = Animated.createAnimatedComponent(
+  // @ts-ignore
   FlatList
-) as React.ComponentClass<
-  Animated.AnimateProps<ViewStyle, FlatListProps<any>>,
-  any
->;
+);
 
 export interface CalendarScrollableMonthsProps {
   scrollMode: CalendarProps['scrollMode'];
@@ -39,10 +33,10 @@ export interface CalendarScrollableMonthsProps {
   onCalendarDayPress?: (day: CalendarDate, kind: CalendarDayKind) => void;
 }
 
-export const CalendarScrollableMonths = ({
-  scrollMode,
-  scrollModeDeceleration
-}: CalendarScrollableMonthsProps) => {
+export const CalendarScrollableMonths = forwardRef<
+  any,
+  CalendarScrollableMonthsProps
+>(({ scrollMode, scrollModeDeceleration }, ref) => {
   const scrollModeProps = useMemoOne<Partial<FlatListProps<any>>>(() => {
     if (scrollMode === 'oneMonth') {
       return {
@@ -60,11 +54,15 @@ export const CalendarScrollableMonths = ({
   const { monthsBefore, calendarInterval } = useCalendarInternal();
 
   const {
+    scrollRef,
     scrollHandler,
     scrollState,
     scrollContentOffset,
     scrollContentSize
   } = useCalendarScroll();
+
+  // useImperativeHandle(ref, () => scrollRef.current);
+  useImperativeHandle(ref, () => scrollRef);
 
   const {
     calendarAnimatedCommonEraMonth,
@@ -74,7 +72,6 @@ export const CalendarScrollableMonths = ({
     calendarEndMonthFromCommonEra
   } = useCalendarAnimated();
 
-  // @ts-expect-error
   useDerivedValue(() => {
     if (scrollState.value !== ScrollState.UNDETERMINED) {
       calendarAnimatedCommonEraMonth.value = round(
@@ -135,6 +132,9 @@ export const CalendarScrollableMonths = ({
 
   return (
     <AnimatedFlatList
+      // @ts-ignore
+      ref={scrollRef}
+      // ref={scrollRef}
       data={calendarMonths}
       initialScrollIndex={monthsBefore}
       horizontal
@@ -150,4 +150,4 @@ export const CalendarScrollableMonths = ({
       {...scrollModeProps}
     />
   );
-};
+});
