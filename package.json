@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/react-native-calendar",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "High-quality, modern, fast interactive calendar built specifically with performance in mind. Supports gestures and animations.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
