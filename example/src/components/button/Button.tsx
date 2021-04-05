@@ -1,86 +1,133 @@
-import React, { useMemo } from 'react';
+import React, { ComponentProps, useEffect, useMemo, useRef } from 'react';
 import {
-  Text,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  View,
-  Platform,
-  TouchableOpacity
+  TouchableOpacityProps,
+  Animated,
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
-// import { TouchableOpacity } from '@gorhom/bottom-sheet';
-// import { TouchableOpacity } from '@gorhom/bottom-sheet';
-import { useAppearance } from '../../hooks';
+import { usePrevious } from '../../hooks';
+import type { View } from 'react-native';
 
-interface ButtonProps {
-  label: string;
-  labelColor?: string[];
-  labelStyle?: TextStyle;
-  containerColor?: string[];
-  style?: ViewStyle;
-  onPress?: () => void;
+type ButtonStyle = Pick<ComponentProps<typeof View>, 'style'>;
+
+export enum ButtonType {
+  ENABLED,
+  DISABLED,
+  SECONDARY,
+  ERRONEOUS
 }
 
-const Button = ({
+export type ButtonProps = {
+  type?: ButtonType;
+  label?: string;
+  animationDuration?: number;
+  onPress?: TouchableOpacityProps['onPress'];
+} & ButtonStyle;
+
+interface ButtonValuesForAnimation {
+  textColor: string;
+  backgroundColor: string;
+}
+
+const getButtonValuesForAnimation = (
+  type: ButtonType
+): ButtonValuesForAnimation => {
+  switch (type) {
+    case ButtonType.DISABLED:
+      return {
+        textColor: 'rgba(68, 82, 95, 0.4)',
+        backgroundColor: 'rgba(224, 230, 235, 1)'
+      };
+
+    case ButtonType.ENABLED:
+      return {
+        textColor: 'rgba(255, 255, 255, 1)',
+        backgroundColor: 'rgba(45, 154, 252, 1)'
+      };
+
+    case ButtonType.SECONDARY:
+      return {
+        textColor: 'rgba(25, 138, 239, 1)',
+        backgroundColor: 'rgba(45, 154, 252, 0.2)'
+      };
+
+    case ButtonType.ERRONEOUS:
+      return {
+        textColor: 'rgba(255, 255, 255, 1)',
+        backgroundColor: 'rgba(243, 106, 97, 1)'
+      };
+  }
+};
+
+export const Button = ({
+  type = ButtonType.ENABLED,
   label,
-  labelColor,
-  labelStyle: _labelStyle,
-  containerColor,
+  animationDuration = 0,
   style,
   onPress
 }: ButtonProps) => {
-  // hooks
-  const { appearance } = useAppearance();
+  const prevType = usePrevious(type) ?? type;
+  const isButtonDisabled = type === ButtonType.DISABLED;
+  const progress = useRef(new Animated.Value(0)).current;
 
-  // styles
-  const containerStyle = useMemo(
-    () => [
-      styles.container,
-      style,
-      containerColor && {
-        backgroundColor:
-          appearance === 'light' ? containerColor[0] : containerColor[1]
-      }
-    ],
-    [style, containerColor, appearance]
+  const { textColor, backgroundColor } = useMemo(() => {
+    const to = getButtonValuesForAnimation(type);
+    const from = getButtonValuesForAnimation(prevType);
+
+    return {
+      textColor: progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [from.textColor, to.textColor]
+      }),
+      backgroundColor: progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [from.backgroundColor, to.backgroundColor]
+      })
+    };
+  }, [type, prevType, progress]);
+
+  useEffect(() => {
+    if (prevType !== type) {
+      Animated.timing(progress, {
+        toValue: 1,
+        duration: animationDuration,
+        useNativeDriver: false
+      }).start((animationResult) => {
+        if (animationResult.finished) {
+          progress.resetAnimation();
+        }
+      });
+    }
+  }, [type, prevType, progress, animationDuration]);
+
+  const backgroundStyle = useMemo(
+    () => [styles.viewStyle, style, { backgroundColor }],
+    [style, backgroundColor]
   );
-  const labelStyle = useMemo(
-    () => [
-      styles.label,
-      _labelStyle,
-      labelColor && {
-        color: appearance === 'light' ? labelColor[0] : labelColor[1]
-      }
-    ],
-    [_labelStyle, labelColor, appearance]
-  );
+  const labelStyle = useMemo(() => [styles.labelStyle, { color: textColor }], [
+    textColor
+  ]);
 
-  // render
-
-  return Platform.OS === 'ios' ? (
-    // @ts-ignore
-    <TouchableOpacity style={containerStyle} onPress={onPress}>
-      <Text style={labelStyle}>{label}</Text>
+  return (
+    <TouchableOpacity onPress={onPress} disabled={isButtonDisabled}>
+      <Animated.View style={backgroundStyle}>
+        {label && <Animated.Text style={labelStyle}>{label}</Animated.Text>}
+      </Animated.View>
     </TouchableOpacity>
-  ) : (
-    <View style={containerStyle}>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={labelStyle}>{label}</Text>
-      </TouchableOpacity>
-    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 12,
-    borderRadius: 4,
-    backgroundColor: '#333',
-    overflow: 'hidden'
+  viewStyle: {
+    height: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8
   },
-  label: {
-    color: 'white'
+  labelStyle: {
+    fontFamily: 'Gilroy-SemiBold',
+    fontSize: 19,
+    textAlign: 'center',
+    textAlignVertical: 'top'
   }
 });
-
-export default Button;
