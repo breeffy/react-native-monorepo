@@ -1,4 +1,5 @@
 # React Native Calendar
+
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/breeffy/react-native-calendar?color=blue&style=flat-square)
 ![npm](https://img.shields.io/npm/v/@breeffy/react-native-calendar?color=yellow&label=npm%40latest&style=flat-square) [![npm](https://img.shields.io/github/license/breeffy/react-native-calendar?color=green&style=flat-square)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) [![npm](https://img.shields.io/badge/types-Typescript-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
 
@@ -18,8 +19,8 @@ High-quality, modern, fast interactive calendar built specifically with performa
 | **Infinite** calendar    |   :construction:   | Allows rendering / scrolling practically infinite amount of months. You can show more than **12000 months**         |
 | **Selection** mode       | :heavy_check_mark: | Supports `singleDay` (can select only one day in calendar) or `multipleDays` (can select multiple days in calendar) |
 | **Pagination** mode      | :heavy_check_mark: | Supports pagination mode                                                                                            |
-| **Themes**               |        :heavy_check_mark:         | Supports custom themes to customize calendar appearance                                                             |
-| **Dark mode**            |        :heavy_check_mark:         | Supports dark mode by using `CalendarThemeDark` theme                                                                                                 |
+| **Themes**               | :heavy_check_mark: | Supports custom themes to customize calendar appearance                                                             |
+| **Dark mode**            | :heavy_check_mark: | Supports dark mode by using `CalendarThemeDark` theme                                                               |
 | **Blank-free** scrolling |   :construction:   | If scrolling is happening faster than calendar can render months, it will replace them with `month-year` text       |
 | **Gestures**             | :heavy_check_mark: | Supports gestures / swipes to scroll calendar                                                                       |
 | **Animations**           | :heavy_check_mark: | Supports high-performant native animations based on scroll position                                                 |
@@ -39,7 +40,7 @@ export const CalendarSheet = () => {
   return (
     <Calendar
       selectionMode="singleDay"
-      scrollMode="multipleMonths"
+      scrollMode="oneMonth"
       monthsBefore={12}
       monthsAfter={24}
     />
@@ -94,7 +95,7 @@ type CalendarProps = {
    * If provided, will be highlighted in active color.
    */
   activeCalendarDay?: CalendarDate;
-  
+
   /**
    * Theme object to customize calendar appearance
    */

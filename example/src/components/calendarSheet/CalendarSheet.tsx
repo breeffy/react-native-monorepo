@@ -21,7 +21,7 @@ export const CalendarSheet = forwardRef<CalendarMethods, CalendarProps>(
         monthsBefore={12}
         monthsAfter={24}
         selectionMode="singleDay"
-        scrollMode="multipleMonths"
+        scrollMode="oneMonth"
         scrollModeDeceleration="fast"
         theme={calendarTheme}
         {...props}
