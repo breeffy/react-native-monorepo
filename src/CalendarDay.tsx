@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { useMemoOne } from 'use-memo-one';
 import { SvgCircle } from './components/shapes';
 import { dayOfWeekWidth } from './constants';
 import { calendarDayThemeToTextStyle } from './helpers';
 import { useCalendarTheme } from './hooks/useCalendarTheme';
-import type { ViewStyleProp } from './types';
 
 export enum CalendarDayKind {
   DEFAULT,
@@ -17,7 +16,8 @@ export enum CalendarDayKind {
 export type CalendarDayProps = {
   kind?: CalendarDayKind;
   day: number;
-} & ViewStyleProp;
+  style?: StyleProp<TextStyle>;
+};
 
 export const CalendarDay = ({
   kind = CalendarDayKind.DEFAULT,
@@ -39,33 +39,35 @@ export const CalendarDay = ({
     }
   }, [kind, theme]);
 
-  const containerStyle = useMemoOne(() => {
-    return [styles.container, style];
-  }, [styles.container, style]);
-
   const textStyle = useMemoOne(() => {
-    return [styles.text, calendarDayThemeToTextStyle(calendarDayTheme)];
-  }, [styles.text, calendarDayTheme]);
+    return [
+      styles.container,
+      styles.text,
+      calendarDayThemeToTextStyle(calendarDayTheme),
+      style
+    ];
+  }, [calendarDayTheme]);
+
+  const circleStyle = useMemoOne(() => [styles.container, styles.circle], []);
 
   return (
-    <View style={containerStyle}>
-      {kind === CalendarDayKind.SELECTED && (
-        <SvgCircle color={calendarDayTheme.circleColor} style={styles.circle} />
-      )}
+    <>
       <Text style={textStyle}>{String(day)}</Text>
-    </View>
+      {kind === CalendarDayKind.SELECTED && (
+        <SvgCircle color={calendarDayTheme.circleColor} style={circleStyle} />
+      )}
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: dayOfWeekWidth,
-    height: 38,
-    justifyContent: 'center',
-    alignItems: 'center'
+    height: 38
   },
   circle: {
-    position: 'absolute'
+    position: 'absolute',
+    alignItems: 'center'
   },
   text: {
     flexGrow: 1,
