@@ -116,7 +116,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       monthsBefore = 50,
       monthsAfter = 50,
       selectionMode = 'singleDay',
-      scrollMode = 'multipleMonths',
+      scrollMode = 'oneMonth',
       scrollModeDeceleration = 'normal',
       activeCalendarDay: _activeCalendarDay,
       theme = CalendarThemeLight,
