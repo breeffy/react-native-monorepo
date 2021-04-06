@@ -34,7 +34,8 @@ import type {
   CalendarYearAndMonth,
   ViewStyleProp,
   CalendarSelectionMode,
-  CalendarTheme
+  CalendarTheme,
+  CalendarPerformanceProps
 } from './types';
 import { CalendarThemeLight } from './themes';
 import { CalendarThemeProvider } from './contexts/theme';
@@ -99,6 +100,12 @@ export type CalendarProps = {
    * Theme object to customize calendar appearance
    */
   theme?: CalendarTheme;
+
+  /**
+   * Properties to customize performance characteristics
+   */
+  performanceProps?: CalendarPerformanceProps;
+
   onDaySelectionChange?: (day: DateTime) => void;
 } & ViewStyleProp;
 
@@ -113,6 +120,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       scrollModeDeceleration = 'normal',
       activeCalendarDay: _activeCalendarDay,
       theme = CalendarThemeLight,
+      performanceProps,
       style: _containerStyle
     }: CalendarProps,
     ref
@@ -312,6 +320,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
                   scrollModeDeceleration={scrollModeDeceleration}
                   activeCalendarDay={activeCalendarDay}
                   selectedDates={selectedDates}
+                  performanceProps={performanceProps}
                   onCalendarDayPress={onCalendarDayStateChange}
                 />
               </CalendarAnimatedProvider>

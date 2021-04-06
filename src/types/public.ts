@@ -3,6 +3,7 @@
  * Note: put only highly-reusable or public types / interfaces
  */
 
+import type { FlatListProps } from 'react-native';
 import type Animated from 'react-native-reanimated';
 
 export type CalendarKind = 'gregorian';
@@ -59,3 +60,10 @@ export interface CalendarAnimatedYearAndMonth {
 }
 
 export type CalendarSelectionMode = 'singleDay' | 'multipleDays';
+export type CalendarPerformanceProps = Pick<
+  FlatListProps<any>,
+  | 'initialNumToRender'
+  | 'windowSize'
+  | 'maxToRenderPerBatch'
+  | 'scrollEventThrottle'
+>;
