@@ -1,10 +1,10 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { FlatList, FlatListProps, ListRenderItem } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
   useDerivedValue
 } from 'react-native-reanimated';
+import { FlatList as RNGestureHandlerFlatList } from 'react-native-gesture-handler';
 import { useCallbackOne, useMemoOne } from 'use-memo-one';
 import { getIdFromCalendarYearAndMonth } from './helpers';
 import { useCalendarScroll } from './hooks/useCalendarScrollView';
@@ -19,6 +19,7 @@ import { calculateScrollProgress } from './worklets';
 import { round } from 'react-native-redash';
 import { getStartOfEveryMonth } from './utils';
 import { CalendarMonthWithContext } from './components/CalendarMonthWithContext';
+import type { FlatListProps, ListRenderItem } from 'react-native';
 import type { CalendarDate, CalendarYearAndMonth } from './types';
 import type { CalendarProps } from './Calendar';
 import type { CalendarDayKind } from './CalendarDay';
@@ -26,7 +27,7 @@ import type { CalendarDayKind } from './CalendarDay';
 // @ts-expect-error
 const AnimatedFlatList: typeof FlatList = Animated.createAnimatedComponent(
   // @ts-ignore
-  FlatList
+  RNGestureHandlerFlatList
 );
 
 export interface CalendarScrollableMonthsProps {
@@ -74,7 +75,6 @@ export const CalendarScrollableMonths = forwardRef<
       scrollContentSize
     } = useCalendarScroll();
 
-    // useImperativeHandle(ref, () => scrollRef.current);
     useImperativeHandle(ref, () => scrollRef);
 
     const {
@@ -147,7 +147,6 @@ export const CalendarScrollableMonths = forwardRef<
       <AnimatedFlatList
         // @ts-ignore
         ref={scrollRef}
-        // ref={scrollRef}
         data={calendarMonths}
         initialScrollIndex={monthsBefore}
         horizontal
