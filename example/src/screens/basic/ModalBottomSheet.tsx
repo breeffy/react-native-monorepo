@@ -9,10 +9,13 @@ import { CalendarSheet } from '../../components/calendarSheet';
 import { useContainerStyle } from './hooks';
 import { Button, ButtonType } from '../../components/button';
 import { BottomSheetHandle } from '../bottomsheet/BottomSheetHandle';
+import type { CalendarMethods } from '@breeffy/react-native-calendar';
 
 export const ModalBottomSheet = () => {
   const [contentHeight, setContentHeight] = useState(0);
   const snapPoints = useMemo(() => [contentHeight], [contentHeight]);
+
+  const calendarSheetRef = useRef<CalendarMethods | null>(null);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   const handlePresentPress = useCallback(() => {
@@ -60,10 +63,10 @@ export const ModalBottomSheet = () => {
           index={0}
           snapPoints={snapPoints}
           handleComponent={BottomSheetHandle}
-          activeOffsetY={[-20, 20]}
+          waitFor={calendarSheetRef}
         >
           <BottomSheetView onLayout={handleOnLayout}>
-            <CalendarSheet />
+            <CalendarSheet ref={calendarSheetRef} />
           </BottomSheetView>
         </BottomSheetModal>
       </BottomSheetModalProvider>

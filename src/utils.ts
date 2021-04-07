@@ -35,9 +35,9 @@ export const getMonthInterpolateConfig = (
   end: number,
   height: number
 ): InterpolateConfig => {
-  console.log(
-    `getMonthInterpolateConfig: ${JSON.stringify({ start, end, height })}`
-  );
+  // console.log(
+  //   `getMonthInterpolateConfig: ${JSON.stringify({ start, end, height })}`
+  // );
   const input: InterpolateInput = [start, end];
   const output: InterpolateOutput = [0, height * (end - start)];
   return [input, output, Extrapolate.CLAMP];
