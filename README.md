@@ -110,6 +110,22 @@ type CalendarProps = {
    * Theme object to customize calendar appearance
    */
   theme?: CalendarTheme;
+  
+  /**
+   * Properties to customize performance characteristics
+   */
+  performanceProps?: CalendarPerformanceProps;
+
+  /**
+   * Callback is called when state of a day changes,
+   * i.e. it's selected / unselected.
+   *
+   * **Note:** for `singleDay` selection mode day unselected by
+   * other selected day is not notified.
+   * You can understand it was unselected by checking
+   * current `selectionMode`.
+   */
+  onDayStateChange?: (day: CalendarDate, kind: CalendarDayKind) => void;
 
   /**
    * Container style
