@@ -1,5 +1,6 @@
 export { Calendar, CalendarProps } from './Calendar';
 export { CalendarThemeLight, CalendarThemeDark } from './themes';
+export { CalendarDayKind } from './CalendarDay';
 export type {
   CalendarDate,
   CalendarDay,
