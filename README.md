@@ -35,7 +35,7 @@ High-quality, modern, fast interactive calendar built specifically with performa
 Because of this we provide a table of supported versions.
 | Calendar                   |       React Native        |   React Native Reanimated   | React Native Gesture Handler |
 | :------------------------: | :-----------------------: | :-------------------------: | :--------------------------: |
-| **0.3.0**, **0.4.0**                   | 0.64.0                | 2.1.0                   | 1.10.3                   |
+| **0.3.0**, **0.4.0**, **0.4.1**                   | 0.64.0                | 2.1.0                   | 1.10.3                   |
 
 > [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) and [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) are **peerDependencies** and need to be installed beforehand.
 
