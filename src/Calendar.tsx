@@ -106,7 +106,16 @@ export type CalendarProps = {
    */
   performanceProps?: CalendarPerformanceProps;
 
-  onDaySelectionChange?: (day: DateTime) => void;
+  /**
+   * Callback is called when state of a day changes,
+   * i.e. it's selected / unselected.
+   *
+   * **Note:** for `singleDay` selection mode day unselected by
+   * other selected day is not notified.
+   * You can understand it was unselected by checking
+   * current `selectionMode`.
+   */
+  onDayStateChange?: (day: CalendarDate, kind: CalendarDayKind) => void;
 } & ViewStyleProp;
 
 export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
@@ -121,7 +130,8 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       activeCalendarDay: _activeCalendarDay,
       theme = CalendarThemeLight,
       performanceProps,
-      style: _containerStyle
+      style: _containerStyle,
+      onDayStateChange
     }: CalendarProps,
     ref
   ) => {
@@ -238,8 +248,9 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
         } else if (calendarKind === CalendarDayKind.DEFAULT) {
           deselectDate(day);
         }
+        onDayStateChange?.(day, calendarKind);
       },
-      [selectDate, deselectDate]
+      [selectDate, deselectDate, onDayStateChange]
     );
 
     // useImperativeHandle(ref, () => ({
