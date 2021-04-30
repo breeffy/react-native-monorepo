@@ -12,7 +12,7 @@ import type {
 import type { ScrollView } from 'react-native';
 import type { FlatList } from 'react-native-gesture-handler';
 
-export const useCalendarScroll = <T extends ScrollView & FlatList<any>>() => {
+export const useScroll = <T extends ScrollView & FlatList<any>>() => {
   const scrollRef = useAnimatedRef<T>();
   const scrollState = useSharedValue<ScrollState>(ScrollState.UNDETERMINED);
   const scrollContentSize = useSharedValue<NativeScrollSize>({
