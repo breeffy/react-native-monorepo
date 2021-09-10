@@ -14,6 +14,9 @@ import type { PickerItemProps } from '../components/itemPicker/types';
 import type { ScrollableCommon } from '../components/itemPicker/scrollable/types';
 import type { ScrollableFlatListProps } from '../components/itemPicker/scrollable/ScrollableFlatList';
 import type { ScrollableViewProps } from '../components/itemPicker/scrollable/ScrollableView';
+import type { PickerTheme } from '../types/pickerTheme';
+import { PickerThemeProvider } from '../contexts/pickerTheme';
+import { PickerThemeLight } from '../themes';
 
 declare module 'react' {
   function forwardRef<T, P = {}>(
@@ -108,6 +111,11 @@ export interface ItemPickerProps<
    */
   pickerSize?: number;
 
+  /**
+   * Theme object to customize picker appearance
+   */
+  theme?: PickerTheme;
+
   renderItem: (props: PickerItemProps<T>) => JSX.Element;
   keyExtractor: (item: T, index: number) => string;
 }
@@ -129,6 +137,7 @@ const ItemPickerComponent = <T,>(
     itemWidth,
     // itemHeight = PickerConstants.ValueHeight,
     itemHeight,
+    theme = PickerThemeLight,
     renderItem,
     keyExtractor
   }: ItemPickerProps<T, ItemPickerScrollComponentKind>,
@@ -215,28 +224,31 @@ const ItemPickerComponent = <T,>(
   );
 
   return (
-    <Scrollable
-      items={items}
-      mode={mode}
-      initialIndex={initialIndex}
-      pickerWidth={pickerWidth}
-      pickerHeight={pickerHeight}
-      pickerSize={pickerSize}
-      itemWidth={itemWidth}
-      itemHeight={itemHeight}
-      itemSize={itemSize}
-      itemsLength={items.length}
-      scrollMode={scrollMode}
-      scrollModeDeceleration={scrollModeDeceleration}
-      scrollComponentKind={scrollComponentKind}
-      performance={performance}
-      indexInterpolateConfig={indexInterpolateConfig}
-      currentIndex={currentIndex}
-      currentProgress={currentProgress}
-      currentScrollState={currentScrollState}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-    />
+    <PickerThemeProvider value={theme}>
+      <Scrollable
+        items={items}
+        mode={mode}
+        initialIndex={initialIndex}
+        pickerWidth={pickerWidth}
+        pickerHeight={pickerHeight}
+        pickerSize={pickerSize}
+        itemWidth={itemWidth}
+        itemHeight={itemHeight}
+        itemSize={itemSize}
+        itemsLength={items.length}
+        scrollMode={scrollMode}
+        scrollModeDeceleration={scrollModeDeceleration}
+        scrollComponentKind={scrollComponentKind}
+        performance={performance}
+        indexInterpolateConfig={indexInterpolateConfig}
+        currentIndex={currentIndex}
+        currentProgress={currentProgress}
+        currentScrollState={currentScrollState}
+        theme={theme}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+      />
+    </PickerThemeProvider>
   );
 };
 
