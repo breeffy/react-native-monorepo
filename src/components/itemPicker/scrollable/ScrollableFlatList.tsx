@@ -34,6 +34,7 @@ const ScrollableFlatListComponent = <T,>(
     contentOffset,
     headerComponentStyle,
     footerComponentStyle,
+    itemSeparator: ItemSeparatorComponent,
     keyExtractor,
     getItemLayout,
     renderItem: _renderItem,
@@ -58,6 +59,7 @@ const ScrollableFlatListComponent = <T,>(
       showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
       decelerationRate={decelerationRate}
       scrollEventThrottle={scrollEventThrottle}
+      ItemSeparatorComponent={ItemSeparatorComponent}
       ListHeaderComponent={View}
       ListFooterComponent={View}
       ListHeaderComponentStyle={headerComponentStyle}

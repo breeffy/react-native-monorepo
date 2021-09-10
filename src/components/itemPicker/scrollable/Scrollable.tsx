@@ -5,7 +5,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useCallbackOne, useMemoOne } from 'use-memo-one';
 import { getIndexProgress, interpolateWithRound } from '../../../worklets';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import { usePaddingLayout } from '../../../hooks/usePaddingLayout';
 import { ScrollableView } from './ScrollableView';
 import {
@@ -58,6 +58,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     currentScrollState,
     indexInterpolateConfig,
     itemsLength,
+    theme,
     keyExtractor,
     renderItem: _renderItem
   }: Required<ScrollableProps<T, U>>,
@@ -145,7 +146,10 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
           style={{
             width: props.itemWidth,
             height: props.itemHeight,
-            zIndex: -1 * props.itemIndex
+            zIndex: -1 * props.itemIndex,
+            // backgroundColor: 'blue',
+            justifyContent: 'center',
+            alignItems: 'center'
             // backgroundColor: 'red',
             // borderWidth: 2,
             // borderColor: 'green'
@@ -184,7 +188,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     return mode === 'horizontal';
   }, [mode]);
 
-  console.log(`containerWidth: ${pickerWidth}, cellWidth: ${itemWidth}`);
+  console.log(`containerWidth: ${pickerWidth}, itemWidth: ${itemWidth}`);
   console.log(`paddingLayout: ${JSON.stringify(headerLayout)}`);
 
   const contentOffset = useMemoOne(() => {
@@ -205,6 +209,23 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     return;
   }, [mode, initialIndex, itemSize, scrollComponentKind]);
 
+  const SeparatorComponent = useCallbackOne(() => {
+    const separatorSize = theme.separator.size;
+    const separatorColor = theme.separator.color;
+
+    /** Do not render separators in this case */
+    if (separatorSize <= 0) return undefined;
+
+    const separatorStyle: ViewStyle =
+      mode === 'horizontal'
+        ? { width: separatorSize, height: itemHeight }
+        : { width: itemWidth, height: separatorSize };
+
+    return (
+      <View style={[separatorStyle, { backgroundColor: separatorColor }]} />
+    );
+  }, [mode, theme.separator]);
+
   const commonProps = useMemoOne<ScrollableCommon<T>>(() => {
     return {
       items: items,
@@ -217,6 +238,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       contentOffset: contentOffset,
       headerComponentStyle: headerLayout,
       footerComponentStyle: headerLayout,
+      itemSeparator: SeparatorComponent,
       renderItem: renderItem,
       onScroll: scrollHandler
     };
@@ -229,7 +251,8 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     contentOffset,
     headerLayout,
     renderItem,
-    scrollHandler
+    scrollHandler,
+    SeparatorComponent
   ]);
 
   const ScrollableComponent = useMemoOne(() => {
@@ -248,7 +271,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     } else {
       return <ScrollableView {...commonProps} />;
     }
-  }, [commonProps, initialIndex, performance]);
+  }, [commonProps, initialIndex, performance, SeparatorComponent]);
 
   return <View style={containerLayout}>{ScrollableComponent}</View>;
 };
