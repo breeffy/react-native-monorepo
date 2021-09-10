@@ -3,6 +3,8 @@ export type { ItemPickerProps } from './components/itemPicker';
 
 export { Calendar, CalendarProps } from './Calendar';
 export { TimePicker } from './components/timePicker';
+export { NumberPicker, NumberPickerKind } from './pickers';
+export type { NumberPickerProps } from './pickers';
 export { CalendarThemeLight, CalendarThemeDark } from './themes';
 export { CalendarDayKind } from './CalendarDay';
 export type {
@@ -30,6 +32,8 @@ export type { CalendarTheme } from './types/theme';
  * Import pickers
  */
 export * from './pickers';
+export { PickerItemComponent } from './components/itemPicker/PickerItemComponent';
+export type { PickerItemComponentProps } from './components/itemPicker/PickerItemComponent';
 
 export {
   ItemPicker as Slider,
