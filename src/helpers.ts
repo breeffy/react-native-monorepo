@@ -10,7 +10,7 @@ import type {
   CalendarWeek,
   CalendarYearAndMonth
 } from './types';
-import type { PickerTextTheme } from './types/pickerTheme';
+import type { PickerItemTheme, PickerTextTheme } from './types/pickerTheme';
 
 export const getIdFromCalendarDate = (date: CalendarDate): string => {
   return `${date.year}-${date.month}-${date.day}`;
@@ -178,6 +178,18 @@ export const textThemeToTextStyle = (
     fontWeight: textTheme.textWeight,
     fontSize: textTheme.textSize,
     color: textTheme.textColor
+  };
+};
+
+export const pickerItemThemeToTextStyle = (
+  textTheme: PickerItemTheme
+): TextStyle => {
+  return {
+    fontFamily: textTheme.textFont,
+    fontWeight: textTheme.textWeight,
+    fontSize: textTheme.textSize,
+    color: textTheme.textColor,
+    backgroundColor: textTheme.textBackgroundColor
   };
 };
 
