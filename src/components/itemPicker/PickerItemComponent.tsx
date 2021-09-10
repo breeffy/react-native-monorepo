@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  StyleProp,
-  TextStyle,
-  View,
-  ViewStyle
-} from 'react-native';
+import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { usePickerTheme } from '../../hooks';
 import { useMemoOne } from 'use-memo-one';
 import { dayOfWeekWidth } from '../../constants';
-import { textThemeToTextStyle } from '../../helpers';
+import { pickerItemThemeToTextStyle } from '../../helpers';
 import { usePickerInternal } from '../../hooks/usePickerInternal';
 import Animated, {
   Extrapolate,
@@ -19,8 +13,9 @@ import Animated, {
 import { usePickerAnimated } from '../../hooks/usePickerAnimated';
 import { toRad } from 'react-native-redash';
 import type { PickerItemProps } from './types';
+import type { TextStyle } from 'react-native';
 
-export type PickerItemComponentProps = PickerItemProps & {
+export type PickerItemComponentProps<T> = PickerItemProps<T> & {
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 };
@@ -38,18 +33,24 @@ export type PickerItemComponentProps = PickerItemProps & {
 //   textStyle?: StyleProp<TextStyle>;
 // };
 
-export const PickerItemComponent = ({
-  itemValue,
+export const PickerItemComponent = <T extends string | number>({
+  item,
   itemIndex,
+  itemWidth,
+  itemHeight,
+  itemSize,
   itemsLength,
-  currentValue,
+  pickerWidth,
+  pickerHeight,
+  pickerSize,
   currentIndex,
+  currentProgress,
   containerStyle: _containerStyle,
   textStyle: _textStyle
-}: PickerItemComponentProps) => {
-  console.log(`BasePickerValue: value [${itemValue}], index [${itemIndex}]`);
+}: PickerItemComponentProps<T>) => {
+  console.log(`BasePickerValue: value [${item}], index [${itemIndex}]`);
   const theme = usePickerTheme();
-  const { cellWidth, cellHeight } = usePickerInternal();
+
   // const { currentValue, currentIndex } = usePickerAnimated();
 
   // const _test_opacity = useDerivedValue(() => {
@@ -78,14 +79,6 @@ export const PickerItemComponent = ({
   //   }
   // }, [kind, theme]);
   //
-
-  const containerStyle = useMemoOne(() => {
-    return [
-      styles.container,
-      _containerStyle,
-      { width: cellWidth, height: cellHeight }
-    ];
-  }, [_containerStyle, cellWidth, cellHeight]);
 
   const animatedTextStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
@@ -116,25 +109,36 @@ export const PickerItemComponent = ({
       Extrapolate.CLAMP
     );
 
-    return {
-      opacity: opacity,
-      margin: 20,
-      transform: [
-        {
-          scale
-        },
-        { translateY },
-        {
-          rotate: `${rotate}rad`
-        }
-      ]
-    };
+    return {};
+
+    // return {
+    //   opacity: opacity,
+    //   margin: 20,
+    //   transform: [
+    //     {
+    //       scale
+    //     },
+    //     { translateY },
+    //     {
+    //       rotate: `${rotate}rad`
+    //     }
+    //   ]
+    // };
   }, []);
 
-  const textStyle = useMemoOne(() => {
+  const textStyle = useMemoOne<(TextStyle | null | undefined)[]>(() => {
     // console.log(`textStyle: is called`);
-    return [textThemeToTextStyle(theme.value), animatedTextStyle, _textStyle];
-  }, [_textStyle, theme.value, cellWidth, cellHeight, animatedTextStyle]);
+    return [
+      pickerItemThemeToTextStyle(theme.item),
+      animatedTextStyle,
+      _textStyle,
+      {
+        includeFontPadding: false,
+        textAlign: 'center',
+        textAlignVertical: 'center'
+      }
+    ];
+  }, [_textStyle, theme.item, itemWidth, itemHeight, animatedTextStyle]);
 
   // const textStyle = useMemoOne(() => {
   //   return [
@@ -148,11 +152,7 @@ export const PickerItemComponent = ({
   // console.log(`textStyle is ${JSON.stringify(textStyle)}`);
   //     {/* <Text style={textStyle}>{String(hour)}</Text> */}
 
-  return (
-    <View style={containerStyle}>
-      <Animated.Text style={textStyle}>{String(itemValue)}</Animated.Text>
-    </View>
-  );
+  return <Animated.Text style={textStyle}>{String(item)}</Animated.Text>;
 };
 
 const styles = StyleSheet.create({
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
     width: dayOfWeekWidth,
     height: 38,
     justifyContent: 'center',
-    alignItems: 'center'
-    // backgroundColor: 'orange',
+    alignItems: 'center',
+    backgroundColor: 'orange'
     // borderColor: 'orange',
     // borderWidth: 1
   },
