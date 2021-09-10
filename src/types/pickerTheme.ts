@@ -20,12 +20,20 @@ export interface PickerTextTheme {
   textWeight?: TextWeight;
 }
 
-export interface PickerDayTheme extends PickerTextTheme {
-  circleColor: CircleColor;
+export interface PickerSeparatorTheme {
+  /**
+   * Size of separator between items
+   */
+  size: number;
+  /**
+   * Color of separator between items
+   */
+  color: string;
 }
 
-export interface PickerDaysOfWeekTheme extends PickerTextTheme {}
-export interface PickerHeaderTheme extends PickerTextTheme {}
+export interface PickerItemTheme extends PickerTextTheme {
+  textBackgroundColor?: BackgroundColor;
+}
 
 export interface PickerLineDelimiterTheme {
   lineColor: LineColor;
@@ -38,17 +46,7 @@ export interface PickerSheetTheme {
 
 export interface PickerTheme {
   sheet: PickerSheetTheme;
-  header: {
-    month: PickerHeaderTheme;
-    year: PickerHeaderTheme;
-  };
-  daysOfWeek: PickerDaysOfWeekTheme;
   lineDelimiter: PickerLineDelimiterTheme;
-  value: PickerTextTheme;
-  day: {
-    default: PickerDayTheme;
-    active: PickerDayTheme;
-    selected: PickerDayTheme;
-    disabled: PickerDayTheme;
-  };
+  item: PickerItemTheme;
+  separator: PickerSeparatorTheme;
 }
