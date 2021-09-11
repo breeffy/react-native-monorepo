@@ -5,7 +5,7 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated';
 import { useMemoOne } from 'use-memo-one';
-import { getIndexProgress } from '../worklets';
+import { getValueProgress } from '../worklets';
 import { ScrollState, windowHeight, windowWidth } from '../constants';
 import { getScrollableIndexInterpolateConfig } from '../utils';
 import { useItemSize } from '../hooks/useItemSize';
@@ -188,7 +188,7 @@ const ItemPickerComponent = <T,>(
   const currentIndex = useSharedValue(initialIndex);
 
   const initialProgress = useMemoOne(() => {
-    return (runOnJS(getIndexProgress)(
+    return (runOnJS(getValueProgress)(
       currentIndex.value,
       indexInterpolateConfig
     ) as unknown) as number;

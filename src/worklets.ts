@@ -27,14 +27,14 @@ export const calculateProgress = (
   );
 };
 
-export const getIndexProgress = (
-  index: number,
+export const getValueProgress = (
+  value: number,
   interpolateConfig: InterpolateConfig
 ) => {
   'worklet';
   const input = interpolateConfig[0];
   const progressInput: [number, number] = [input[0], input[input.length - 1]];
-  return calculateProgress(index, progressInput);
+  return calculateProgress(value, progressInput);
 };
 
 export const calculatePickerScrollProgress = (

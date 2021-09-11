@@ -4,7 +4,7 @@ import Animated, {
   useDerivedValue
 } from 'react-native-reanimated';
 import { useCallbackOne, useMemoOne } from 'use-memo-one';
-import { getIndexProgress, interpolateWithRound } from '../../../worklets';
+import { getValueProgress, interpolateWithRound } from '../../../worklets';
 import { View, ViewStyle } from 'react-native';
 import { usePaddingLayout } from '../../../hooks/usePaddingLayout';
 import { ScrollableView } from './ScrollableView';
@@ -108,7 +108,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     () => {
       // console.log(`offset: ${offset.value}`);
       const index = interpolateWithRound(offset.value, indexInterpolateConfig);
-      const progress = getIndexProgress(index, indexInterpolateConfig);
+      const progress = getValueProgress(index, indexInterpolateConfig);
       const state = scrollState.value;
       return [index, progress, state] as const;
     },
