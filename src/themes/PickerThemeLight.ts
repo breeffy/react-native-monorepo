@@ -7,9 +7,9 @@ import type {
 
 const pickerItemTheme: PickerItemTheme = {
   textFont: 'Gilroy-Medium',
-  textSize: 24,
-  textColor: 'orange',
-  textBackgroundColor: 'pink'
+  textSize: 28,
+  textColor: 'rgba(68, 82, 95, 0.9)',
+  textBackgroundColor: 'transparent'
 };
 
 const pickerLineDelimiterTheme: PickerLineDelimiterTheme = {
@@ -24,6 +24,6 @@ export const PickerThemeLight: PickerTheme = deepFreeze({
   lineDelimiter: pickerLineDelimiterTheme,
   item: pickerItemTheme,
   separator: {
-    color: 'green'
+    color: 'transparent'
   }
 });
