@@ -9,10 +9,14 @@ import type { InterpolateConfig } from './utils';
 export const interpolateWithRound = (
   value: number,
   interpolateConfig: InterpolateConfig,
-  precision: number | undefined = 4
+  precision: number | null
 ) => {
   'worklet';
-  return round(interpolate(value, ...interpolateConfig), precision);
+  const interpolatedValue = interpolate(value, ...interpolateConfig);
+  if (precision === null) {
+    return interpolatedValue;
+  }
+  return round(interpolatedValue, precision);
 };
 
 export const calculateProgress = (

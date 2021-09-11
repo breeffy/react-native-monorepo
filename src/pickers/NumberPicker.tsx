@@ -35,6 +35,13 @@ export type NumberPickerProps<T> = Omit<
   itemScales?: number[];
 
   /**
+   * Precision with which animated values `currentIndex`, `currentProgress`, `currentValue` are rounded.
+   * If `null` is provided no rounding is performed.
+   * @defaultValue `2`
+   */
+  precision: number | null;
+
+  /**
    * Returns ledge (offset) of item from previous one.
    * 
    * Initially item is positioned so that right edge of item 
@@ -60,10 +67,12 @@ export const NumberPicker = <T extends number = number>(
     items,
     mode = 'horizontal',
     pickerSize: _pickerSize,
+    separatorSize = 0,
     itemWidth,
     itemHeight,
     itemScales = [],
     scrollComponentKind = 'scrollview',
+    precision = 2,
     renderItem: _renderItem,
     getItemOffset,
     initialIndex = 0,
@@ -95,7 +104,8 @@ export const NumberPicker = <T extends number = number>(
       /** Calculate value based on index value */
       const currentValue = interpolateWithRound(
         currentIndex.value,
-        valueInterpolateConfig
+        valueInterpolateConfig,
+        precision
       );
 
       return [currentIndex.value, currentValue] as const;
@@ -109,7 +119,7 @@ export const NumberPicker = <T extends number = number>(
         _currentValue.value = array[1];
       }
     },
-    []
+    [precision]
   );
 
   // const valueInterpolateConfig = useMemoOne(() => {
@@ -186,6 +196,7 @@ export const NumberPicker = <T extends number = number>(
       {...props}
       mode={mode}
       pickerSize={pickerSize}
+      separatorSize={separatorSize}
       itemWidth={itemWidth}
       itemHeight={itemHeight}
       currentIndex={currentIndex}

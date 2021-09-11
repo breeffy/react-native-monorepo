@@ -24,7 +24,6 @@ export const PickerThemeLight: PickerTheme = deepFreeze({
   lineDelimiter: pickerLineDelimiterTheme,
   item: pickerItemTheme,
   separator: {
-    size: 30,
     color: 'green'
   }
 });

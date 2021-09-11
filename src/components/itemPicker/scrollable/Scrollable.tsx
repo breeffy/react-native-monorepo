@@ -47,9 +47,11 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     performance,
     scrollModeDeceleration,
     scrollComponentKind,
+    precision,
     pickerWidth,
     pickerHeight,
     pickerSize,
+    separatorSize,
     itemWidth,
     itemHeight,
     itemSize,
@@ -106,10 +108,14 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
 
   useAnimatedReaction(
     () => {
-      // console.log(`offset: ${offset.value}`);
-      const index = interpolateWithRound(offset.value, indexInterpolateConfig);
+      const index = interpolateWithRound(
+        offset.value,
+        indexInterpolateConfig,
+        precision
+      );
       const progress = getValueProgress(index, indexInterpolateConfig);
       const state = scrollState.value;
+      // console.log(`offset: ${offset.value}, index: ${index}`);
       return [index, progress, state] as const;
     },
     (array) => {
@@ -117,7 +123,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       currentProgress.value = array[1];
       currentScrollState.value = array[2];
     },
-    []
+    [precision]
   );
 
   useImperativeHandle(ref, () => scrollRef);
@@ -149,8 +155,8 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
             zIndex: -1 * props.itemIndex,
             // backgroundColor: 'blue',
             justifyContent: 'center',
-            alignItems: 'center'
-            // backgroundColor: 'red',
+            alignItems: 'center',
+            backgroundColor: 'orange'
             // borderWidth: 2,
             // borderColor: 'green'
           }}
@@ -210,11 +216,10 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
   }, [mode, initialIndex, itemSize, scrollComponentKind]);
 
   const SeparatorComponent = useCallbackOne(() => {
-    const separatorSize = theme.separator.size;
     const separatorColor = theme.separator.color;
 
     /** Do not render separators in this case */
-    if (separatorSize <= 0) return undefined;
+    if (separatorSize <= 0) return null;
 
     const separatorStyle: ViewStyle =
       mode === 'horizontal'
@@ -224,7 +229,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     return (
       <View style={[separatorStyle, { backgroundColor: separatorColor }]} />
     );
-  }, [mode, theme.separator]);
+  }, [mode, separatorSize, theme.separator]);
 
   const commonProps = useMemoOne<ScrollableCommon<T>>(() => {
     return {

@@ -124,7 +124,8 @@ export const getCellSize = (
 
 export const getScrollableIndexInterpolateConfig = (
   values: number[],
-  cellSize: number
+  itemSize: number,
+  separatorSize: number
 ): InterpolateConfig => {
   const start = 0;
   const end = values.length;
@@ -134,9 +135,13 @@ export const getScrollableIndexInterpolateConfig = (
   const type = Extrapolate.CLAMP;
 
   for (let i = start; i < end; ++i) {
-    input.push(i * cellSize);
+    input.push(i * (itemSize + separatorSize));
     output.push(values[i]);
   }
+
+  // console.log(
+  //   `interpolateIndexConfig: ${JSON.stringify([input, output, type])}`
+  // );
 
   if (input.length === output.length) {
     if (isInterpolateNumbers(input) && isInterpolateNumbers(output)) {

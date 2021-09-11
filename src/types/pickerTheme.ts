@@ -22,10 +22,6 @@ export interface PickerTextTheme {
 
 export interface PickerSeparatorTheme {
   /**
-   * Size of separator between items
-   */
-  size: number;
-  /**
    * Color of separator between items
    */
   color: string;

@@ -78,6 +78,13 @@ export interface ItemPickerProps<
   scrollComponentKind?: U;
 
   /**
+   * Precision with which animated values `currentIndex`, `currentProgress` are rounded.
+   * If `null` is provided no rounding is performed.
+   * @defaultValue `2`
+   */
+  precision: number | null;
+
+  /**
    * Properties to customize performance characteristics
    */
   performance?: ItemPickerPerformance<U>;
@@ -112,6 +119,14 @@ export interface ItemPickerProps<
   pickerSize?: number;
 
   /**
+   * Size of the separator (gap) between items along the main dimension.
+   * For **horizontal** mode it is additional width between items.
+   * For **vertical** mode it is additional height between items.
+   * @defaultValue `0`
+   */
+  separatorSize?: number;
+
+  /**
    * Theme object to customize picker appearance
    */
   theme?: PickerTheme;
@@ -131,8 +146,10 @@ const ItemPickerComponent = <T,>(
     scrollMode = 'anyOffset',
     scrollModeDeceleration = 'normal',
     scrollComponentKind = 'flatlist',
+    precision = 2,
     performance: _performance,
     pickerSize: _pickerSize,
+    separatorSize = 0,
     // itemWidth = PickerConstants.ValueWidth,
     itemWidth,
     // itemHeight = PickerConstants.ValueHeight,
@@ -182,8 +199,12 @@ const ItemPickerComponent = <T,>(
 
   const indexInterpolateConfig = useMemoOne(() => {
     const indexes = [...items.keys()];
-    return getScrollableIndexInterpolateConfig(indexes, itemSize);
-  }, [items, itemSize]);
+    return getScrollableIndexInterpolateConfig(
+      indexes,
+      itemSize,
+      separatorSize
+    );
+  }, [items, itemSize, separatorSize]);
 
   const currentIndex = useSharedValue(initialIndex);
 
@@ -232,6 +253,7 @@ const ItemPickerComponent = <T,>(
         pickerWidth={pickerWidth}
         pickerHeight={pickerHeight}
         pickerSize={pickerSize}
+        separatorSize={separatorSize}
         itemWidth={itemWidth}
         itemHeight={itemHeight}
         itemSize={itemSize}
@@ -239,6 +261,7 @@ const ItemPickerComponent = <T,>(
         scrollMode={scrollMode}
         scrollModeDeceleration={scrollModeDeceleration}
         scrollComponentKind={scrollComponentKind}
+        precision={precision}
         performance={performance}
         indexInterpolateConfig={indexInterpolateConfig}
         currentIndex={currentIndex}

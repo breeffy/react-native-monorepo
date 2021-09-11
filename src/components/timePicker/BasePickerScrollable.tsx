@@ -129,8 +129,8 @@ export const BasePickerScrollable = forwardRef<any, BasePickerScrollableProps>(
     useAnimatedReaction(
       () => {
         return [
-          interpolateWithRound(offset.value, interpolateConfigs.value),
-          interpolateWithRound(offset.value, interpolateConfigs.index)
+          interpolateWithRound(offset.value, interpolateConfigs.value, null),
+          interpolateWithRound(offset.value, interpolateConfigs.index, null)
         ];
       },
       (array) => {
