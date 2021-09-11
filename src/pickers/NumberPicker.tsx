@@ -1,4 +1,9 @@
 import React from 'react';
+import Animated, {
+  Extrapolate,
+  useAnimatedReaction,
+  useSharedValue
+} from 'react-native-reanimated';
 import {
   ItemPicker,
   ItemPickerProps,
@@ -8,12 +13,9 @@ import { useItemSize } from '../hooks/useItemSize';
 import { useCallbackOne, useMemoOne } from 'use-memo-one';
 import { Accumulator, cardReducer } from './utils';
 import { usePickerLayout } from '../hooks/usePickerLayout';
+import { interpolateWithRound } from '../worklets';
+import type { InterpolateConfig } from '../utils';
 import type { PickerItemProps } from '../components/itemPicker/types';
-import Animated, {
-  useAnimatedReaction,
-  useSharedValue
-} from 'react-native-reanimated';
-import { getPickerInterpolateConfig } from '../utils';
 
 export interface CardItemProps<T> extends PickerItemProps<T> {
   translates: number[];
@@ -65,16 +67,50 @@ export const NumberPicker = <T extends number = number>(
     renderItem: _renderItem,
     getItemOffset,
     initialIndex = 0,
-    currentIndex: _currentIndex
+    currentIndex: _currentIndex,
+    currentProgress: _currentProgress,
+    currentValue: _currentValue,
+    currentScrollState: _currentScrollState
   } = props;
 
-  const currentIndex = useSharedValue(initialIndex);
+  const currentIndex = useSharedValue<number>(initialIndex);
 
-  const initialValue = useMemoOne(() => {
-    return items[initialIndex];
-  }, [items, initialIndex]);
+  // const initialValue = useMemoOne(() => {
+  //   return items[initialIndex];
+  // }, [items, initialIndex]);
 
-  const currentValue = useSharedValue(initialValue);
+  const valueInterpolateConfig = useMemoOne(() => {
+    const indexes = [...items.keys()];
+    return ([
+      indexes,
+      items,
+      Extrapolate.CLAMP
+    ] as unknown) as InterpolateConfig;
+  }, [items]);
+
+  useAnimatedReaction(
+    () => {
+      // console.log(`offset: ${offset.value}`);
+
+      /** Calculate value based on index value */
+      const currentValue = interpolateWithRound(
+        currentIndex.value,
+        valueInterpolateConfig
+      );
+
+      return [currentIndex.value, currentValue] as const;
+    },
+    (array) => {
+      if (_currentIndex !== undefined) {
+        _currentIndex.value = array[0];
+      }
+
+      if (_currentValue !== undefined) {
+        _currentValue.value = array[1];
+      }
+    },
+    []
+  );
 
   // const valueInterpolateConfig = useMemoOne(() => {
   //   return getPickerInterpolateConfig(values, cellSize);
