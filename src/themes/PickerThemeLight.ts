@@ -7,7 +7,7 @@ import type {
 
 const pickerItemTheme: PickerItemTheme = {
   textFont: 'Gilroy-Medium',
-  textSize: 28,
+  textSize: 32,
   textColor: 'rgba(68, 82, 95, 0.9)',
   textBackgroundColor: 'transparent'
 };
