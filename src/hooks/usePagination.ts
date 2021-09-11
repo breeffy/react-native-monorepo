@@ -3,24 +3,37 @@ import type { ItemPickerProps } from '../pickers/ItemPicker';
 
 interface Props<T = any> {
   scrollMode: ItemPickerProps<T>['scrollMode'];
+  itemsLength: number;
   itemSize: number;
+  separatorSize: number;
 }
 
-export const usePagination = ({ scrollMode, itemSize }: Props) => {
+export const usePagination = ({
+  scrollMode,
+  itemsLength,
+  itemSize,
+  separatorSize
+}: Props) => {
   const pagination = useMemoOne(() => {
-    if (scrollMode === 'oneValue') {
+    const intervalSize = itemSize + separatorSize;
+    const offsets = Array.from(
+      { length: itemsLength },
+      (_, i) => i * intervalSize
+    );
+
+    if (scrollMode === 'oneItem') {
       return {
         disableIntervalMomentum: true,
-        snapToInterval: itemSize
+        snapToOffsets: offsets
       };
-    } else if (scrollMode === 'multipleValues') {
+    } else if (scrollMode === 'multipleItems') {
       return {
         disableIntervalMomentum: false,
-        snapToInterval: itemSize
+        snapToOffsets: offsets
       };
     } else {
       return {};
     }
-  }, [scrollMode, itemSize]);
+  }, [scrollMode, itemSize, separatorSize]);
   return pagination;
 };

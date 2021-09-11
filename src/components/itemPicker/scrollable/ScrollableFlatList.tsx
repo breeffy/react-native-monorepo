@@ -27,7 +27,7 @@ const ScrollableFlatListComponent = <T,>(
     windowSize,
     horizontal,
     disableIntervalMomentum,
-    snapToInterval,
+    snapToOffsets,
     showsHorizontalScrollIndicator,
     scrollEventThrottle,
     decelerationRate,
@@ -55,7 +55,7 @@ const ScrollableFlatListComponent = <T,>(
       ref={ref}
       horizontal={horizontal}
       disableIntervalMomentum={disableIntervalMomentum}
-      snapToInterval={snapToInterval}
+      snapToOffsets={snapToOffsets}
       showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
       decelerationRate={decelerationRate}
       scrollEventThrottle={scrollEventThrottle}

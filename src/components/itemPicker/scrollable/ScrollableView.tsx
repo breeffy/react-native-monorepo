@@ -14,7 +14,7 @@ const ScrollableViewComponent = <T,>(
     items,
     horizontal,
     disableIntervalMomentum,
-    snapToInterval,
+    snapToOffsets,
     showsHorizontalScrollIndicator,
     scrollEventThrottle,
     decelerationRate,
@@ -54,7 +54,7 @@ const ScrollableViewComponent = <T,>(
       ref={ref}
       horizontal={horizontal}
       disableIntervalMomentum={disableIntervalMomentum}
-      snapToInterval={snapToInterval}
+      snapToOffsets={snapToOffsets}
       showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
       decelerationRate={decelerationRate}
       scrollEventThrottle={scrollEventThrottle}

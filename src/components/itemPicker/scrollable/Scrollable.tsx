@@ -66,18 +66,24 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
   }: Required<ScrollableProps<T, U>>,
   ref: any
 ) => {
-  const pagination = usePagination({ scrollMode, itemSize });
+  const pagination = usePagination({
+    scrollMode,
+    itemsLength,
+    itemSize,
+    separatorSize
+  });
   console.log(
     `pagination: ${JSON.stringify(
       pagination
-    )}, scrollMode: ${scrollMode}, itemSize: ${itemSize}`
+    )}, scrollMode: ${scrollMode}, itemSize: ${itemSize}, separatorSize: ${separatorSize}`
   );
   const containerLayout = useMemoOne(() => {
     return {
       width: pickerWidth,
-      height: pickerHeight
+      height: pickerHeight,
+      backgroundColor: theme.sheet.backgroundColor
     };
-  }, [pickerWidth, pickerHeight]);
+  }, [pickerWidth, pickerHeight, theme.sheet]);
 
   console.log(
     `mode: ${mode}, containerWidth: ${pickerWidth}, containerHeight: ${pickerHeight}, itemWidth: ${itemWidth}, itemHeight: ${itemHeight}`
@@ -115,7 +121,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       );
       const progress = getValueProgress(index, indexInterpolateConfig);
       const state = scrollState.value;
-      // console.log(`offset: ${offset.value}, index: ${index}`);
+      console.log(`offset: ${offset.value}, index: ${index}`);
       return [index, progress, state] as const;
     },
     (array) => {
@@ -155,8 +161,8 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
             zIndex: -1 * props.itemIndex,
             // backgroundColor: 'blue',
             justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'orange'
+            alignItems: 'center'
+            // backgroundColor: 'orange'
             // borderWidth: 2,
             // borderColor: 'green'
           }}
@@ -235,7 +241,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     return {
       items: items,
       disableIntervalMomentum: pagination.disableIntervalMomentum,
-      snapToInterval: pagination.snapToInterval,
+      snapToOffsets: pagination.snapToOffsets,
       scrollEventThrottle: performance?.scrollEventThrottle,
       horizontal: horizontal,
       showsHorizontalScrollIndicator: false,

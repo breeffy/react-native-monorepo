@@ -22,7 +22,7 @@ type CommonProps<T> = Intersection<ScrollViewProps, FlatListProps<T>>;
 export interface ScrollableCommon<T> {
   items: T[];
   disableIntervalMomentum: CommonProps<T>['disableIntervalMomentum'];
-  snapToInterval: CommonProps<T>['snapToInterval'];
+  snapToOffsets: CommonProps<T>['snapToOffsets'];
   scrollEventThrottle: CommonProps<T>['scrollEventThrottle'];
   horizontal: boolean;
   showsHorizontalScrollIndicator: boolean;
