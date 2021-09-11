@@ -63,7 +63,7 @@ export interface ItemPickerProps<
    * How much values can be scrolled over.
    * @defaultValue `oneValue`
    */
-  scrollMode?: 'oneValue' | 'multipleValues' | 'anyOffset';
+  scrollMode?: 'oneItem' | 'multipleItems' | 'anyOffset';
 
   /**
    * How quickly scrolling decelerates after the user lifts their finger.
