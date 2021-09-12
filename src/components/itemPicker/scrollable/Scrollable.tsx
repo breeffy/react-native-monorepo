@@ -205,7 +205,8 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
 
   const contentOffset = useMemoOne(() => {
     if (scrollComponentKind === 'scrollview') {
-      const offset = initialIndex * itemSize;
+      const intervalSize = itemSize + separatorSize;
+      const offset = initialIndex * intervalSize;
       if (mode === 'horizontal') {
         return {
           x: offset,
@@ -219,7 +220,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       }
     }
     return;
-  }, [mode, initialIndex, itemSize, scrollComponentKind]);
+  }, [mode, initialIndex, itemSize, separatorSize, scrollComponentKind]);
 
   const SeparatorComponent = useCallbackOne(() => {
     const separatorColor = theme.separator.color;
