@@ -9,6 +9,10 @@ export interface Accumulator {
   translates: number[];
 }
 
+export const itemsDistance = (itemSize: number, separatorSize: number) => {
+  return itemSize + separatorSize;
+};
+
 export const cardReducer = (
   acc: Accumulator,
   itemInfo: ItemInfo,
