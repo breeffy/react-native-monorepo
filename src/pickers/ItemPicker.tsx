@@ -36,6 +36,7 @@ export type ItemPickerPerformance<
       | 'initialNumToRender'
       | 'maxToRenderPerBatch'
       | 'windowSize'
+      | 'updateCellsBatchingPeriod'
     >;
 
 export interface ItemPickerProps<
@@ -186,16 +187,19 @@ const ItemPickerComponent = <T,>(
 
   const performance = useMemoOne(() => {
     if (_performance === undefined) {
-      const initialNumToRender = Math.floor(pickerSize / itemSize) + 2;
+      // const intervalSize = itemsDistance(itemSize, separatorSize);
+      // const maxVisibleItems = Math.floor(pickerSize / intervalSize) + 1;
+
       return {
-        initialNumToRender: initialNumToRender,
-        maxToRenderPerBatch: 10,
-        windowSize: 21,
+        initialNumToRender: 0,
+        maxToRenderPerBatch: 100,
+        windowSize: 3,
+        updateCellsBatchingPeriod: 5,
         scrollEventThrottle: 1
       } as ItemPickerPerformance<'flatlist'>;
     }
     return _performance;
-  }, [_performance, pickerSize, itemSize]);
+  }, [_performance, pickerSize, itemSize, separatorSize, initialIndex]);
 
   const indexInterpolateConfig = useMemoOne(() => {
     const indexes = [...items.keys()];
