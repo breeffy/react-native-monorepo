@@ -1,4 +1,5 @@
 import { useMemoOne } from 'use-memo-one';
+import { itemsDistance } from '../pickers/utils';
 import type { ItemPickerProps } from '../pickers/ItemPicker';
 
 interface Props<T = any> {
@@ -15,7 +16,7 @@ export const usePagination = ({
   separatorSize
 }: Props) => {
   const pagination = useMemoOne(() => {
-    const intervalSize = itemSize + separatorSize;
+    const intervalSize = itemsDistance(itemSize, separatorSize);
     const offsets = Array.from(
       { length: itemsLength },
       (_, i) => i * intervalSize
