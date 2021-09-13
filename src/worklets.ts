@@ -4,17 +4,51 @@ import type {
   CalendarEndMonthFromCommonEra,
   CalendarStartMonthFromCommonEra
 } from './types';
+import type { InterpolateConfig } from './utils';
+
+export const interpolateWithRound = (
+  value: number,
+  interpolateConfig: InterpolateConfig,
+  precision: number | null
+) => {
+  'worklet';
+  const interpolatedValue = interpolate(value, ...interpolateConfig);
+  if (precision === null) {
+    return interpolatedValue;
+  }
+  return round(interpolatedValue, precision);
+};
 
 export const calculateProgress = (
-  value: Animated.SharedValue<number>,
+  value: number,
   inputRange: [number, number],
   precision: number | undefined = 4
 ): number => {
   'worklet';
   return round(
-    interpolate(value.value, inputRange, [0, 100], Extrapolate.CLAMP),
+    interpolate(value, inputRange, [0, 100], Extrapolate.CLAMP),
     precision
   );
+};
+
+export const getValueProgress = (
+  value: number,
+  interpolateConfig: InterpolateConfig
+) => {
+  'worklet';
+  const input = interpolateConfig[0];
+  const progressInput: [number, number] = [input[0], input[input.length - 1]];
+  return calculateProgress(value, progressInput);
+};
+
+export const calculatePickerScrollProgress = (
+  value: number,
+  interpolateConfig: InterpolateConfig
+) => {
+  'worklet';
+  const input = interpolateConfig[0];
+  const progressInput: [number, number] = [input[0], input[input.length - 1]];
+  return calculateProgress(value, progressInput);
 };
 
 export const calculateScrollProgress = (
@@ -22,5 +56,5 @@ export const calculateScrollProgress = (
   inputRange: [CalendarStartMonthFromCommonEra, CalendarEndMonthFromCommonEra]
 ) => {
   'worklet';
-  return calculateProgress(value, [inputRange[0], inputRange[1] - 1]);
+  return calculateProgress(value.value, [inputRange[0], inputRange[1] - 1]);
 };

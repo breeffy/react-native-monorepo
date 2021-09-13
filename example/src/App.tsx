@@ -3,12 +3,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppearanceProvider } from './components/appearanceProvider';
 import { Showcase } from './screens/showcase';
-import { ModalBottomSheet, ScrollMode, SelectionMode } from './screens/basic';
+import {
+  ModalBottomSheet,
+  ScrollMode,
+  SelectionMode,
+  TimePicker
+} from './screens/basic';
+import { CardPickerExamples } from './screens/cardPickers';
 import { AppProvider } from './contexts/internal';
 import { Header } from './screens/showcase/Header';
 import type { TextStyle, ViewStyle } from 'react-native';
 import type { AppContextState } from './contexts/internal';
 import type { AppStackParamsList } from './types';
+import { DayAndTimePicker } from './screens/pickers/DayAndTimePicker';
 
 const Stack = createStackNavigator<AppStackParamsList>();
 
@@ -67,6 +74,27 @@ export const App = () => {
               options={{
                 header: Header
               }}
+            />
+            <Stack.Screen
+              name="HourPicker"
+              options={{
+                title: 'Hour Picker'
+              }}
+              getComponent={() => () => <DayAndTimePicker kind={'Hours'} />}
+            />
+            <Stack.Screen
+              name="CustomPicker"
+              options={{
+                title: 'Custom Pickers'
+              }}
+              getComponent={() => () => <TimePicker />}
+            />
+            <Stack.Screen
+              name="CardPicker"
+              options={{
+                title: 'Card Picker'
+              }}
+              getComponent={() => () => <CardPickerExamples />}
             />
             <Stack.Screen
               name="SingleDaySelectionMode"
