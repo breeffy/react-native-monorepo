@@ -8,11 +8,20 @@ import { useAppContext } from '../../hooks/useAppContext';
 
 const data = [
   {
-    title: 'Picker',
+    title: 'Pickers',
     data: [
       {
-        name: 'Time Picker',
-        slug: 'TimePicker'
+        name: 'Hour Picker',
+        slug: 'HourPicker'
+      }
+    ]
+  },
+  {
+    title: 'Custom Picker',
+    data: [
+      {
+        name: 'Value Picker',
+        slug: 'CustomPicker'
       },
       {
         name: 'Card Picker',

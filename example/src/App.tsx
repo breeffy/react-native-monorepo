@@ -15,6 +15,7 @@ import { Header } from './screens/showcase/Header';
 import type { TextStyle, ViewStyle } from 'react-native';
 import type { AppContextState } from './contexts/internal';
 import type { AppStackParamsList } from './types';
+import { DayAndTimePicker } from './screens/pickers/DayAndTimePicker';
 
 const Stack = createStackNavigator<AppStackParamsList>();
 
@@ -75,9 +76,16 @@ export const App = () => {
               }}
             />
             <Stack.Screen
-              name="TimePicker"
+              name="HourPicker"
               options={{
-                title: 'Time Picker'
+                title: 'Hour Picker'
+              }}
+              getComponent={() => () => <DayAndTimePicker kind={'Hours'} />}
+            />
+            <Stack.Screen
+              name="CustomPicker"
+              options={{
+                title: 'Custom Pickers'
               }}
               getComponent={() => () => <TimePicker />}
             />

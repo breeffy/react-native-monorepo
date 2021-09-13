@@ -32,8 +32,8 @@ export type { CalendarTheme } from './types/theme';
  * Import pickers
  */
 export * from './pickers';
-export { PickerItemComponent } from './components/itemPicker/PickerItemComponent';
-export type { PickerItemComponentProps } from './components/itemPicker/PickerItemComponent';
+export { Item } from './components/itemPicker/PickerItemComponent';
+export type { ItemProps } from './components/itemPicker/PickerItemComponent';
 
 export {
   ItemPicker as Slider,

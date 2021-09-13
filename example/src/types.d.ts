@@ -1,5 +1,6 @@
 export type AppStackParamsList = {
   Showcase: undefined;
+  ['CustomPicker']: undefined;
   // basic
   ['SingleDaySelectionMode']: undefined;
   ['MultipleDaysSelectionMode']: undefined;

@@ -1,52 +1,15 @@
 import React, { forwardRef, useMemo, useRef, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatListProps,
-  PixelRatio,
-  NativeSyntheticEvent
-} from 'react-native';
+import { View, StyleSheet, FlatListProps } from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedReaction,
-  useDerivedValue,
   useSharedValue
 } from 'react-native-reanimated';
 import { TapGestureHandler } from 'react-native-gesture-handler';
-import { DateTime } from 'luxon';
-import { useCallbackOne, useMemoOne } from 'use-memo-one';
-import { CalendarProvider } from '../../contexts/external';
-import { CalendarInternalProvider } from '../../contexts/internal';
-import { CalendarAnimatedProvider } from '../../contexts/animated';
-import { CalendarDaysOfWeekHeader } from '..';
-import { calendarYearAndMonthToMonths } from '../../helpers';
+import { useMemoOne } from 'use-memo-one';
 import { BasePickerScrollable } from './BasePickerScrollable';
-import {
-  calculatePickerScrollProgress,
-  calculateScrollProgress
-} from '../../worklets';
-import { CalendarHeaderMonth } from '../header/CalendarHeaderMonth';
-import { useCalendarInterval, useSelectedDates } from '../../hooks';
-import { CalendarHeaderYear } from '../header/CalendarHeaderYear';
-import { CalendarHeaderDecorator } from '../header/CalendarHeaderDecorator';
-import { CalendarDayKind } from '../../CalendarDay';
+import { calculatePickerScrollProgress } from '../../worklets';
 import { PickerAnimatedProvider } from '../../contexts/pickerAnimated';
-import type { PickerAnimatedContextInterface } from '../../contexts/pickerAnimated';
-import type {
-  CalendarCurrentAnimatedMonthFromCommonEra,
-  CalendarStartMonthFromCommonEra,
-  CalendarEndMonthFromCommonEra,
-  CalendarDate,
-  CalendarKind,
-  CalendarMethods,
-  CalendarYearAndMonth,
-  ViewStyleProp,
-  CalendarSelectionMode,
-  CalendarTheme,
-  CalendarPerformanceProps
-} from '../../types';
-import { CalendarThemeLight } from '../../themes';
-import { CalendarThemeProvider } from '../../contexts/theme';
 import {
   PickerConstants,
   ScrollState,
@@ -55,19 +18,23 @@ import {
 } from '../../constants';
 import { PickerThemeProvider } from '../../contexts/pickerTheme';
 import { PickerThemeLight } from '../../themes';
-import type { PickerTheme } from '../../types/pickerTheme';
-import { PickerKind } from './PickerKind';
 import {
   PickerInternalContextInterface,
   PickerInternalProvider
 } from '../../contexts/pickerInternal';
 import {
   calculateCellLayout,
-  getCellSize,
   getPickerInterpolateConfig,
   range
 } from '../../utils';
+import type { PickerTheme } from '../../types/pickerTheme';
 import type { PickerItemProps } from './types';
+import type { PickerAnimatedContextInterface } from '../../contexts/pickerAnimated';
+import type {
+  CalendarMethods,
+  ViewStyleProp,
+  CalendarPerformanceProps
+} from '../../types';
 
 // @ts-expect-error
 const AnimatedTapGestureHandler: typeof TapGestureHandler = Animated.createAnimatedComponent(
