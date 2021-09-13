@@ -14,6 +14,7 @@ export interface ScrollableFlatListProps<T> extends ScrollableCommon<T> {
   initialNumToRender: FlatListProps<T>['initialNumToRender'];
   maxToRenderPerBatch: FlatListProps<T>['maxToRenderPerBatch'];
   windowSize: FlatListProps<T>['windowSize'];
+  updateCellsBatchingPeriod: FlatListProps<T>['updateCellsBatchingPeriod'];
   keyExtractor: FlatListProps<T>['keyExtractor'];
   getItemLayout: FlatListProps<T>['getItemLayout'];
 }
@@ -25,6 +26,7 @@ const ScrollableFlatListComponent = <T,>(
     initialNumToRender,
     maxToRenderPerBatch,
     windowSize,
+    updateCellsBatchingPeriod,
     horizontal,
     disableIntervalMomentum,
     snapToOffsets,
@@ -65,10 +67,10 @@ const ScrollableFlatListComponent = <T,>(
       ListHeaderComponentStyle={headerComponentStyle}
       ListFooterComponentStyle={footerComponentStyle}
       data={items}
-      initialScrollIndex={initialScrollIndex}
       initialNumToRender={initialNumToRender}
       windowSize={windowSize}
       maxToRenderPerBatch={maxToRenderPerBatch}
+      updateCellsBatchingPeriod={updateCellsBatchingPeriod}
       contentOffset={contentOffset}
       renderItem={renderItem}
       keyExtractor={keyExtractor}

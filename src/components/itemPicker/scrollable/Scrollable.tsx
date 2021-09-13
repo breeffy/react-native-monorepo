@@ -22,6 +22,7 @@ import type {
   ItemPickerScrollComponentKind
 } from '../../../pickers/ItemPicker';
 import type { InterpolateConfig } from '../../../utils';
+import { itemsDistance } from '../../../pickers/utils';
 
 interface ScrollableFlatList<T> extends ScrollableFlatListProps<T> {
   kind: 'flatlist';
@@ -187,13 +188,14 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
 
   const getItemLayout = useCallbackOne(
     (_: T[] | null | undefined, index: number) => {
+      const intervalSize = itemsDistance(itemSize, separatorSize);
       return {
-        length: itemSize,
-        offset: itemSize * index,
+        length: intervalSize,
+        offset: intervalSize * index,
         index
       };
     },
-    [itemSize]
+    [itemSize, separatorSize]
   );
 
   const horizontal = useMemoOne(() => {
@@ -204,39 +206,37 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
   console.log(`paddingLayout: ${JSON.stringify(headerLayout)}`);
 
   const contentOffset = useMemoOne(() => {
-    if (scrollComponentKind === 'scrollview') {
-      const intervalSize = itemSize + separatorSize;
-      const offset = initialIndex * intervalSize;
-      if (mode === 'horizontal') {
-        return {
-          x: offset,
-          y: 0
-        };
-      } else {
-        return {
-          x: 0,
-          y: offset
-        };
-      }
+    const intervalSize = itemsDistance(itemSize, separatorSize);
+    const offset = initialIndex * intervalSize;
+    if (mode === 'horizontal') {
+      return {
+        x: offset,
+        y: 0
+      };
+    } else if (mode === 'vertical') {
+      return {
+        x: 0,
+        y: offset
+      };
     }
     return;
   }, [mode, initialIndex, itemSize, separatorSize, scrollComponentKind]);
 
-  const SeparatorComponent = useCallbackOne(() => {
+  const separatorStyle = useMemoOne(() => {
     const separatorColor = theme.separator.color;
-
-    /** Do not render separators in this case */
-    if (separatorSize <= 0) return null;
-
     const separatorStyle: ViewStyle =
       mode === 'horizontal'
         ? { width: separatorSize, height: itemHeight }
         : { width: itemWidth, height: separatorSize };
+    return [separatorStyle, { backgroundColor: separatorColor }];
+  }, [theme.separator.color, separatorSize, mode, itemHeight, itemWidth]);
 
-    return (
-      <View style={[separatorStyle, { backgroundColor: separatorColor }]} />
-    );
-  }, [mode, separatorSize, theme.separator]);
+  const SeparatorComponent = useCallbackOne(() => {
+    /** Do not render separators in this case */
+    if (separatorSize <= 0) return null;
+
+    return <View style={separatorStyle} />;
+  }, [separatorSize, separatorStyle]);
 
   const commonProps = useMemoOne<ScrollableCommon<T>>(() => {
     return {
@@ -276,6 +276,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
         initialNumToRender: perf.initialNumToRender,
         maxToRenderPerBatch: perf.maxToRenderPerBatch,
         windowSize: perf.windowSize,
+        updateCellsBatchingPeriod: perf.updateCellsBatchingPeriod,
         keyExtractor: keyExtractor,
         getItemLayout: getItemLayout
       };
