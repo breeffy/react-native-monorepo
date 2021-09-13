@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { usePickerTheme } from '../../hooks';
 import { useMemoOne } from 'use-memo-one';
@@ -15,7 +15,7 @@ import { toRad } from 'react-native-redash';
 import type { PickerItemProps } from './types';
 import type { TextStyle } from 'react-native';
 
-export type PickerItemComponentProps<T> = PickerItemProps<T> & {
+export type ItemProps<T> = PickerItemProps<T> & {
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 };
@@ -33,7 +33,7 @@ export type PickerItemComponentProps<T> = PickerItemProps<T> & {
 //   textStyle?: StyleProp<TextStyle>;
 // };
 
-export const PickerItemComponent = <T extends string | number>({
+const ItemComponent = <T extends string | number>({
   item,
   itemIndex,
   itemWidth,
@@ -47,8 +47,8 @@ export const PickerItemComponent = <T extends string | number>({
   currentProgress,
   containerStyle: _containerStyle,
   textStyle: _textStyle
-}: PickerItemComponentProps<T>) => {
-  console.log(`BasePickerValue: value [${item}], index [${itemIndex}]`);
+}: ItemProps<T>) => {
+  console.log(`Picker: value [${item}], index [${itemIndex}]`);
   const theme = usePickerTheme();
 
   // const { currentValue, currentIndex } = usePickerAnimated();
@@ -109,21 +109,10 @@ export const PickerItemComponent = <T extends string | number>({
       Extrapolate.CLAMP
     );
 
-    return {};
-
-    // return {
-    //   opacity: opacity,
-    //   margin: 20,
-    //   transform: [
-    //     {
-    //       scale
-    //     },
-    //     { translateY },
-    //     {
-    //       rotate: `${rotate}rad`
-    //     }
-    //   ]
-    // };
+    return {
+      opacity: opacity,
+      transform: [{ scale }]
+    };
   }, []);
 
   const textStyle = useMemoOne<(TextStyle | null | undefined)[]>(() => {
@@ -154,6 +143,8 @@ export const PickerItemComponent = <T extends string | number>({
 
   return <Animated.Text style={textStyle}>{String(item)}</Animated.Text>;
 };
+
+export const Item = memo(ItemComponent);
 
 const styles = StyleSheet.create({
   container: {
