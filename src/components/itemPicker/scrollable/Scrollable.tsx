@@ -272,7 +272,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       const perf = performance as ItemPickerPerformance<'flatlist'>;
       const flatlistProps: ScrollableFlatListProps<T> = {
         ...commonProps,
-        initialScrollIndex: initialIndex,
         initialNumToRender: perf.initialNumToRender,
         maxToRenderPerBatch: perf.maxToRenderPerBatch,
         windowSize: perf.windowSize,
