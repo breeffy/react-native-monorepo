@@ -1,23 +1,10 @@
-import type {
-  FlatListProps,
-  ScrollViewProps,
-  StyleProp,
-  ViewStyle
-} from 'react-native';
+import type { FlatListProps, ScrollViewProps, ViewStyle } from 'react-native';
 import type { useAnimatedScrollHandler } from 'react-native-reanimated';
 import type { Intersection } from 'utility-types';
 import type { AnimatedScrollView } from './ScrollableView';
 import type { AnimatedFlatList } from './ScrollableFlatList';
 
 type CommonProps<T> = Intersection<ScrollViewProps, FlatListProps<T>>;
-
-// performanceProps: Pick<
-//   FlatListProps<any>,
-//   | 'initialNumToRender'
-//   | 'windowSize'
-//   | 'maxToRenderPerBatch'
-//   | 'scrollEventThrottle'
-// >;
 
 export interface ScrollableCommon<T> {
   items: T[];
@@ -30,12 +17,10 @@ export interface ScrollableCommon<T> {
   contentOffset?: CommonProps<T>['contentOffset'];
   headerComponentStyle?: ViewStyle;
   footerComponentStyle?: ViewStyle;
-  itemSeparator: () => JSX.Element | undefined;
-  // renderItem: (props: PickerItemProps) => JSX.Element;
+  itemSeparator?: () => JSX.Element;
   renderItem: (item: T, index: number) => JSX.Element;
   onScroll: ReturnType<typeof useAnimatedScrollHandler>;
 }
 
-// export type ScrollableRef = React.Ref<ScrollView & FlatList<any>>;
 export type ScrollableViewRef = React.Ref<typeof AnimatedScrollView>;
 export type ScrollableFlatListRef = React.Ref<typeof AnimatedFlatList>;

@@ -232,9 +232,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
   }, [theme.separator.color, separatorSize, mode, itemHeight, itemWidth]);
 
   const SeparatorComponent = useCallbackOne(() => {
-    /** Do not render separators in this case */
-    if (separatorSize <= 0) return;
-
     return <View style={separatorStyle} />;
   }, [separatorSize, separatorStyle]);
 
@@ -250,7 +247,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       contentOffset: contentOffset,
       headerComponentStyle: headerLayout,
       footerComponentStyle: headerLayout,
-      itemSeparator: SeparatorComponent,
+      itemSeparator: separatorSize > 0 ? SeparatorComponent : undefined,
       renderItem: renderItem,
       onScroll: scrollHandler
     };
@@ -262,6 +259,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     scrollModeDeceleration,
     contentOffset,
     headerLayout,
+    separatorSize,
     renderItem,
     scrollHandler,
     SeparatorComponent
