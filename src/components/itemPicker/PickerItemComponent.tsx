@@ -4,13 +4,11 @@ import { usePickerTheme } from '../../hooks';
 import { useMemoOne } from 'use-memo-one';
 import { dayOfWeekWidth } from '../../constants';
 import { pickerItemThemeToTextStyle } from '../../helpers';
-import { usePickerInternal } from '../../hooks/usePickerInternal';
 import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle
 } from 'react-native-reanimated';
-import { usePickerAnimated } from '../../hooks/usePickerAnimated';
 import { toRad } from 'react-native-redash';
 import type { PickerItemProps } from './types';
 import type { TextStyle } from 'react-native';
