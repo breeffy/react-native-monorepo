@@ -19,25 +19,8 @@ export type TimeHourProps = {
   style?: StyleProp<TextStyle>;
 };
 
-export const TimeHour = ({
-  kind = CalendarDayKind.DEFAULT,
-  hour,
-  style
-}: TimeHourProps) => {
+export const TimeHour = ({ hour }: TimeHourProps) => {
   // console.log(`CalendarDay: kind: ${kind}, day: ${day}`);
-  const theme = useCalendarTheme();
-  const calendarDayTheme = useMemoOne(() => {
-    switch (kind) {
-      case CalendarDayKind.DEFAULT:
-        return theme.day.default;
-      case CalendarDayKind.DISABLED:
-        return theme.day.disabled;
-      case CalendarDayKind.ACTIVE:
-        return theme.day.active;
-      case CalendarDayKind.SELECTED:
-        return theme.day.selected;
-    }
-  }, [kind, theme]);
 
   // const textStyle = useMemoOne(() => {
   //   return [
