@@ -10,7 +10,7 @@ import { DateTime } from 'luxon';
 import { useCallbackOne, useMemoOne } from 'use-memo-one';
 import { CalendarProvider } from './contexts/external';
 import {
-  PickerInternalContextInterface,
+  CalendarInternalContextInterface,
   CalendarInternalProvider
 } from './contexts/internal';
 import { CalendarAnimatedProvider } from './contexts/animated';
@@ -267,7 +267,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
     //   [contentWrapperRef]
     // );
 
-    const internalContextVariables = useMemo<PickerInternalContextInterface>(
+    const internalContextVariables = useMemo<CalendarInternalContextInterface>(
       () => ({
         activeAnimatedMonth: calendarAnimatedCommonEraMonth,
         activeCalendarDay: activeCalendarDay,
