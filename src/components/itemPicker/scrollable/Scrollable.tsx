@@ -150,18 +150,17 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
         pickerSize: pickerSize
       };
 
+      const style: ViewStyle = {
+        width: props.itemWidth,
+        height: props.itemHeight,
+        zIndex: -1 * props.itemIndex,
+        justifyContent: 'center',
+        alignItems: 'center'
+      };
+
       const key = keyExtractor(item, index);
       return (
-        <View
-          key={key}
-          style={{
-            width: props.itemWidth,
-            height: props.itemHeight,
-            zIndex: -1 * props.itemIndex,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
+        <View key={key} style={style}>
           {_renderItem(props)}
         </View>
       );
