@@ -18,8 +18,6 @@ export type ItemProps<T> = PickerItemProps<T> & {
 const ItemComponent = <T extends string | number>({
   item,
   itemIndex,
-  itemWidth,
-  itemHeight,
   currentIndex,
   containerStyle: _containerStyle,
   textStyle: _textStyle
@@ -59,7 +57,7 @@ const ItemComponent = <T extends string | number>({
         textAlignVertical: 'center'
       }
     ];
-  }, [_textStyle, theme.item, itemWidth, itemHeight, animatedTextStyle]);
+  }, [_textStyle, theme.item, animatedTextStyle]);
 
   return <Animated.Text style={textStyle}>{String(item)}</Animated.Text>;
 };
