@@ -2,7 +2,6 @@ export { ItemPicker } from './components/itemPicker';
 export type { ItemPickerProps } from './components/itemPicker';
 
 export { Calendar, CalendarProps } from './Calendar';
-export { TimePicker } from './components/timePicker';
 export { NumberPicker, NumberPickerKind } from './pickers';
 export type { NumberPickerProps } from './pickers';
 export { CalendarThemeLight, CalendarThemeDark } from './themes';
