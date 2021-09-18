@@ -166,7 +166,7 @@ export const NumberPicker = <T extends number = number>(
     const info = itemScales.map((it) => {
       return {
         scale: it,
-        offset: getItemOffset(it, itemSize)
+        offset: getItemOffset?.(it, itemSize) ?? 0
       };
     });
 
