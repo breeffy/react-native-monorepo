@@ -6,6 +6,9 @@ on:
         description: 'patch, minor or major version'
         required: true
         default: 'patch'
+      prerelease:
+        description: 'beta, alpha or rc prerelease'
+        required: false
       draft:
         description: 'github release type: true or false'
         required: true
@@ -19,10 +22,28 @@ jobs:
       - name: Check version input
         uses: actions/github-script@v3.1.0
         with:
+          id: version-option
           result-encoding: string
           script: |
-            if (!['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
+            if ('${{ github.event.inputs.version }}' === '') {
+              return ''
+            } else if (['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
+              return '${{ github.event.inputs.version }}'
+            } else {
               core.setFailed('input version [${{ github.event.inputs.version }}] is not "patch", "minor" or "major"')
+            }
+      - name: Check prerelease input
+        id: prerelease-option
+        uses: actions/github-script@v3.1.0
+        with:
+          result-encoding: string
+          script: |
+            if ('${{ github.event.inputs.prerelease }}' === '') {
+              return ''
+            } else if (['beta', 'alpha', 'rc'].includes('${{ github.event.inputs.prerelease }}')) {
+              return '--preRelease=${{ github.event.inputs.prerelease }}'
+            } else {
+              core.setFailed('input version [${{ github.event.inputs.version }}] is not "beta", "alpha" or "rc"')
             }
       - name: Check draft input
         id: draft-option
@@ -59,7 +80,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile --non-interactive
       - name: Create release
-        run: yarn release -- ${{ github.event.inputs.version }} ${{steps.draft-option.outputs.result}} --ci
+        run: yarn release -- ${{ steps.version-option.outputs.result }} ${{ steps.prerelease-option.outputs.result }} ${{ steps.draft-option.outputs.result }} --ci
         env:
           GITHUB_TOKEN: ${{ secrets.BREEFFYBOT_TOKEN }}
       - name: Publish to NPM Registry
