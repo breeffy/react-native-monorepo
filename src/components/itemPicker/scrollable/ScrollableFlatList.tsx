@@ -10,7 +10,6 @@ export const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const Component = AnimatedFlatList;
 
 export interface ScrollableFlatListProps<T> extends ScrollableCommon<T> {
-  initialScrollIndex: FlatListProps<T>['initialNumToRender'];
   initialNumToRender: FlatListProps<T>['initialNumToRender'];
   maxToRenderPerBatch: FlatListProps<T>['maxToRenderPerBatch'];
   windowSize: FlatListProps<T>['windowSize'];
@@ -22,7 +21,6 @@ export interface ScrollableFlatListProps<T> extends ScrollableCommon<T> {
 const ScrollableFlatListComponent = <T,>(
   {
     items,
-    initialScrollIndex,
     initialNumToRender,
     maxToRenderPerBatch,
     windowSize,

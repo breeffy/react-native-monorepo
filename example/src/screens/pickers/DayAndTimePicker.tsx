@@ -40,19 +40,7 @@ export const DayAndTimePicker = ({ kind }: DayAndTimePickerProps) => {
 
   const renderItem = useCallbackOne<NumberPickerProps<number>['renderItem']>(
     (props) => {
-      // console.log(`renderItem: [${JSON.stringify(props)}]`);
-      return (
-        <Item
-          item={props.item}
-          itemIndex={props.itemIndex}
-          // itemSize={50}
-          //itemWidth={100}
-          // itemHeight={100}
-          // itemsLength={24}
-          //itemSize={100}
-          currentIndex={index}
-        />
-      );
+      return <Item {...props} />;
     },
     []
   );

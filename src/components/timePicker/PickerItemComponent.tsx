@@ -131,11 +131,11 @@ export const PickerItemComponent = ({
   const textStyle = useMemoOne(() => {
     // console.log(`textStyle: is called`);
     return [
-      textThemeToTextStyle(theme.value),
+      textThemeToTextStyle(theme.item),
       _textStyle,
       { backgroundColor: 'orange' }
     ];
-  }, [_textStyle, theme.value, cellWidth, cellHeight, animatedTextStyle]);
+  }, [_textStyle, theme.item, cellWidth, cellHeight, animatedTextStyle]);
 
   // const textStyle = useMemoOne(() => {
   //   return [

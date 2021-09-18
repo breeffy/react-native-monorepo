@@ -7,4 +7,4 @@ interface CarouselProps<T> {
   items: T[];
 }
 
-export const Carousel = <T,>({ kind }: CarouselProps<T>) => {};
+export const Carousel = <T,>({}: CarouselProps<T>) => {};

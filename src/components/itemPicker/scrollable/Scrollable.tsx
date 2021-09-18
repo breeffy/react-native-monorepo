@@ -73,11 +73,11 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     itemSize,
     separatorSize
   });
-  console.log(
-    `pagination: ${JSON.stringify(
-      pagination
-    )}, scrollMode: ${scrollMode}, itemSize: ${itemSize}, separatorSize: ${separatorSize}`
-  );
+  // console.log(
+  //   `pagination: ${JSON.stringify(
+  //     pagination
+  //   )}, scrollMode: ${scrollMode}, itemSize: ${itemSize}, separatorSize: ${separatorSize}`
+  // );
   const containerLayout = useMemoOne(() => {
     return {
       width: pickerWidth,
@@ -86,9 +86,9 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     };
   }, [pickerWidth, pickerHeight, theme.sheet]);
 
-  console.log(
-    `mode: ${mode}, containerWidth: ${pickerWidth}, containerHeight: ${pickerHeight}, itemWidth: ${itemWidth}, itemHeight: ${itemHeight}`
-  );
+  // console.log(
+  //   `mode: ${mode}, containerWidth: ${pickerWidth}, containerHeight: ${pickerHeight}, itemWidth: ${itemWidth}, itemHeight: ${itemHeight}`
+  // );
 
   const headerLayout = usePaddingLayout({
     mode,
@@ -122,7 +122,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       );
       const progress = getValueProgress(index, indexInterpolateConfig);
       const state = scrollState.value;
-      console.log(`offset: ${offset.value}, index: ${index}`);
       return [index, progress, state] as const;
     },
     (array) => {
@@ -137,7 +136,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
 
   const renderItem = useCallbackOne<(item: T, index: number) => JSX.Element>(
     (item, index) => {
-      // console.log(`item is ${JSON.stringify(item)}`);
       const props: PickerItemProps<T> = {
         item: item,
         itemIndex: index,
@@ -152,22 +150,17 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
         pickerSize: pickerSize
       };
 
+      const style: ViewStyle = {
+        width: props.itemWidth,
+        height: props.itemHeight,
+        zIndex: -1 * props.itemIndex,
+        justifyContent: 'center',
+        alignItems: 'center'
+      };
+
       const key = keyExtractor(item, index);
       return (
-        <View
-          key={key}
-          style={{
-            width: props.itemWidth,
-            height: props.itemHeight,
-            zIndex: -1 * props.itemIndex,
-            // backgroundColor: 'blue',
-            justifyContent: 'center',
-            alignItems: 'center'
-            // backgroundColor: 'orange'
-            // borderWidth: 2,
-            // borderColor: 'green'
-          }}
-        >
+        <View key={key} style={style}>
           {_renderItem(props)}
         </View>
       );
@@ -202,8 +195,8 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     return mode === 'horizontal';
   }, [mode]);
 
-  console.log(`containerWidth: ${pickerWidth}, itemWidth: ${itemWidth}`);
-  console.log(`paddingLayout: ${JSON.stringify(headerLayout)}`);
+  // console.log(`containerWidth: ${pickerWidth}, itemWidth: ${itemWidth}`);
+  // console.log(`paddingLayout: ${JSON.stringify(headerLayout)}`);
 
   const contentOffset = useMemoOne(() => {
     const intervalSize = itemsDistance(itemSize, separatorSize);
@@ -232,9 +225,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
   }, [theme.separator.color, separatorSize, mode, itemHeight, itemWidth]);
 
   const SeparatorComponent = useCallbackOne(() => {
-    /** Do not render separators in this case */
-    if (separatorSize <= 0) return null;
-
     return <View style={separatorStyle} />;
   }, [separatorSize, separatorStyle]);
 
@@ -250,7 +240,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       contentOffset: contentOffset,
       headerComponentStyle: headerLayout,
       footerComponentStyle: headerLayout,
-      itemSeparator: SeparatorComponent,
+      itemSeparator: separatorSize > 0 ? SeparatorComponent : undefined,
       renderItem: renderItem,
       onScroll: scrollHandler
     };
@@ -262,6 +252,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     scrollModeDeceleration,
     contentOffset,
     headerLayout,
+    separatorSize,
     renderItem,
     scrollHandler,
     SeparatorComponent
@@ -272,7 +263,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       const perf = performance as ItemPickerPerformance<'flatlist'>;
       const flatlistProps: ScrollableFlatListProps<T> = {
         ...commonProps,
-        initialScrollIndex: initialIndex,
         initialNumToRender: perf.initialNumToRender,
         maxToRenderPerBatch: perf.maxToRenderPerBatch,
         windowSize: perf.windowSize,
