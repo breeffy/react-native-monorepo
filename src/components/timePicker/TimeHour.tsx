@@ -1,9 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
-import { useMemoOne } from 'use-memo-one';
 import { dayOfWeekWidth } from '../../constants';
-import { calendarDayThemeToTextStyle } from '../../helpers';
-import { useCalendarTheme } from '../../hooks/useCalendarTheme';
 
 export enum CalendarDayKind {
   DEFAULT,
