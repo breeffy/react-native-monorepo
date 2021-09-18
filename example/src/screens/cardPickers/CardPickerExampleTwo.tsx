@@ -39,7 +39,6 @@ export const CardPickerItem = <T,>({
   currentIndex,
   translates,
   scales,
-  pickerBorderDistance,
   style: _style,
   children
 }: PropsWithChildren<CardPickerItemProps<T>>) => {
@@ -143,13 +142,14 @@ export const CardPickerExampleTwo = () => {
     <CardPicker
       items={items}
       mode="horizontal"
-      scrollMode="oneValue"
+      scrollMode="oneItem"
       scrollComponentKind="flatlist"
       scrollModeDeceleration="fast"
       pickerSize={Settings.pickerSize}
       itemWidth={Settings.itemWidth}
       itemHeight={Settings.itemHeight}
       itemScales={itemScales}
+      precision={null}
       getItemOffset={getItemOffset}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
