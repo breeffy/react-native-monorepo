@@ -77,9 +77,7 @@ export const NumberPicker = <T extends number = number>(
     getItemOffset,
     initialIndex = 0,
     currentIndex: _currentIndex,
-    currentProgress: _currentProgress,
-    currentValue: _currentValue,
-    currentScrollState: _currentScrollState
+    currentValue: _currentValue
   } = props;
 
   const currentIndex = useSharedValue<number>(initialIndex);
