@@ -4,7 +4,6 @@ import {
   Image,
   StyleProp,
   StyleSheet,
-  View,
   ViewStyle
 } from 'react-native';
 import { CardPicker } from '@breeffy/react-native-calendar';
@@ -148,8 +147,7 @@ export const CardPickerExampleOne = () => {
 
   const itemScales = useMemoOne(() => [1, 0.9, 0.8, 0.7, 0.6], []);
   const getItemOffset = useCallbackOne(
-    (itemScale: number, itemSize: number) => {
-      // return itemScale * (itemSize + 20);
+    (_itemScale: number, _itemSize: number) => {
       return 20;
     },
     []
@@ -159,7 +157,7 @@ export const CardPickerExampleOne = () => {
     <CardPicker
       items={items}
       mode="horizontal"
-      scrollMode="multipleValues"
+      scrollMode="multipleItems"
       scrollComponentKind="scrollview"
       scrollModeDeceleration="fast"
       pickerSize={Settings.pickerSize}
@@ -167,6 +165,7 @@ export const CardPickerExampleOne = () => {
       itemHeight={Settings.itemHeight}
       itemScales={itemScales}
       getItemOffset={getItemOffset}
+      precision={null}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
       currentIndex={index}
