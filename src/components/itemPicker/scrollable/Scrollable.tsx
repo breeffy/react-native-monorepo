@@ -233,7 +233,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
 
   const SeparatorComponent = useCallbackOne(() => {
     /** Do not render separators in this case */
-    if (separatorSize <= 0) return null;
+    if (separatorSize <= 0) return;
 
     return <View style={separatorStyle} />;
   }, [separatorSize, separatorStyle]);

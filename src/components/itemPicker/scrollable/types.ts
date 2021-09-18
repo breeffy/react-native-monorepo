@@ -30,7 +30,7 @@ export interface ScrollableCommon<T> {
   contentOffset?: CommonProps<T>['contentOffset'];
   headerComponentStyle?: ViewStyle;
   footerComponentStyle?: ViewStyle;
-  itemSeparator?: () => JSX.Element;
+  itemSeparator: () => JSX.Element | undefined;
   // renderItem: (props: PickerItemProps) => JSX.Element;
   renderItem: (item: T, index: number) => JSX.Element;
   onScroll: ReturnType<typeof useAnimatedScrollHandler>;
