@@ -17,7 +17,7 @@ import { interpolateWithRound } from '../worklets';
 import type { InterpolateConfig } from '../utils';
 import type { PickerItemProps } from '../components/itemPicker/types';
 
-export interface CardItemProps<T> extends PickerItemProps<T> {
+export interface ItemProps<T> extends PickerItemProps<T> {
   translates: number[];
   scales: number[];
   pickerBorderDistance: number;
@@ -56,7 +56,7 @@ export type NumberPickerProps<T> = Omit<
    * `(itemScale: number, itemSize: number) => 20`
    */
   getItemOffset?: (itemScale: number, itemSize: number) => number;
-  renderItem: (props: CardItemProps<T>) => JSX.Element;
+  renderItem: (props: ItemProps<T>) => JSX.Element;
   currentValue: Animated.SharedValue<number>;
 };
 
@@ -180,13 +180,13 @@ export const NumberPicker = <T extends number = number>(
 
   const renderItem = useCallbackOne(
     (pickerItemProps: PickerItemProps<T>) => {
-      const cardItemProps: CardItemProps<T> = {
+      const itemProps: ItemProps<T> = {
         ...pickerItemProps,
         translates: translates,
         scales: scales,
         pickerBorderDistance
       };
-      return _renderItem(cardItemProps);
+      return _renderItem(itemProps);
     },
     [_renderItem, translates, scales, pickerBorderDistance]
   );
