@@ -1,9 +1,9 @@
-name: Release new package version
+name: Publish new package
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'patch, minor or major version'
+        description: 'prerelease, patch, minor or major version'
         required: true
         default: 'patch'
       prerelease:
@@ -25,7 +25,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if ('${{ github.event.inputs.version }}' === '') {
+            if ('${{ github.event.inputs.version }}' === 'prerelease') {
               return ''
             } else if (['patch', 'minor', 'major'].includes('${{ github.event.inputs.version }}')) {
               return '${{ github.event.inputs.version }}'
@@ -41,7 +41,24 @@ jobs:
             if ('${{ github.event.inputs.prerelease }}' === '') {
               return ''
             } else if (['beta', 'alpha', 'rc'].includes('${{ github.event.inputs.prerelease }}')) {
-              return '--preRelease=${{ github.event.inputs.prerelease }}'
+              if ('${{ github.event.inputs.version }}' === 'prerelease') {
+                return '--preRelease'
+              } else {
+                return '--preRelease=${{ github.event.inputs.prerelease }}'
+              }
+            } else {
+              core.setFailed('input version [${{ github.event.inputs.version }}] is not "beta", "alpha" or "rc"')
+            }
+      - name: Figure out npm tag option
+        id: npmtag-option
+        uses: actions/github-script@v3.1.0
+        with:
+          result-encoding: string
+          script: |
+            if ('${{ github.event.inputs.prerelease }}' === '') {
+              return ''
+            } else if (['beta', 'alpha', 'rc'].includes('${{ github.event.inputs.prerelease }}')) {
+              return '--tag ${{ github.event.inputs.prerelease }}'
             } else {
               core.setFailed('input version [${{ github.event.inputs.version }}] is not "beta", "alpha" or "rc"')
             }
@@ -89,7 +106,7 @@ jobs:
           node-version: 14.x
           registry-url: 'https://registry.npmjs.org'
           scope: '@breeffy'
-      - run: npm publish --access public
+      - run: npm publish --access public ${{ steps.npmtag-option.outputs.result }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_BREEFFY_ORG_PUBLISH_TOKEN }}
       - name: Publish to GitHub Registry
@@ -98,6 +115,6 @@ jobs:
           node-version: 14.x
           registry-url: 'https://npm.pkg.github.com'
           scope: '@breeffy'
-      - run: npm publish --access public
+      - run: npm publish --access public ${{ steps.npmtag-option.outputs.result }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.BREEFFYBOT_TOKEN }}
