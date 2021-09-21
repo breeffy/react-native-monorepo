@@ -12,4 +12,5 @@ export interface PickerItemProps<T> {
   pickerSize: number;
   currentIndex: Animated.SharedValue<number>;
   currentProgress: Animated.SharedValue<number>;
+  currentRawIndex: Animated.SharedValue<number>;
 }

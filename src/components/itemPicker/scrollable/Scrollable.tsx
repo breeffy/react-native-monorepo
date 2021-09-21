@@ -59,6 +59,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     currentIndex,
     currentProgress,
     currentScrollState,
+    currentRawIndex,
     indexInterpolateConfig,
     itemsLength,
     theme,
@@ -120,14 +121,23 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
         indexInterpolateConfig,
         precision
       );
+
       const progress = getValueProgress(index, indexInterpolateConfig);
       const state = scrollState.value;
-      return [index, progress, state] as const;
+
+      const rawIndex = interpolateWithRound(
+        offset.value,
+        indexInterpolateConfig,
+        null
+      );
+
+      return [index, progress, state, rawIndex] as const;
     },
     (array) => {
       currentIndex.value = array[0];
       currentProgress.value = array[1];
       currentScrollState.value = array[2];
+      currentRawIndex.value = array[3];
     },
     [precision]
   );
@@ -145,6 +155,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
         itemsLength: itemsLength,
         currentIndex: currentIndex,
         currentProgress: currentProgress,
+        currentRawIndex: currentRawIndex,
         pickerWidth: pickerWidth,
         pickerHeight: pickerHeight,
         pickerSize: pickerSize
@@ -173,6 +184,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       itemsLength,
       currentIndex,
       currentProgress,
+      currentRawIndex,
       pickerWidth,
       pickerHeight,
       pickerSize

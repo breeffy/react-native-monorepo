@@ -18,6 +18,7 @@ interface DayAndTimePickerProps {
 export const DayAndTimePicker = ({ kind }: DayAndTimePickerProps) => {
   const value = useSharedValue(0);
   const index = useSharedValue(0);
+  const rawIndex = useSharedValue(0);
 
   const defaultContainerStyle = useContainerStyle();
 
@@ -30,6 +31,12 @@ export const DayAndTimePicker = ({ kind }: DayAndTimePickerProps) => {
   const propsForIndex = useAnimatedProps(() => {
     return {
       text: String(index.value)
+    };
+  });
+
+  const propsForRawIndex = useAnimatedProps(() => {
+    return {
+      text: String(rawIndex.value)
     };
   });
 
@@ -59,6 +66,7 @@ export const DayAndTimePicker = ({ kind }: DayAndTimePickerProps) => {
         separatorSize={0}
         currentValue={value}
         currentIndex={index}
+        currentRawIndex={rawIndex}
         initialIndex={12}
         scrollMode="anyOffset"
         scrollComponentKind="flatlist"
@@ -71,6 +79,8 @@ export const DayAndTimePicker = ({ kind }: DayAndTimePickerProps) => {
         <AnimateableText animatedProps={propsForValue} style={styles.text} />
         <Text style={styles.text}>Index: </Text>
         <AnimateableText animatedProps={propsForIndex} style={styles.text} />
+        <Text style={styles.text}>Raw Index: </Text>
+        <AnimateableText animatedProps={propsForRawIndex} style={styles.text} />
       </View>
     </View>
   );

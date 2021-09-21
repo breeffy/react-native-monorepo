@@ -18,7 +18,7 @@ export type ItemProps<T> = PickerItemProps<T> & {
 const ItemComponent = <T extends string | number>({
   item,
   itemIndex,
-  currentIndex,
+  currentRawIndex,
   containerStyle: _containerStyle,
   textStyle: _textStyle
 }: ItemProps<T>) => {
@@ -27,14 +27,14 @@ const ItemComponent = <T extends string | number>({
 
   const animatedTextStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
-      currentIndex.value,
+      currentRawIndex.value,
       [itemIndex - 2, itemIndex - 1, itemIndex, itemIndex + 1, itemIndex + 2],
       [0.3, 0.6, 1, 0.6, 0.3],
       Extrapolate.CLAMP
     );
 
     const scale = interpolate(
-      currentIndex.value,
+      currentRawIndex.value,
       [itemIndex - 2, itemIndex - 1, itemIndex, itemIndex + 1, itemIndex + 2],
       [0.8, 0.9, 1.2, 0.9, 0.8],
       Extrapolate.CLAMP
