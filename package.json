@@ -78,7 +78,7 @@
     "react-native": "*",
     "react-native-gesture-handler": ">=1.9.0",
     "react-native-reanimated": ">=2.0.0",
-    "react-native-svg": "^12.1.0"
+    "react-native-svg": ">=12.1.0"
   },
   "jest": {
     "preset": "react-native",
