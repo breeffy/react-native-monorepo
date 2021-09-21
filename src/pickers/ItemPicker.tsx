@@ -105,6 +105,13 @@ export interface ItemPickerProps<
    */
   currentScrollState?: Animated.SharedValue<ScrollState>;
 
+  /**
+   * Current raw animated index, **without** rounding.
+   * Property `precision` is ignored. Use this property
+   * to interpolate animations, for example in `renderItem()` function
+   */
+  currentRawIndex?: Animated.SharedValue<number>;
+
   itemWidth: number;
   itemHeight: number;
 
@@ -142,6 +149,7 @@ const ItemPickerComponent = <T,>(
     currentProgress: _currentProgress,
     currentIndex: _currentIndex,
     currentScrollState: _currentScrollState,
+    currentRawIndex: _currentRawIndex,
     initialIndex = 0,
     mode = 'horizontal',
     scrollMode = 'anyOffset',
@@ -211,6 +219,7 @@ const ItemPickerComponent = <T,>(
   }, [items, itemSize, separatorSize]);
 
   const currentIndex = useSharedValue(initialIndex);
+  const currentRawIndex = useSharedValue(initialIndex);
 
   const initialProgress = useMemoOne(() => {
     return (runOnJS(getValueProgress)(
@@ -229,7 +238,8 @@ const ItemPickerComponent = <T,>(
       return [
         currentIndex.value,
         currentProgress.value,
-        currentScrollState.value
+        currentScrollState.value,
+        currentRawIndex.value
       ] as const;
     },
     (array) => {
@@ -243,6 +253,10 @@ const ItemPickerComponent = <T,>(
 
       if (_currentScrollState !== undefined) {
         _currentScrollState.value = array[2];
+      }
+
+      if (_currentRawIndex !== undefined) {
+        _currentRawIndex.value = array[3];
       }
     },
     []
@@ -271,6 +285,7 @@ const ItemPickerComponent = <T,>(
         currentIndex={currentIndex}
         currentProgress={currentProgress}
         currentScrollState={currentScrollState}
+        currentRawIndex={currentRawIndex}
         theme={theme}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
