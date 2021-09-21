@@ -33,11 +33,11 @@ High-quality, modern, fast interactive calendar built specifically with performa
 > React Native ecosystem is evolving rapidly, fixing and introducing many bugs. For example **react-native-calendar** [doesn't work for React Native `0.63.3`](https://github.com/facebook/react-native/issues/30533) because this version doesn't support **ScrollView** `contentOffset` property for Android, while [`0.63.4` should work](https://github.com/facebook/react-native/commit/ed29ba13f97f240c91fdf6c0ef3fb601046697b9). 
 
 Because of this we provide a table of supported versions.
-| Calendar                   |       React Native        |   React Native Reanimated   | React Native Gesture Handler |
-| :------------------------: | :-----------------------: | :-------------------------: | :--------------------------: |
-| **0.3.0**, **0.4.0**, **0.4.1**                   | 0.64.0                | 2.1.0                   | 1.10.3                   |
+| Calendar                   |       React Native        |   React Native Reanimated   | React Native Gesture Handler | React Native SVG |
+| :------------------------: | :-----------------------: | :-------------------------: | :--------------------------: |:--------------------------: |
+| **0.3.0**, **0.4.0**, **0.4.1**, **0.5.0**                   | 0.64.0                | 2.1.0                   | 1.10.3                   | 12.1.0 |
 
-> [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) and [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) are **peerDependencies** and need to be installed beforehand.
+> [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated), [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) and [react-native-svg](https://github.com/react-native-svg/react-native-svg)  are **peerDependencies** and need to be installed beforehand.
 
 ## Usage
 
