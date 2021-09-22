@@ -23,6 +23,8 @@ import type {
 } from '../../../pickers/ItemPicker';
 import type { InterpolateConfig } from '../../../utils';
 import { itemsDistance } from '../../../pickers/utils';
+import { round } from 'react-native-redash';
+import type { RequiredExcept } from 'src/types';
 
 interface ScrollableFlatList<T> extends ScrollableFlatListProps<T> {
   kind: 'flatlist';
@@ -49,6 +51,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     scrollModeDeceleration,
     scrollComponentKind,
     precision,
+    roundMode,
     pickerWidth,
     pickerHeight,
     pickerSize,
@@ -65,7 +68,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     theme,
     keyExtractor,
     renderItem: _renderItem
-  }: Required<ScrollableProps<T, U>>,
+  }: RequiredExcept<ScrollableProps<T, U>, 'roundMode'>,
   ref: any
 ) => {
   const pagination = usePagination({
@@ -116,20 +119,23 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
 
   useAnimatedReaction(
     () => {
-      const index = interpolateWithRound(
-        offset.value,
-        indexInterpolateConfig,
-        precision
-      );
-
-      const progress = getValueProgress(index, indexInterpolateConfig);
-      const state = scrollState.value;
-
       const rawIndex = interpolateWithRound(
         offset.value,
         indexInterpolateConfig,
         null
       );
+
+      let index;
+      if (roundMode === 'ceil') {
+        index = Math.ceil(rawIndex);
+      } else if (roundMode === 'floor') {
+        index = Math.floor(rawIndex);
+      } else {
+        index = round(rawIndex, precision === null ? undefined : precision);
+      }
+
+      const progress = getValueProgress(index, indexInterpolateConfig);
+      const state = scrollState.value;
 
       return [index, progress, state, rawIndex] as const;
     },
@@ -139,7 +145,7 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
       currentScrollState.value = array[2];
       currentRawIndex.value = array[3];
     },
-    [precision]
+    [precision, roundMode]
   );
 
   useImperativeHandle(ref, () => scrollRef);

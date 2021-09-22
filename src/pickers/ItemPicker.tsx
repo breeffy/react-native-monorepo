@@ -10,13 +10,14 @@ import { ScrollState, windowHeight, windowWidth } from '../constants';
 import { getScrollableIndexInterpolateConfig } from '../utils';
 import { useItemSize } from '../hooks/useItemSize';
 import { Scrollable } from '../components/itemPicker/scrollable/Scrollable';
+import { PickerThemeProvider } from '../contexts/pickerTheme';
+import { PickerThemeLight } from '../themes';
+import { invariant } from '@breeffy/react-native-invariant';
 import type { PickerItemProps } from '../components/itemPicker/types';
 import type { ScrollableCommon } from '../components/itemPicker/scrollable/types';
 import type { ScrollableFlatListProps } from '../components/itemPicker/scrollable/ScrollableFlatList';
 import type { ScrollableViewProps } from '../components/itemPicker/scrollable/ScrollableView';
 import type { PickerTheme } from '../types/pickerTheme';
-import { PickerThemeProvider } from '../contexts/pickerTheme';
-import { PickerThemeLight } from '../themes';
 
 declare module 'react' {
   function forwardRef<T, P = {}>(
@@ -86,6 +87,14 @@ export interface ItemPickerProps<
   precision: number | null;
 
   /**
+   * Mode to round `currentIndex` to integer value.
+   * _Only applicable_ when `precision` is set to `0` (round to integer values).
+   * @defaultValue `round` if `precision` is `0`
+   * @defaultValue `undefined` otherwise
+   */
+  roundMode?: 'ceil' | 'round' | 'floor';
+
+  /**
    * Properties to customize performance characteristics
    */
   performance?: ItemPickerPerformance<U>;
@@ -144,7 +153,10 @@ export interface ItemPickerProps<
 }
 
 const ItemPickerComponent = <T,>(
-  {
+  props: ItemPickerProps<T, ItemPickerScrollComponentKind>,
+  _ref: any
+) => {
+  const {
     items,
     currentProgress: _currentProgress,
     currentIndex: _currentIndex,
@@ -156,6 +168,7 @@ const ItemPickerComponent = <T,>(
     scrollModeDeceleration = 'normal',
     scrollComponentKind = 'flatlist',
     precision = 2,
+    roundMode: _roundMode,
     performance: _performance,
     pickerSize: _pickerSize,
     separatorSize = 0,
@@ -166,9 +179,25 @@ const ItemPickerComponent = <T,>(
     theme = PickerThemeLight,
     renderItem,
     keyExtractor
-  }: ItemPickerProps<T, ItemPickerScrollComponentKind>,
-  _ref: any
-) => {
+  } = props;
+
+  const roundMode =
+    _roundMode === undefined
+      ? precision === 0
+        ? 'round'
+        : _roundMode
+      : _roundMode;
+
+  // Check compatibility of precision and roundMode properties
+  invariant(
+    (roundMode === undefined && precision !== 0) ||
+      ((roundMode === 'ceil' ||
+        roundMode === 'floor' ||
+        roundMode === 'round') &&
+        precision === 0),
+    `precision [${precision}] and roundMode [${roundMode}] are incompatible`
+  );
+
   const { pickerSize, pickerWidth, pickerHeight } = useMemoOne(() => {
     if (mode === 'horizontal') {
       const pickerSize = _pickerSize ?? windowWidth;
@@ -280,6 +309,7 @@ const ItemPickerComponent = <T,>(
         scrollModeDeceleration={scrollModeDeceleration}
         scrollComponentKind={scrollComponentKind}
         precision={precision}
+        roundMode={roundMode}
         performance={performance}
         indexInterpolateConfig={indexInterpolateConfig}
         currentIndex={currentIndex}
