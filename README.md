@@ -14,7 +14,7 @@ High-quality, modern, fast interactive calendar built specifically with performa
 | Feature                  |       Status       | Description                                                                                                         |
 | ------------------------ | :----------------: | ------------------------------------------------------------------------------------------------------------------- |
 | **Gregorian** calendar   | :heavy_check_mark: | Supports gregorian calendar                                                                                         |
-| **Horizontal** calendar  |   :construction:   | Horizontal calendar, allows scrolling months horizontally                                                           |
+| **Horizontal** calendar  | :heavy_check_mark: | Horizontal calendar, allows scrolling months horizontally                                                           |
 | **Vertical** calendar    |        :x:         | Vertical calendar, allows scrolling months vertically                                                               |
 | **Infinite** calendar    |   :construction:   | Allows rendering / scrolling practically infinite amount of months. You can show more than **12000 months**         |
 | **Selection** mode       | :heavy_check_mark: | Supports `singleDay` (can select only one day in calendar) or `multipleDays` (can select multiple days in calendar) |
