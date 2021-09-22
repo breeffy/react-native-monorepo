@@ -62,7 +62,8 @@ export const DayAndTimePicker = ({ kind }: DayAndTimePickerProps) => {
         items={NumberPickerKind[kind]}
         itemWidth={90}
         itemHeight={100}
-        precision={2}
+        precision={0}
+        roundMode="round"
         separatorSize={0}
         currentValue={value}
         currentIndex={index}
