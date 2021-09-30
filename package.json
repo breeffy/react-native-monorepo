@@ -10,7 +10,8 @@
       "**/react",
       "**/react-dom",
       "**/react-native",
-      "**/react-native/**"
+      "**/react-native/**",
+      "**/react-native-web"
     ]
   },
   "scripts": {
