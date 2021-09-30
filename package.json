@@ -1,6 +1,29 @@
 {
-  "name": "@breeffy/react-native-calendar",
-  "version": "0.5.0-alpha.3",
+  "name": "@breeffy/react-native-ui",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react",
+      "**/react-dom",
+      "**/react-native",
+      "**/react-native/**"
+    ]
+  },
+  "scripts": {
+    "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf yarn.lock",
+    "test": "jest",
+    "typescript": "tsc --noEmit",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "prepare": "bob build",
+    "release": "release-it",
+    "example": "yarn --cwd example",
+    "pods": "cd example && pod-install --quiet",
+    "bootstrap": "yarn example && yarn && yarn pods"
+  },
   "description": "High-quality, modern, fast interactive calendar built specifically with performance in mind. Supports gestures and animations.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -21,16 +44,6 @@
     "!**/__fixtures__",
     "!**/__mocks__"
   ],
-  "scripts": {
-    "test": "jest",
-    "typescript": "tsc --noEmit",
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "prepare": "bob build",
-    "release": "release-it",
-    "example": "yarn --cwd example",
-    "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
-  },
   "keywords": [
     "react-native",
     "ios",
