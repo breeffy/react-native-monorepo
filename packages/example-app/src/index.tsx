@@ -1,18 +1,16 @@
 import React from 'react';
 import {
-  Image,
+  // Image,
   Platform,
   SafeAreaView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import LogoSrc from './logo.jpg';
 
 export function App() {
   return (
     <SafeAreaView style={styles.root}>
-      <Image style={styles.logo} source={LogoSrc} />
       <Text style={styles.text}>Hello from React Native!</Text>
       <View style={styles.platformRow}>
         <Text style={styles.text}>Platform: </Text>
