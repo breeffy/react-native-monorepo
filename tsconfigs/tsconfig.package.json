@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.typechecks.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "esnext",
+    "lib": [
+      "es2017"
+    ],
+    "jsx": "react-native",
+    "composite": true
+  }
+}
