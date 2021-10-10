@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": false,
   "description": "Set of essential UI components",
-  "main": "src",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
   "license": "Apache-2.0",
   "peerDependencies": {
@@ -16,7 +17,17 @@
     "react": "*"
   },
   "dependencies": {
+    "@breeffy/react-native-hooks": "^0.0.1",
     "react-native-svg": "*",
     "fast-deep-equal": "*"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
+    "clean:npm": "rm -rf ./node_modules",
+    "clean:all": "yarn run clean:tsc && yarn run clean:npm"
   }
 }
