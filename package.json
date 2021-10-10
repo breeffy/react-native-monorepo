@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "lerna run build --stream",
+    "prepare": "yarn run build",
     "clean:tsc": "lerna run clean:tsc --parallel",
     "clean:npm": "lerna run clean:npm --parallel && rm -rf yarn.lock",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm",
