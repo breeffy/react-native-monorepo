@@ -16,7 +16,7 @@
     "lib": [
       "es2017"
     ],
-    "jsx": "react-native",
+    "jsx": "react-jsx",
     "composite": true
   }
 }
