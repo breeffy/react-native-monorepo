@@ -1,0 +1,14 @@
+{
+  "references": [
+    {
+      "path": "packages/hooks"
+    },
+    {
+      "path": "packages/elements"
+    },
+    {
+      "path": "packages/example-app"
+    }
+  ],
+  "files": [],
+}

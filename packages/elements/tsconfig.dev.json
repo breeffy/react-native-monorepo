@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfigs/tsconfig.dev.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "references": [
+    {
+      "path": "../hooks"
+    }
+  ],
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
+}

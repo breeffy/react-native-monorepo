@@ -19,6 +19,7 @@
     ]
   },
   "scripts": {
+    "dev": "lerna run dev --scope=example-app --stream",
     "build": "lerna run build --stream",
     "prepare": "yarn run build",
     "clean:tsc": "lerna run clean:tsc --parallel",

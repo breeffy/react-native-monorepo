@@ -19,6 +19,7 @@
     "lib"
   ],
   "scripts": {
+    "dev": "tsc --build --watch --preserveWatchOutput ./tsconfig.dev.json",
     "build": "tsc -b",
     "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
     "clean:npm": "rm -rf ./node_modules",
