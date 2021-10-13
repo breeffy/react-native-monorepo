@@ -5,9 +5,8 @@
  * @format
  */
 
-const path = require('path');
 const exclusionList = require('metro-config/src/defaults/exclusionList');
-const {getMetroTools} = require('react-native-monorepo-tools');
+const { getMetroTools } = require('react-native-monorepo-tools');
 const getMetroAndroidAssetsResolutionFix = require('react-native-monorepo-tools/src/get-metro-android-assets-resolution-fix');
 
 const monorepoMetroTools = getMetroTools();
@@ -19,18 +18,19 @@ module.exports = {
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
+        inlineRequires: true
+      }
+    })
   },
   server: {
     enhanceMiddleware: middleware => {
       return androidAssetsResolutionFix.applyMiddleware(middleware);
-    },
+    }
   },
   watchFolders: monorepoMetroTools.watchFolders,
   resolver: {
+    resolverMainFields: ['react-native', 'watchmode', 'main'],
     blockList: exclusionList(monorepoMetroTools.blockList),
-    extraNodeModules: monorepoMetroTools.extraNodeModules,
-  },
+    extraNodeModules: monorepoMetroTools.extraNodeModules
+  }
 };

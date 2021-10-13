@@ -5,6 +5,7 @@
   "description": "Shared javascript code for react-native-ui example app",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "watchmode": "src/index.tsx",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
   "license": "Apache-2.0",
   "peerDependencies": {

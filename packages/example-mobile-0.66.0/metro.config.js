@@ -29,6 +29,7 @@ module.exports = {
   },
   watchFolders: monorepoMetroTools.watchFolders,
   resolver: {
+    resolverMainFields: ['react-native', 'watchmode', 'main'],
     blockList: exclusionList(monorepoMetroTools.blockList),
     extraNodeModules: monorepoMetroTools.extraNodeModules
   }

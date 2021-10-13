@@ -4,6 +4,7 @@
   "description": "Set of essential React Native hooks",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "watchmode": "src/index.ts",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
   "license": "Apache-2.0",
   "peerDependencies": {
