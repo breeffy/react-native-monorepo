@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfigs/tsconfig.package.json",
+  "extends": "../../configs/typescript/tsconfig.package.json",
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src"

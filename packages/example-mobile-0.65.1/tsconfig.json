@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfigs/tsconfig.mobile.json",
+  "extends": "../../configs/typescript/tsconfig.mobile.json",
   "exclude": [
     "node_modules",
     "babel.config.js",

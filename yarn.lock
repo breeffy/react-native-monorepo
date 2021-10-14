@@ -12598,6 +12598,14 @@ react-native-screens@=3.8.0, react-native-screens@^3.8.0:
   dependencies:
     warn-once "^0.1.0"
 
+react-native-svg@*:
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.1.1.tgz#5f292410b8bcc07bbc52b2da7ceb22caf5bcaaee"
+  integrity sha512-NIAJ8jCnXGCqGWXkkJ1GTzO4a3Md5at5sagYV8Vh4MXYnL4z5Rh428Wahjhh+LIjx40EE5xM5YtwyJBqOIba2Q==
+  dependencies:
+    css-select "^2.1.0"
+    css-tree "^1.0.0-alpha.39"
+
 react-native-svg@=12.2.0:
   version "12.2.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.2.0.tgz#42273c7a1af804224b8ef97d936fab7df6a5e949"
