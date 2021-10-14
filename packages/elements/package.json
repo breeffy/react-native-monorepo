@@ -5,12 +5,13 @@
   "description": "Set of essential UI components",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "watchmode": "src/index.ts",
+  "devmode": "src/index.ts",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
   "license": "Apache-2.0",
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-svg": "*"
   },
   "devDependencies": {
     "@types/react": "^17.0.26",
@@ -19,7 +20,6 @@
   },
   "dependencies": {
     "@breeffy/react-native-hooks": "^0.0.1",
-    "react-native-svg": "*",
     "fast-deep-equal": "*"
   },
   "files": [

@@ -12,6 +12,7 @@
       "**/react-native",
       "**/react-native/**",
       "**/react-native-web",
+      "**/react-native-svg",
       "**/@react-navigation/native",
       "**/@react-navigation/native-stack",
       "**/react-native-screens",
@@ -19,11 +20,15 @@
     ]
   },
   "scripts": {
-    "dev": "lerna run dev --scope=example-app --stream",
+    "dev:android": "lerna run dev:android --scope=mobile-0.66.0 --stream",
+    "dev:ios": "lerna run dev:ios --scope=mobile-0.66.0 --stream",
+    "dev:android:0.66.0": "lerna run dev:android --scope=mobile-0.66.0 --stream",
+    "dev:ios:0.66.0": "lerna run dev:ios --scope=mobile-0.66.0 --stream",
+    "dev:android:0.65.1": "lerna run dev:android --scope=mobile-0.65.1 --stream",
+    "dev:ios:0.65.1": "lerna run dev:ios --scope=mobile-0.65.1 --stream",
     "build": "lerna run build --stream",
-    "prepare": "yarn run build",
     "clean:tsc": "lerna run clean:tsc --parallel",
-    "clean:npm": "lerna run clean:npm --parallel && rm -rf yarn.lock",
+    "clean:npm": "lerna run clean:npm --parallel && rm -rf node_modules/",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm",
     "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf yarn.lock"
   },
