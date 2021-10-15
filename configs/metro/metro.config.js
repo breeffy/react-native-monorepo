@@ -29,10 +29,16 @@ const loadMetroConfig = configPath => {
   const monorepoMetroTools = getMetroTools();
   const androidAssetsResolutionFix = getMetroAndroidAssetsResolutionFix();
 
+  const metroOptions = ['react-native', 'main'];
+  const devModeOptions = ['devmode'];
+  const storyBookOptions = ['sbmodern', 'browser'];
+
+  const defaultOptions = storyBookOptions.concat(metroOptions);
+
   const isDevMode = process.env.MODE === 'dev';
   const resolverOptions = isDevMode
-    ? { resolverMainFields: ['react-native', 'devmode', 'main'] }
-    : {};
+    ? { resolverMainFields: devModeOptions.concat(defaultOptions) }
+    : { resolverMainFields: defaultOptions };
 
   return {
     transformer: {

@@ -6,6 +6,7 @@ import {
   CalendarsScreen,
   ElementsScreen
 } from './screens';
+import StorybookUIRoot from '../.storybook/Storybook';
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -19,8 +20,8 @@ const App = () => {
           // @ts-ignore
           headerStyle: { elevation: 0 },
           headerTitleStyle: {
-            fontFamily: 'OpenSans-Bold',
-            fontSize: 24
+            fontFamily: 'OpenSans-Regular',
+            fontSize: 22
           },
           headerShadowVisible: false
         }}
@@ -28,7 +29,7 @@ const App = () => {
         <Stack.Screen
           name='Home'
           component={HomeScreen}
-          options={{ title: 'Overview' }}
+          options={{ title: 'Home' }}
         />
         <Stack.Screen name='Pickers' component={PickersScreen} />
         <Stack.Screen name='Elements' component={ElementsScreen} />
@@ -38,4 +39,5 @@ const App = () => {
   );
 };
 
-export default App;
+// export default App;
+export { StorybookUIRoot as default };

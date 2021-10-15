@@ -10,7 +10,8 @@
   "license": "Apache-2.0",
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@react-native-async-storage/async-storage": "*"
   },
   "devDependencies": {
     "@types/react": "^17.0.26",
@@ -18,8 +19,17 @@
   },
   "dependencies": {
     "@breeffy/react-native-ui-elements": "^0.0.1",
+    "@react-native-community/datetimepicker": "^3.5.2",
+    "@react-native-community/slider": "^4.1.9",
     "@react-navigation/native": "^6.0.4",
     "@react-navigation/native-stack": "^6.2.2",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-controls": "^6.3.12",
+    "@storybook/addon-ondevice-actions": "^6.0.1-alpha.6",
+    "@storybook/addon-ondevice-backgrounds": "^6.0.1-alpha.6",
+    "@storybook/addon-ondevice-controls": "^6.0.1-alpha.6",
+    "@storybook/addon-ondevice-notes": "^6.0.1-alpha.6",
+    "@storybook/react-native": "^6.0.1-alpha.6",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0"
   },
@@ -32,6 +42,8 @@
     "build": "tsc -b",
     "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
     "clean:npm": "rm -rf ./node_modules",
-    "clean:all": "yarn run clean:tsc && yarn run clean:npm"
+    "clean:all": "yarn run clean:tsc && yarn run clean:npm",
+    "prestart": "sb-rn-get-stories",
+    "storybook-watcher": "sb-rn-watcher"
   }
 }
