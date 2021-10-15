@@ -13,25 +13,29 @@ export interface MenuItemProps {
   iconName: string;
   disabled?: boolean;
   style: StyleProp<ViewStyle>;
+  onPress?: () => void;
 }
 
 export const MenuItem = ({
   title,
   iconName,
   disabled = false,
-  style
+  style,
+  onPress
 }: MenuItemProps) => {
   return (
     <Pressable
       disabled={disabled}
       style={props => {
         console.log(`${JSON.stringify(props)}`);
+        console.log('Cool things!');
         if (disabled) {
           return [{ opacity: 0.3 }, style];
         } else {
           return [{ opacity: props.pressed ? 0.5 : 1.0 }, style];
         }
       }}
+      onPress={onPress}
     >
       <View style={[styles.container]}>
         <Text style={styles.title}>{title}</Text>

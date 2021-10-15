@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Platform, SafeAreaView, Text, View, Button } from 'react-native';
 import { MenuItem } from '../components';
 import { styles } from '../styles';
@@ -9,6 +10,11 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 export type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export const HomeScreen = ({ navigation }: HomeProps) => {
+  const onElementsPress = useCallback(() => {
+    console.log('onElementsPressed called!');
+    navigation.navigate('Elements');
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.root}>
       <View
@@ -27,6 +33,7 @@ export const HomeScreen = ({ navigation }: HomeProps) => {
           title='Elements'
           iconName={Icons.elements}
           style={{ marginTop: 20 }}
+          onPress={onElementsPress}
         />
         <MenuItem
           title='Calendars'
@@ -39,7 +46,7 @@ export const HomeScreen = ({ navigation }: HomeProps) => {
           disabled
           style={{ marginTop: 20 }}
         />
-        <Text style={styles.text}>Hello from React Native!</Text>
+        <Text style={styles.text}>Test</Text>
         <View style={styles.platformRow}>
           <Text style={styles.text}>Platform: </Text>
           <View style={styles.platformBackground}>
@@ -51,7 +58,7 @@ export const HomeScreen = ({ navigation }: HomeProps) => {
           onPress={() =>
             navigation.navigate('Details', {
               itemId: 86,
-              otherParam: 'anything you want here'
+              otherParam: 'cool test'
             })
           }
         />

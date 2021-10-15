@@ -17,7 +17,7 @@ export function DetailsScreen({ route, navigation }: DetailsProps) {
       <Text>otherParam: {JSON.stringify(otherParam)}</Text>
       <Button
         title='Go to Details... again'
-        // @ts-expect-error
+        // @ts-ignore
         onPress={() => navigation.push('Details')}
       />
       <Button title='Go to Home' onPress={() => navigation.navigate('Home')} />
