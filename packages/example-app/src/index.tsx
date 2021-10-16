@@ -6,7 +6,7 @@ import {
   CalendarsScreen,
   ElementsScreen
 } from './screens';
-import StorybookUIRoot from '../.storybook/Storybook';
+import StorybookUIRoot from './storybook/Storybook';
 import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

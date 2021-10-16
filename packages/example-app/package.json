@@ -43,7 +43,7 @@
     "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
     "clean:npm": "rm -rf ./node_modules",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm",
-    "prestart": "sb-rn-get-stories",
-    "storybook-watcher": "sb-rn-watcher"
+    "prestart": "sb-rn-get-stories --config-path=./src/storybook",
+    "storybook-watcher": "sb-rn-watcher --config-path=./src/storybook"
   }
 }
