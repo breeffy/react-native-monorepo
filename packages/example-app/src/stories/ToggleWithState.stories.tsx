@@ -1,9 +1,9 @@
-import { Toggle, ToggleType } from '@breeffy/react-native-ui-elements';
+import { ToggleWithState, ToggleType } from '@breeffy/react-native-ui-elements';
 import type { ComponentStory, ComponentMeta } from '@storybook/react-native';
 
-const ToggleMeta: ComponentMeta<typeof Toggle> = {
-  title: 'Toggle',
-  component: Toggle,
+const ToggleMeta: ComponentMeta<typeof ToggleWithState> = {
+  title: 'Toggle With State',
+  component: ToggleWithState,
   argTypes: {
     onPress: { action: 'pressed the button' }
   },
@@ -14,9 +14,9 @@ const ToggleMeta: ComponentMeta<typeof Toggle> = {
 
 export default ToggleMeta;
 
-type ToggleStory = ComponentStory<typeof Toggle>;
+type ToggleStory = ComponentStory<typeof ToggleWithState>;
 
-const Template: ToggleStory = args => <Toggle {...args} />;
+const Template: ToggleStory = args => <ToggleWithState {...args} />;
 
 export const ToggleOn: ToggleStory = Template.bind({});
 ToggleOn.args = { ...ToggleMeta.args, type: ToggleType.ENABLED };

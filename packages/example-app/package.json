@@ -9,9 +9,9 @@
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
   "license": "Apache-2.0",
   "peerDependencies": {
+    "@react-native-async-storage/async-storage": "*",
     "react": "*",
-    "react-native": "*",
-    "@react-native-async-storage/async-storage": "*"
+    "react-native": "*"
   },
   "devDependencies": {
     "@types/react": "^17.0.26",
