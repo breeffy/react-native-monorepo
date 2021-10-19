@@ -1,3 +1,7 @@
+# Ignore TypeScript generated .tsbuildinfo files
+*.tsbuildinfo
+# Ignore VS Code workspace files
+*.code-workspace
 # OSX
 #
 .DS_Store

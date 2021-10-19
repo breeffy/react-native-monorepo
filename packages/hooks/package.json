@@ -1,0 +1,29 @@
+{
+  "name": "@breeffy/hooks",
+  "version": "0.0.1",
+  "description": "Set of essential React Native hooks",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "devmode": "src/index.ts",
+  "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
+  "license": "Apache-2.0",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.26",
+    "@types/react-native": "^0.65.2",
+    "react": "*"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "dev": "tsc --build --watch --preserveWatchOutput ./tsconfig.dev.json",
+    "build": "tsc -b",
+    "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
+    "clean:npm": "rm -rf ./node_modules",
+    "clean:all": "yarn run clean:tsc && yarn run clean:npm"
+  }
+}

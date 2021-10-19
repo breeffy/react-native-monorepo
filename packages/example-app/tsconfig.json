@@ -1,0 +1,21 @@
+{
+  "extends": "../../configs/typescript/tsconfig.package.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "references": [
+    {
+      "path": "../elements"
+    },
+    {
+      "path": "../calendars"
+    }
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "assets"
+  ]
+}
