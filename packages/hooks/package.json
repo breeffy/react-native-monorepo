@@ -1,5 +1,5 @@
 {
-  "name": "@breeffy/react-native-hooks",
+  "name": "@breeffy/hooks",
   "version": "0.0.1",
   "description": "Set of essential React Native hooks",
   "main": "lib/index.js",

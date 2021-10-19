@@ -1,4 +1,4 @@
-import { Toggle, ToggleType } from '@breeffy/react-native-ui-elements';
+import { Toggle, ToggleType } from '@breeffy/elements';
 import type { ComponentStory, ComponentMeta } from '@storybook/react-native';
 
 const ToggleMeta: ComponentMeta<typeof Toggle> = {

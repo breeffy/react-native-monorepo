@@ -1,5 +1,5 @@
 {
-  "name": "mobile-0.65.1",
+  "name": "@breeffy/mobile-0.65.1",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "example-app": "*",
+    "@breeffy/example": "*",
     "react": "=17.0.2",
     "react-native": "=0.65.1",
     "@react-navigation/native": "=6.0.4",

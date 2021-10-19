@@ -1,5 +1,5 @@
 {
-  "name": "mobile-0.66.0",
+  "name": "@breeffy/mobile-0.66.0",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -16,9 +16,11 @@
     "@react-native-async-storage/async-storage": "=1.15.9",
     "@react-navigation/native": "=6.0.4",
     "@react-navigation/native-stack": "=6.2.2",
-    "example-app": "*",
+    "@breeffy/example": "*",
     "react": "=17.0.2",
     "react-native": "=0.66.0",
+    "react-native-gesture-handler": "=1.10.3",
+    "react-native-reanimated": "=2.3.0-beta.3",
     "react-native-safe-area-context": "=3.3.2",
     "react-native-screens": "=3.8.0",
     "react-native-svg": "=12.2.0"

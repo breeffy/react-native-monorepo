@@ -6,7 +6,7 @@ import {
   ViewStyle,
   StyleProp
 } from 'react-native';
-import { usePrevious } from '@breeffy/react-native-hooks';
+import { usePrevious } from '@breeffy/hooks';
 import { Svg, Rect, Circle } from 'react-native-svg';
 import isEqual from 'fast-deep-equal';
 

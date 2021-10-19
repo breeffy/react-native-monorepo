@@ -1,5 +1,5 @@
 {
-  "name": "@breeffy/react-native-ui-elements",
+  "name": "@breeffy/elements",
   "version": "0.0.1",
   "private": false,
   "description": "Set of essential UI components",
@@ -20,7 +20,7 @@
     "react-native-svg": "*"
   },
   "dependencies": {
-    "@breeffy/react-native-hooks": "^0.0.1",
+    "@breeffy/hooks": "^0.0.1",
     "fast-deep-equal": "*"
   },
   "files": [

@@ -1,5 +1,5 @@
 {
-  "name": "example-app",
+  "name": "@breeffy/example",
   "version": "0.0.0",
   "private": true,
   "description": "Shared javascript code for react-native-ui example app",
@@ -18,7 +18,8 @@
     "@types/react-native": "^0.65.2"
   },
   "dependencies": {
-    "@breeffy/react-native-ui-elements": "^0.0.1",
+    "@breeffy/elements": "^0.0.1",
+    "@breeffy/calendars": "^0.5.0-alpha.3",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-community/slider": "^4.1.9",
     "@react-navigation/native": "^6.0.4",

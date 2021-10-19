@@ -11,6 +11,7 @@ import type { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+// @ts-ignore
 const App = () => {
   return (
     <NavigationContainer>
