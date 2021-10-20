@@ -4,6 +4,17 @@
     "outDir": "lib",
     "rootDir": "src"
   },
+  "references": [
+    {
+      "path": "../invariants"
+    },
+    {
+      "path": "../utils"
+    },
+    {
+      "path": "../types"
+    }
+  ],
   "exclude": [
     "node_modules",
     "lib"
