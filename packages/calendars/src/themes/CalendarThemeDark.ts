@@ -1,4 +1,5 @@
-import { makeCalendarDayTheme, deepFreeze } from './utils';
+import { deepFreeze } from '@breeffy/utils';
+import { makeCalendarDayTheme } from './utils';
 import type {
   CalendarTheme,
   CalendarDayTheme,
