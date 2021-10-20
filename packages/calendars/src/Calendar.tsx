@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useMemo, useRef, useState } from 'react';
-import { View, StyleSheet, FlatListProps } from 'react-native';
+import { StyleSheet, FlatListProps } from 'react-native';
 import Animated, {
   runOnJS,
   useDerivedValue,
