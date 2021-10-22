@@ -7,32 +7,24 @@ import Animated, {
 import type { CardItemProps } from '@breeffy/pickers';
 import type { PropsWithStyle } from '@breeffy/types-react-native';
 
-export interface AnimatedItemProps<T>
+export interface AnimatedItemWithSeparatorProps<T>
   extends PropsWithStyle<CardItemProps<T>> {}
 
-export const AnimatedItem = <T,>({
+export const AnimatedItemWithSeparator = <T,>({
   itemIndex,
   itemWidth,
   itemHeight,
   currentRawIndex,
   translates,
   scales,
-  pickerBorderDistance,
   style: _style,
   children
-}: PropsWithChildren<AnimatedItemProps<T>>) => {
+}: PropsWithChildren<AnimatedItemWithSeparatorProps<T>>) => {
   const style = useAnimatedStyle(() => {
     const opacity = interpolate(
       currentRawIndex.value,
-      [
-        itemIndex - 3,
-        itemIndex - 2,
-        itemIndex - 1,
-        itemIndex,
-        itemIndex + 1,
-        itemIndex + 2
-      ],
-      [0, 1, 1, 1, 0.2, 0],
+      [itemIndex - 2, itemIndex - 1, itemIndex, itemIndex + 1, itemIndex + 2],
+      [0, 0.2, 1, 0.2, 0],
       Extrapolate.CLAMP
     );
 
@@ -46,7 +38,7 @@ export const AnimatedItem = <T,>({
         itemIndex + 1,
         itemIndex + 2
       ],
-      [scales[3], scales[2], scales[1], scales[0], scales[0], scales[0]],
+      [scales[3], scales[2], scales[1], scales[0], scales[1], scales[2]],
       Extrapolate.EXTEND
     );
 
@@ -66,7 +58,7 @@ export const AnimatedItem = <T,>({
         translates[2],
         translates[1],
         translates[0],
-        -pickerBorderDistance
+        translates[1]
       ],
       Extrapolate.CLAMP
     );

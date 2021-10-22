@@ -34,13 +34,17 @@ export type CardPickerProps<T> = Omit<
    * 
    * So, if you want to layout item right next to adjacent one,
    * use this function: 
-   * `(itemScale: number, itemSize: number) => itemScale * itemSize`
+   * `(itemScale: number, itemSize: number, separatorSize: number) => itemScale * itemSize + separatorSize`
 
    * If you want to make item ledge from previous item by some 
    * constant offset use this function:
-   * `(itemScale: number, itemSize: number) => 20`
+   * `(itemScale: number, itemSize: number, separatorSize: number) => separatorSize`
    */
-  getItemOffset: (itemScale: number, itemSize: number) => number;
+  getItemOffset: (
+    itemScale: number,
+    itemSize: number,
+    separatorSize: number
+  ) => number;
   renderItem: (props: CardItemProps<T>) => JSX.Element;
 };
 
@@ -51,6 +55,7 @@ export const CardPicker = <T,>(props: CardPickerProps<T>) => {
     itemWidth,
     itemHeight,
     itemScales,
+    separatorSize = 0,
     renderItem: _renderItem,
     getItemOffset
   } = props;
@@ -76,7 +81,7 @@ export const CardPicker = <T,>(props: CardPickerProps<T>) => {
     const info = itemScales.map(it => {
       return {
         scale: it,
-        offset: getItemOffset(it, itemSize)
+        offset: getItemOffset(it, itemSize, separatorSize)
       };
     });
 
@@ -86,7 +91,7 @@ export const CardPicker = <T,>(props: CardPickerProps<T>) => {
       translates: []
     });
     return [acc.translates, itemScales];
-  }, [itemSize, itemScales, getItemOffset]);
+  }, [itemSize, itemScales, separatorSize, getItemOffset]);
 
   const renderItem = useCallback(
     (pickerItemProps: PickerItemProps<T>) => {
@@ -108,6 +113,7 @@ export const CardPicker = <T,>(props: CardPickerProps<T>) => {
       pickerSize={pickerSize}
       itemWidth={itemWidth}
       itemHeight={itemHeight}
+      separatorSize={separatorSize}
       renderItem={renderItem}
     />
   );

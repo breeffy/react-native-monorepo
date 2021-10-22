@@ -101,8 +101,6 @@ const ScrollableComponent = <T, U extends ItemPickerScrollComponentKind>(
     itemHeight
   });
 
-  console.log(`paddingLayout: ${JSON.stringify(headerLayout)}`);
-
   const { scrollRef, scrollHandler, scrollContentOffset, scrollState } =
     useScroll();
 

@@ -1,21 +1,39 @@
-import { CardPicker, CardPickerProps } from '@breeffy/pickers';
 import { useCallback } from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
-import { AnimatedItem, PickerDetails, Images } from '../components';
+import { CardPicker } from '@breeffy/pickers';
+import {
+  AnimatedItem,
+  AnimatedItemWithAngle,
+  AnimatedItemWithSeparator,
+  PickerDetails,
+  Images
+} from '../components';
+import type { PropsWithChildren } from 'react';
+import type { CardItemProps, CardPickerProps } from '@breeffy/pickers';
 import type { ComponentStory, ComponentMeta } from '@storybook/react-native';
+import type {
+  AnimatedItemProps,
+  AnimatedItemWithAngleProps
+} from '../components';
 
 const windowWidth = Dimensions.get('window').width;
-console.log(`windowWidth: ${windowWidth}`);
 
 const styles = StyleSheet.create({
-  animatedItem: {
+  animatedWrapper: {
     borderRadius: 16
-    // backgroundColor: 'orange'
-  }
+  },
+  pickerDetails: { marginTop: 20, marginBottom: 20 },
+  container: { flex: 1 }
 });
 
-const CardPickerMeta: ComponentMeta<typeof CardPicker> = {
+type CardPickerWithNumber = (props: CardPickerProps<number>) => JSX.Element;
+type AnimatedComponent<
+  T = number,
+  W = AnimatedItemProps<T> | AnimatedItemWithAngleProps<T>
+> = (props: PropsWithChildren<W>) => JSX.Element;
+
+const CardPickerMeta: ComponentMeta<CardPickerWithNumber> = {
   title: 'CardPicker',
   component: CardPicker,
   argTypes: {
@@ -56,28 +74,25 @@ const CardPickerMeta: ComponentMeta<typeof CardPicker> = {
     itemWidth: 200,
     itemHeight: 300,
     scrollMode: 'multipleItems',
-    // scrollComponentKind: 'scrollview',
     scrollComponentKind: 'scrollview',
     // initialIndex: 6,
     mode: 'horizontal',
     pickerSize: windowWidth,
-    // itemScales: [1, 0.9, 0.8, 0.7, 0.6],
     itemScales: [1, 1, 1, 1, 1, 1],
-    precision: null
+    precision: null,
+    getItemOffset: () => {
+      return 100;
+    }
   }
 };
 
 export default CardPickerMeta;
 
-type CardPickerStory = ComponentStory<typeof CardPicker>;
-type RenderItemCallback = CardPickerProps<number>['renderItem'];
+type CardPickerStory = ComponentStory<CardPickerWithNumber>;
 
 const Template: CardPickerStory = args => {
-  // const items: number[] = [...Array(10)];
-  // const items: number[] = [1, 2, 3, 4, 5];
   const items: number[] = [...Array(10)];
 
-  const value = useSharedValue(0);
   const index = useSharedValue(0);
   const rawIndex = useSharedValue(0);
 
@@ -86,27 +101,31 @@ const Template: CardPickerStory = args => {
     []
   );
 
-  const getItemOffset = useCallback((_itemScale: number, _itemSize: number) => {
-    return 100;
-    // return _itemSize;
-  }, []);
+  return (
+    <View style={styles.container}>
+      <PickerDetails
+        style={styles.pickerDetails}
+        index={index}
+        rawIndex={rawIndex}
+      />
+      <CardPicker
+        {...args}
+        items={items}
+        currentIndex={index}
+        currentRawIndex={rawIndex}
+        keyExtractor={keyExtractor}
+      />
+    </View>
+  );
+};
 
-  const renderItem = useCallback<RenderItemCallback>(props => {
-    // console.log(
-    //   `images length: ${Images.length},props: ${JSON.stringify(
-    //     props.itemIndex
-    //   )}`
-    // );
-    // console.log(`pickerBorderDistance: ${props.pickerBorderDistance}`);
-    // const index = (props.itemIndex + 1) % Images.length;
+const WithAnimatedWrapper =
+  (AnimatedWrapper: AnimatedComponent) => (props: CardItemProps<number>) => {
     const index = props.itemIndex % Images.length;
-    // console.log(`index is [${index}]`);
     const source = Images[index].source;
 
-    console.log(`index: ${index}, source: ${source}`);
-
     return (
-      <AnimatedItem {...props} style={styles.animatedItem}>
+      <AnimatedWrapper {...props} style={styles.animatedWrapper}>
         <Image
           source={source}
           resizeMode='cover'
@@ -115,35 +134,45 @@ const Template: CardPickerStory = args => {
             height: props.itemHeight
           }}
         />
-      </AnimatedItem>
+      </AnimatedWrapper>
     );
-  }, []);
+  };
 
-  return (
-    <View style={{ flex: 1 }}>
-      <PickerDetails
-        style={{ marginTop: 20, marginBottom: 20 }}
-        value={value}
-        index={index}
-        rawIndex={rawIndex}
-      />
-      <CardPicker
-        {...args}
-        roundMode='floor'
-        precision={0}
-        items={items}
-        currentIndex={index}
-        currentRawIndex={rawIndex}
-        keyExtractor={keyExtractor}
-        getItemOffset={getItemOffset}
-        renderItem={renderItem}
-      />
-    </View>
-  );
+export const NumberPickerWithCrossing: CardPickerStory = Template.bind({});
+NumberPickerWithCrossing.args = {
+  ...CardPickerMeta.args,
+  renderItem: WithAnimatedWrapper(AnimatedItem)
 };
+NumberPickerWithCrossing.storyName = 'with crossing';
 
-export const NumberPickerStoryOne: CardPickerStory = Template.bind({});
-NumberPickerStoryOne.args = {
-  ...CardPickerMeta.args
+export const CardPickerWithScale: CardPickerStory = Template.bind({});
+CardPickerWithScale.args = {
+  ...CardPickerMeta.args,
+  itemScales: [0.7, 0.8, 0.9, 1, 1, 1],
+  renderItem: WithAnimatedWrapper(AnimatedItem)
 };
-NumberPickerStoryOne.storyName = 'horizontal';
+CardPickerWithScale.storyName = 'with scale';
+
+export const CardPickerWithAngle: CardPickerStory = Template.bind({});
+CardPickerWithAngle.args = {
+  ...CardPickerMeta.args,
+  itemScales: [0.7, 0.8, 0.9, 1, 1, 1],
+  renderItem: WithAnimatedWrapper(AnimatedItemWithAngle)
+};
+CardPickerWithAngle.storyName = 'with angle';
+
+export const CardPickerWithSeparator: CardPickerStory = Template.bind({});
+CardPickerWithSeparator.args = {
+  ...CardPickerMeta.args,
+  separatorSize: 20,
+  itemScales: [1, 0.8, 1, 1, 1, 1],
+  renderItem: WithAnimatedWrapper(AnimatedItemWithSeparator),
+  getItemOffset: (
+    itemScale: number,
+    itemSize: number,
+    separatorSize: number
+  ) => {
+    return itemSize * itemScale + separatorSize;
+  }
+};
+CardPickerWithSeparator.storyName = 'with separator';

@@ -7,21 +7,34 @@ import Animated, {
 import type { CardItemProps } from '@breeffy/pickers';
 import type { PropsWithStyle } from '@breeffy/types-react-native';
 
-export interface AnimatedItemProps<T>
+export interface AnimatedItemWithAngleProps<T>
   extends PropsWithStyle<CardItemProps<T>> {}
 
-export const AnimatedItem = <T,>({
+export const AnimatedItemWithAngle = <T,>({
   itemIndex,
   itemWidth,
   itemHeight,
   currentRawIndex,
   translates,
   scales,
-  pickerBorderDistance,
   style: _style,
   children
-}: PropsWithChildren<AnimatedItemProps<T>>) => {
+}: PropsWithChildren<AnimatedItemWithAngleProps<T>>) => {
   const style = useAnimatedStyle(() => {
+    const offsetX = itemHeight / 2;
+    const translateX = interpolate(
+      currentRawIndex.value,
+      [itemIndex - 1, itemIndex, itemIndex + 1],
+      [offsetX, 0, -offsetX]
+    );
+
+    const angleNumber = interpolate(
+      currentRawIndex.value,
+      [itemIndex - 1, itemIndex, itemIndex + 1],
+      [20, 0, -20]
+    );
+
+    const angleDeg = `${angleNumber}deg`;
     const opacity = interpolate(
       currentRawIndex.value,
       [
@@ -30,9 +43,10 @@ export const AnimatedItem = <T,>({
         itemIndex - 1,
         itemIndex,
         itemIndex + 1,
-        itemIndex + 2
+        itemIndex + 2,
+        itemIndex + 3
       ],
-      [0, 1, 1, 1, 0.2, 0],
+      [0, 0.5, 0.5, 1, 0.5, 0.5, 0],
       Extrapolate.CLAMP
     );
 
@@ -44,31 +58,19 @@ export const AnimatedItem = <T,>({
         itemIndex - 1,
         itemIndex,
         itemIndex + 1,
-        itemIndex + 2
+        itemIndex + 2,
+        itemIndex + 3
       ],
-      [scales[3], scales[2], scales[1], scales[0], scales[0], scales[0]],
+      [
+        scales[3],
+        scales[2],
+        scales[1],
+        scales[0],
+        scales[1],
+        scales[2],
+        scales[3]
+      ],
       Extrapolate.EXTEND
-    );
-
-    const translateX = interpolate(
-      currentRawIndex.value,
-      [
-        itemIndex - 4,
-        itemIndex - 3,
-        itemIndex - 2,
-        itemIndex - 1,
-        itemIndex,
-        itemIndex + 1
-      ],
-      [
-        0,
-        translates[3],
-        translates[2],
-        translates[1],
-        translates[0],
-        -pickerBorderDistance
-      ],
-      Extrapolate.CLAMP
     );
 
     return {
@@ -77,12 +79,10 @@ export const AnimatedItem = <T,>({
       overflow: 'hidden',
       opacity: opacity,
       transform: [
-        {
-          translateX: translateX
-        },
-        {
-          scale: scale
-        }
+        { translateX: -translateX },
+        { scale: scale },
+        { rotate: angleDeg },
+        { translateX: translateX }
       ]
     };
   }, [translates, scales]);
