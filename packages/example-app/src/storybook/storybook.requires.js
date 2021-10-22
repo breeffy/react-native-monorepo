@@ -29,6 +29,8 @@ argsEnhancers.forEach((enhancer) => addArgsEnhancer(enhancer));
 const getStories = () => {
   return [
     require("../stories/Calendar.stories.tsx"),
+    require("../stories/CardPicker.stories.tsx"),
+    require("../stories/NumberPicker.stories.tsx"),
     require("../stories/Toggle.stories.tsx"),
     require("../stories/ToggleWithState.stories.tsx"),
   ];

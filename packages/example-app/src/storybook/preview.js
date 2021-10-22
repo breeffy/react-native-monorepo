@@ -18,7 +18,8 @@ export const decorators = [
 export const parameters = {
   layout: 'centered',
   backgrounds: [
-    { name: 'plain', value: 'white', default: true },
+    { name: 'plain', value: 'rgba(247, 248, 250, 1)', default: true },
+    { name: 'white', value: 'white' },
     { name: 'warm', value: 'hotpink' },
     { name: 'cool', value: 'deepskyblue' }
   ]

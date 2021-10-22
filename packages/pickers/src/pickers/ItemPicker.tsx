@@ -45,6 +45,8 @@ export interface ItemPickerProps<
 > {
   /**
    * Items which will be shown in ItemPicker.
+   * @notes
+   * `items` array should contain at least 2 elements.
    */
   items: T[];
 
@@ -195,6 +197,14 @@ const ItemPickerComponent = <T,>(
         roundMode === 'round') &&
         precision === 0),
     `precision [${precision}] and roundMode [${roundMode}] are incompatible`
+  );
+
+  // Require `items` to have at least 2 elements
+  invariant(
+    Array.isArray(items) && items.length >= 2,
+    `items ${JSON.stringify(
+      items
+    )} should be array and have it least 2 elements`
   );
 
   const { pickerSize, pickerWidth, pickerHeight } = useMemo(() => {

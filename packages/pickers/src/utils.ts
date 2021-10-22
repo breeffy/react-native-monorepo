@@ -150,9 +150,9 @@ export const getScrollableIndexInterpolateConfig = (
   }
 
   throw new Error(
-    `failed to calculate picker interpolation config: input [${JSON.stringify(
+    `failed to calculate picker interpolation config: input ${JSON.stringify(
       input
-    )}], output [${JSON.stringify(output)}], type [${type}]`
+    )}, output ${JSON.stringify(output)}, type [${type}]`
   );
 };
 
