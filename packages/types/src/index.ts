@@ -1,1 +1,5 @@
-export type { ChangePropertyType, RequiredExcept } from './properties';
+export type {
+  ChangePropertyType,
+  RequiredExcept,
+  Intersection
+} from './properties';

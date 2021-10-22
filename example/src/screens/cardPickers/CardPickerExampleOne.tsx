@@ -29,86 +29,6 @@ const Settings = {
   imageMargin: 40
 };
 
-interface CardPickerItemProps<T> extends CardItemProps<T> {
-  style?: StyleProp<ViewStyle>;
-}
-
-export const CardPickerItem = <T,>({
-  itemIndex,
-  itemWidth,
-  itemHeight,
-  currentIndex,
-  translates,
-  scales,
-  pickerBorderDistance,
-  style: _style,
-  children
-}: PropsWithChildren<CardPickerItemProps<T>>) => {
-  const style = useAnimatedStyle(() => {
-    const opacity = interpolate(
-      currentIndex.value,
-      [itemIndex - 3, itemIndex - 2, itemIndex - 1, itemIndex, itemIndex + 1],
-      [0, 1, 1, 1, 0.2],
-      Extrapolate.CLAMP
-    );
-
-    const scale = interpolate(
-      currentIndex.value,
-      [
-        itemIndex - 3,
-        itemIndex - 2,
-        itemIndex - 1,
-        itemIndex,
-        itemIndex + 1,
-        itemIndex + 2,
-        itemIndex + 3
-      ],
-      [scales[3], scales[2], scales[1], scales[0], 0.8],
-      Extrapolate.EXTEND
-    );
-
-    const translateX = interpolate(
-      currentIndex.value,
-      [
-        itemIndex - 4,
-        itemIndex - 3,
-        itemIndex - 2,
-        itemIndex - 1,
-        itemIndex,
-        itemIndex + 1
-      ],
-      [
-        0,
-        translates[3],
-        translates[2],
-        translates[1],
-        translates[0],
-        -pickerBorderDistance
-      ],
-      Extrapolate.CLAMP
-    );
-
-    return {
-      width: itemWidth,
-      height: itemHeight,
-      overflow: 'hidden',
-      opacity: opacity,
-      transform: [
-        {
-          translateX: translateX
-        },
-        { scale: scale }
-      ]
-    };
-  }, [translates, scales]);
-
-  const containerStyle = useMemoOne(() => {
-    return [_style, style];
-  }, [_style, style]);
-
-  return <Animated.View style={containerStyle}>{children}</Animated.View>;
-};
-
 export const CardPickerExampleOne = () => {
   const items: number[] = [...Array(10)];
   const index = useSharedValue(0);
@@ -118,7 +38,7 @@ export const CardPickerExampleOne = () => {
   }, []);
 
   const renderItem = useCallbackOne<CardPickerProps<number>['renderItem']>(
-    (props) => {
+    props => {
       console.log(
         `images length: ${Images.length},props: ${JSON.stringify(
           props.itemIndex
@@ -132,7 +52,7 @@ export const CardPickerExampleOne = () => {
         <CardPickerItem {...props} style={styles.cardPickerItem}>
           <Image
             source={source}
-            resizeMode="cover"
+            resizeMode='cover'
             style={{
               width: props.itemWidth,
               height: props.itemHeight
@@ -156,10 +76,10 @@ export const CardPickerExampleOne = () => {
   return (
     <CardPicker
       items={items}
-      mode="horizontal"
-      scrollMode="multipleItems"
-      scrollComponentKind="scrollview"
-      scrollModeDeceleration="fast"
+      mode='horizontal'
+      scrollMode='multipleItems'
+      scrollComponentKind='scrollview'
+      scrollModeDeceleration='fast'
       pickerSize={Settings.pickerSize}
       itemWidth={Settings.itemWidth}
       itemHeight={Settings.itemHeight}

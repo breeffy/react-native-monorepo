@@ -21,6 +21,7 @@ module.exports = {
     'react-native/no-inline-styles': 'off',
     'no-bitwise': 'off',
     'no-shadow': 'off',
+    'no-undef': 'off',
     curly: 'off'
   }
 };

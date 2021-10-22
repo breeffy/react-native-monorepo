@@ -11,15 +11,20 @@
   "peerDependencies": {
     "@react-native-async-storage/async-storage": "*",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-animateable-text": "*"
   },
   "devDependencies": {
+    "@breeffy/types": "^0.0.1",
     "@types/react": "^17.0.26",
-    "@types/react-native": "^0.65.2"
+    "@types/react-native": "^0.65.9",
+    "copyfiles": "^2.4.1",
+    "react-native-animateable-text": "*",
+    "concurrently": "^6.3.0"
   },
   "dependencies": {
-    "@breeffy/elements": "^0.0.1",
     "@breeffy/calendars": "^0.5.0-alpha.3",
+    "@breeffy/elements": "^0.0.1",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-community/slider": "^4.1.9",
     "@react-navigation/native": "^6.0.4",
@@ -40,10 +45,12 @@
   ],
   "scripts": {
     "dev": "tsc --build --watch --preserveWatchOutput ./tsconfig.dev.json",
-    "build": "tsc -b",
+    "build": "concurrently --kill-others-on-fail -n build:tsc,copy:assets \"yarn:build:tsc\" \"yarn:copy:assets\"",
+    "build:tsc": "tsc -b",
     "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
     "clean:npm": "rm -rf ./node_modules",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm",
+    "copy:assets": "copyfiles --error assets/*.* lib",
     "prestart": "sb-rn-get-stories --config-path=./src/storybook",
     "storybook-watcher": "sb-rn-watcher --config-path=./src/storybook"
   }
