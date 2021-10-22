@@ -15,6 +15,7 @@
       "**/react-native-svg",
       "**/react-native-reanimated",
       "**/react-native-gesture-handler",
+      "**/react-native-animateable-text",
       "**/@react-navigation/native",
       "**/@react-navigation/native-stack",
       "**/react-native-screens",
