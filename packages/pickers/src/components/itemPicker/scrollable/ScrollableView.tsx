@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useLayoutEffect } from 'react';
+import React, { forwardRef, useLayoutEffect, useMemo } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -28,7 +28,7 @@ const ScrollableViewComponent = <T,>(
 ) => {
   useLayoutEffect(() => {}, []);
 
-  const ContentList: Function = useCallback(() => {
+  const ContentList = useMemo(() => {
     if (ItemSeparatorComponent === undefined) {
       return items.map((item, index) => {
         return renderItem(item, index);
@@ -46,7 +46,7 @@ const ScrollableViewComponent = <T,>(
       }
       return renderItem(item, index);
     });
-  }, [items, ItemSeparatorComponent]);
+  }, [items, ItemSeparatorComponent, renderItem]);
 
   return (
     <AnimatedScrollView
@@ -62,7 +62,7 @@ const ScrollableViewComponent = <T,>(
       onScroll={onScroll}
     >
       <View style={headerComponentStyle} />
-      <ContentList />
+      {ContentList}
       <View style={footerComponentStyle} />
     </AnimatedScrollView>
   );
