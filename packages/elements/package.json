@@ -1,7 +1,6 @@
 {
   "name": "@breeffy/elements",
   "version": "0.0.1",
-  "private": false,
   "description": "Set of essential UI components",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
