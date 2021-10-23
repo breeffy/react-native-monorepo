@@ -1,3 +1,6 @@
+# Ignore Yarn artifacts
+.yarn/cache
+.yarn/install-state.gz
 # Ignore TypeScript generated .tsbuildinfo files
 *.tsbuildinfo
 # Ignore VS Code workspace files
