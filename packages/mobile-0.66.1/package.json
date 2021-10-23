@@ -10,7 +10,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "dev:start": "MODE=dev yarn run start",
     "dev:android": "concurrently --kill-others-on-fail -n server,android \"yarn:dev:start\" \"yarn:android\"",
-    "dev:ios": "concurrently --kill-others-on-fail -n server,ios \"yarn:dev:start\" \"yarn:ios\""
+    "dev:ios": "concurrently --kill-others-on-fail -n server,ios \"yarn:dev:start\" \"yarn:ios\"",
+    "clean:npm": "rm -rf ./node_modules"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   },
   "dependencies": {
     "@breeffy/example": "*",
@@ -41,9 +45,6 @@
     "react-native-monorepo-tools": "=1.1.0",
     "react-test-renderer": "17.0.2",
     "typescript": "^3.8.3"
-  },
-  "resolutions": {
-    "@types/react": "^17"
   },
   "jest": {
     "preset": "react-native",

@@ -12,6 +12,9 @@
     "dev:android": "concurrently --kill-others-on-fail -n server,android \"yarn:dev:start\" \"yarn:android\"",
     "dev:ios": "concurrently --kill-others-on-fail -n server,ios \"yarn:dev:start\" \"yarn:ios\""
   },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "dependencies": {
     "@breeffy/example": "*",
     "@react-native-async-storage/async-storage": "=1.15.9",
@@ -41,9 +44,6 @@
     "react-native-monorepo-tools": "=1.1.0",
     "react-test-renderer": "17.0.2",
     "typescript": "^3.8.3"
-  },
-  "resolutions": {
-    "@types/react": "^17"
   },
   "jest": {
     "preset": "react-native",
