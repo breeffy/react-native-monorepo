@@ -1156,22 +1156,28 @@ __metadata:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
     "@breeffy/example": "*"
+    "@react-native-async-storage/async-storage": =1.15.9
     "@react-native-community/eslint-config": ^2.0.0
     "@react-navigation/native": =6.0.4
     "@react-navigation/native-stack": =6.2.2
     "@types/jest": ^26.0.23
-    "@types/react-native": ^0.65.0
+    "@types/react-native": ^0.65.10
     "@types/react-test-renderer": ^17.0.1
     babel-jest: ^26.6.3
+    concurrently: ^6.3.0
     eslint: ^7.14.0
     jest: ^26.6.3
     metro-react-native-babel-preset: ^0.66.0
     react: =17.0.2
     react-native: =0.65.1
+    react-native-animateable-text: =0.7.0
     react-native-codegen: ^0.0.7
+    react-native-gesture-handler: =1.10.3
     react-native-monorepo-tools: =1.1.0
+    react-native-reanimated: =2.3.0-beta.3
     react-native-safe-area-context: =3.3.2
     react-native-screens: =3.8.0
+    react-native-svg: =12.2.0
     react-test-renderer: 17.0.2
     typescript: ^3.8.3
   languageName: unknown
@@ -3960,21 +3966,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:^0.65.0, @types/react-native@npm:^0.65.2":
-  version: 0.65.4
-  resolution: "@types/react-native@npm:0.65.4"
-  dependencies:
-    "@types/react": "*"
-  checksum: d48cbd542a67723554ebbd062eefb82cc715078e184318c5244be87bf58053a6da94c1e8819f6587ba82f13132034f5a5d8978648f49ce7eac9bc22c3fb1bfc3
-  languageName: node
-  linkType: hard
-
 "@types/react-native@npm:^0.65.10":
   version: 0.65.10
   resolution: "@types/react-native@npm:0.65.10"
   dependencies:
     "@types/react": "*"
   checksum: 7a14600fd6d71e64388dbde9849aeec2c7233010cfc4ed2836d441a14d518079b55f14639c873e79b5f1d47e8814b66ffd4ef9399a788e6bfcf9236dc4417731
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:^0.65.2":
+  version: 0.65.4
+  resolution: "@types/react-native@npm:0.65.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: d48cbd542a67723554ebbd062eefb82cc715078e184318c5244be87bf58053a6da94c1e8819f6587ba82f13132034f5a5d8978648f49ce7eac9bc22c3fb1bfc3
   languageName: node
   linkType: hard
 
@@ -12643,6 +12649,17 @@ __metadata:
     react-native: ">=0.64.0-rc.3"
     react-native-reanimated: "*"
   checksum: 4124504dfde46990e385d265e8279e5828d62c122c4341300cfa183c438e1e8e87fb9bdf0a2ed8b84ff3eddcf92fd6e0bc3c9e1a4d704c65f924b0ba4fe6043a
+  languageName: node
+  linkType: hard
+
+"react-native-animateable-text@npm:=0.7.0":
+  version: 0.7.0
+  resolution: "react-native-animateable-text@npm:0.7.0"
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.64.0-rc.3"
+    react-native-reanimated: "*"
+  checksum: c02fb6fcca7fa53d23cae6091dd1e5c2fe469bfd931a73b85b7a28ec7336d188a1953e54e70e7ea27eb610a7dd8168d78dcba5c27b1d8f8590fa8bd66d3dd278
   languageName: node
   linkType: hard
 
