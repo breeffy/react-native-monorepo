@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "dev:start": "MODE=dev yarn run start",
+    "dev:android": "concurrently --kill-others-on-fail -n server,android \"yarn:dev:start\" \"yarn:android\"",
+    "dev:ios": "concurrently --kill-others-on-fail -n server,ios \"yarn:dev:start\" \"yarn:ios\""
   },
   "installConfig": {
     "hoistingLimits": "workspaces"
