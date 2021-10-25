@@ -1,4 +1,5 @@
 {
+  "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -8,14 +9,16 @@
     "eject": "expo eject",
     "test": "jest --watchAll"
   },
-  "jest": {
-    "preset": "jest-expo"
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   },
   "dependencies": {
+    "@breeffy/example": "*",
     "@expo/vector-icons": "^12.0.0",
+    "@react-native-async-storage/async-storage": "=1.15.9",
     "@react-navigation/bottom-tabs": "^6.0.5",
-    "@react-navigation/native": "^6.0.2",
-    "@react-navigation/native-stack": "^6.1.0",
+    "@react-navigation/native": "=6.0.4",
+    "@react-navigation/native-stack": "=6.2.2",
     "expo": "~43.0.0",
     "expo-asset": "~8.4.3",
     "expo-constants": "~12.1.2",
@@ -24,11 +27,15 @@
     "expo-splash-screen": "~0.13.3",
     "expo-status-bar": "~1.1.0",
     "expo-web-browser": "~10.0.3",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-native": "0.64.2",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-screens": "~3.8.0",
+    "react": "=17.0.1",
+    "react-dom": "=17.0.1",
+    "react-native": "=0.64.2",
+    "react-native-animateable-text": "^0.6.0",
+    "react-native-gesture-handler": "=1.10.3",
+    "react-native-reanimated": "=2.3.0-beta.3",
+    "react-native-safe-area-context": "=3.3.2",
+    "react-native-screens": "=3.8.0",
+    "react-native-svg": "=12.2.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
@@ -36,7 +43,10 @@
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "jest-expo": "~43.0.0",
+    "react-native-monorepo-tools": "=1.1.0",
     "typescript": "~4.3.5"
   },
-  "private": true
+  "jest": {
+    "preset": "jest-expo"
+  }
 }
