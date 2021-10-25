@@ -1,7 +1,6 @@
-# React Native Calendar
+# React Native UI kit
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/breeffy/react-native-calendar?color=blue&style=flat-square)
-![npm](https://img.shields.io/npm/v/@breeffy/react-native-calendar?color=yellow&label=npm%40latest&style=flat-square) [![npm](https://img.shields.io/github/license/breeffy/react-native-calendar?color=green&style=flat-square)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) [![npm](https://img.shields.io/badge/types-Typescript-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
+[![npm](https://img.shields.io/github/license/breeffy/react-native-calendar?color=green&style=flat-square)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) [![npm](https://img.shields.io/badge/types-Typescript-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
 
 ## Overview
 
