@@ -2,43 +2,99 @@
 
 [![npm](https://img.shields.io/github/license/breeffy/react-native-calendar?color=green&style=flat-square)](https://github.com/breeffy/react-native-calendar/blob/main/LICENSE) [![npm](https://img.shields.io/badge/types-Typescript-blue?style=flat-square)](https://www.npmjs.com/package/@gorhom/bottom-sheet)
 
-## Overview
+## Components
 
-High-quality, modern, fast interactive calendar built specifically with performance in mind. Supports gestures and animations.
+| Name          |                                Package                                 | Description                                       |
+| ------------- | :--------------------------------------------------------------------: | ------------------------------------------------- |
+| **Calendars** | [@breeffy/calendars](https://www.npmjs.com/package/@breeffy/calendars) | Performant calendars with gestures and animations |
+| **Pickers**   |   [@breeffy/pickers](https://www.npmjs.com/package/@breeffy/pickers)   | Wheel pickers, swipers, carousels                 |
+| **Elements**  |  [@breeffy/elements](https://www.npmjs.com/package/@breeffy/elements)  | **Toggle** and other essential components         |
 
-![React Native Calendar](./preview.gif)
+## Storybook
 
-## Main Features
+You can play with components and it's properties using **interactive storybook** playground.
 
-| Feature                  |       Status       | Description                                                                                                         |
-| ------------------------ | :----------------: | ------------------------------------------------------------------------------------------------------------------- |
-| **Gregorian** calendar   | :heavy_check_mark: | Supports gregorian calendar                                                                                         |
-| **Horizontal** calendar  | :heavy_check_mark: | Horizontal calendar, allows scrolling months horizontally                                                           |
-| **Vertical** calendar    |        :x:         | Vertical calendar, allows scrolling months vertically                                                               |
-| **Infinite** calendar    |   :construction:   | Allows rendering / scrolling practically infinite amount of months. You can show more than **12000 months**         |
-| **Selection** mode       | :heavy_check_mark: | Supports `singleDay` (can select only one day in calendar) or `multipleDays` (can select multiple days in calendar) |
-| **Pagination** mode      | :heavy_check_mark: | Supports pagination mode                                                                                            |
-| **Themes**               | :heavy_check_mark: | Supports custom themes to customize calendar appearance                                                             |
-| **Dark mode**            | :heavy_check_mark: | Supports dark mode by using `CalendarThemeDark` theme                                                               |
-| **Blank-free** scrolling |   :construction:   | If scrolling is happening faster than calendar can render months, it will replace them with `month-year` text       |
-| **Gestures**             | :heavy_check_mark: | Supports gestures / swipes to scroll calendar                                                                       |
-| **Animations**           | :heavy_check_mark: | Supports high-performant native animations based on scroll position                                                 |
+Run metro server in **dev** mode and run application
 
-:heavy_check_mark: - done
-:construction: - in progress
-:x: - not supported
+```bash
+yarn dev:android
+```
 
-## Supported Versions
+Don't forget to install dependencies before that
 
-> React Native ecosystem is evolving rapidly, fixing and introducing many bugs. For example **react-native-calendar** [doesn't work for React Native `0.63.3`](https://github.com/facebook/react-native/issues/30533) because this version doesn't support **ScrollView** `contentOffset` property for Android, while [`0.63.4` should work](https://github.com/facebook/react-native/commit/ed29ba13f97f240c91fdf6c0ef3fb601046697b9).
+```bash
+yarn install
+```
 
-Because of this we provide a table of supported versions.
-| Calendar | React Native | React Native Reanimated | React Native Gesture Handler | React Native SVG |
-| :------------------------: | :-----------------------: | :-------------------------: | :--------------------------: |:--------------------------: |
-| **0.3.0**, **0.4.0**, **0.4.1**, **0.5.0** | 0.64.0 | 2.1.0 | 1.10.3 | 12.1.0 |
+Code for **examples** can be found [here](https://github.com/breeffy/react-native-monorepo/tree/main/packages/example-app/src/stories).
 
-> [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated), [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) and [react-native-svg](https://github.com/react-native-svg/react-native-svg) are **peerDependencies** and need to be installed beforehand.
+## Showcase
 
-## Usage
+### Pickers
+
+![Card Pickers](./previews/cardpickers.png)
+
+### Calendars
+
+![Calendars](./previews/calendars.gif)
+
+## Support
+
+### React Native Versions
+
+Versions [`0.65.1`](https://github.com/breeffy/react-native-monorepo/tree/main/packages/mobile-0.65.1), [`0.66.0`](https://github.com/breeffy/react-native-monorepo/tree/main/packages/mobile-0.66.0), [`0.66.1`](https://github.com/breeffy/react-native-monorepo/tree/main/packages/mobile-0.66.1) are supported. For every supported version you can find example application.
+
+Run specific example application with RN `<version>` using command
+
+```bash
+yarn dev:android:<version>
+```
+
+For example for RN `0.66.1` it will be
+
+```bash
+yarn dev:android:0.66.1
+```
+
+> RN versions `0.63.4 - 0.65.0` might work, but components are not tested against these versions.
+
+### Peer Dependencies
+
+Packages **allow any version** of peer dependency and it's combinations
+
+```json
+"peerDependencies": {
+  "react": "*",
+  "react-native": "*",
+  "react-native-gesture-handler": "*",
+  "react-native-reanimated": "*",
+  "react-native-svg": "*"
+}
+```
+
+They might have **incompatibilities between each other**.
+
+Versions that are **guaranteed to be working** are specified in example applications.
+
+> Select a **release commit** with version you are interested in, look at `package.json` of example application with required RN `version`
+
+For latest packages in GitHub:
+[`0.65.1`](https://github.com/breeffy/react-native-monorepo/blob/main/packages/mobile-0.65.1/package.json#L24),
+[`0.66.0`](https://github.com/breeffy/react-native-monorepo/blob/main/packages/mobile-0.66.0/package.json#L24),
+[`0.66.1`](https://github.com/breeffy/react-native-monorepo/blob/main/packages/mobile-0.66.1/package.json#L24).
+
+> Other `peerDependencies` combinations **are not officially supported**, but should work.
+
+### Operating Systems
+
+Right now **only Android is officially supported**.
+
+### Expo
+
+Expo platform **is not officially supported**.
+
+Meanwhile it's expected that **components should be working** in Expo platform since no native or platform-specific code is used.
+
+But **storybook** playground **doesn't work with Expo** and components can't be easily tested against it.
 
 Copyright © 2020-2022, [Victor Malov](https://github.com/likern).
