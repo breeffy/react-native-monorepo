@@ -118,4 +118,4 @@ type CalendarProps = {
 };
 ```
 
-Copyright © 2020-2021, [Victor Malov](https://github.com/likern).
+Copyright © 2020-2022, [Victor Malov](https://github.com/likern).
