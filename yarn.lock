@@ -1149,9 +1149,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/mobile-0.65.1@workspace:packages/example-mobile-0.65.1":
+"@breeffy/mobile-0.65.1@workspace:packages/mobile-0.65.1":
   version: 0.0.0-use.local
-  resolution: "@breeffy/mobile-0.65.1@workspace:packages/example-mobile-0.65.1"
+  resolution: "@breeffy/mobile-0.65.1@workspace:packages/mobile-0.65.1"
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
@@ -1183,9 +1183,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/mobile-0.66.0@workspace:packages/example-mobile-0.66.0":
+"@breeffy/mobile-0.66.0@workspace:packages/mobile-0.66.0":
   version: 0.0.0-use.local
-  resolution: "@breeffy/mobile-0.66.0@workspace:packages/example-mobile-0.66.0"
+  resolution: "@breeffy/mobile-0.66.0@workspace:packages/mobile-0.66.0"
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
