@@ -1,7 +1,7 @@
 {
   "name": "@breeffy/types",
   "version": "0.0.1",
-  "description": "Useful Typescript types ",
+  "description": "Useful Typescript types",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "devmode": "src/index.ts",
