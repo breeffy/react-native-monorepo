@@ -22,6 +22,9 @@
     "clean:npm": "rm -rf ./node_modules",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "breeffy",
     "react-native",
