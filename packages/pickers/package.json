@@ -1,12 +1,17 @@
 {
   "name": "@breeffy/pickers",
   "version": "0.0.1",
-  "description": "Pickers and wheel-pickers components",
+  "description": "Pickers UI components",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "devmode": "src/index.ts",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
+  "repository": "https://github.com/breeffy/react-native-monorepo",
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/breeffy/react-native-monorepo/issues"
+  },
+  "homepage": "https://github.com/breeffy/react-native-monorepo#readme",
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
@@ -39,5 +44,14 @@
     "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
     "clean:npm": "rm -rf ./node_modules",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm"
-  }
+  },
+  "keywords": [
+    "breeffy",
+    "react-native",
+    "android",
+    "picker",
+    "component",
+    "reanimated",
+    "ui"
+  ]
 }

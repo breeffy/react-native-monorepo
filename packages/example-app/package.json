@@ -2,7 +2,7 @@
   "name": "@breeffy/example",
   "version": "0.0.0",
   "private": true,
-  "description": "Shared javascript code for react-native-ui example app",
+  "description": "Shared code for example application",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "devmode": "src/index.tsx",

@@ -1,12 +1,17 @@
 {
   "name": "@breeffy/types-react-native",
   "version": "0.0.1",
-  "description": "React Native specific helper types",
+  "description": "Useful Typescript types for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "devmode": "src/index.ts",
   "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
+  "repository": "https://github.com/breeffy/react-native-monorepo",
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/breeffy/react-native-monorepo/issues"
+  },
+  "homepage": "https://github.com/breeffy/react-native-monorepo#readme",
   "devDependencies": {
     "@types/react-native": "^0.65.9"
   },
@@ -19,5 +24,11 @@
     "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
     "clean:npm": "rm -rf ./node_modules",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm"
-  }
+  },
+  "keywords": [
+    "breeffy",
+    "react-native",
+    "android",
+    "types"
+  ]
 }
