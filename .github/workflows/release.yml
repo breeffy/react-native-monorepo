@@ -70,6 +70,16 @@ jobs:
         uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97
         with:
           token: ${{ secrets.BREEFFYBOT_TOKEN }}
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-dir-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: yarn-cache-dir-
       - name: Setup git config
         run: |
           git config user.name "BreeffyBot"
