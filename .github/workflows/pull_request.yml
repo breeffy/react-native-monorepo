@@ -1,4 +1,4 @@
-name: checks
+name: build
 on:
   push:
     branches:
@@ -8,33 +8,13 @@ on:
       - main
 
 jobs:
-  compile:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97
         with:
           token: ${{ secrets.BREEFFYBOT_TOKEN }}
-      - run: yarn install --frozen-lockfile --non-interactive
-      - name: TypeScript compiles
-        run: yarn typescript
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-        with:
-          token: ${{ secrets.BREEFFYBOT_TOKEN }}
-      - run: yarn install --frozen-lockfile --non-interactive
-      - name: Linting passes
-        run: yarn lint
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-        with:
-          token: ${{ secrets.BREEFFYBOT_TOKEN }}
-      - run: yarn install --frozen-lockfile --non-interactive
-      - name: Testing passes
-        run: yarn test --passWithNoTests
+      - run: yarn install --immutable
+      - name: Build packages
+        run: yarn build
