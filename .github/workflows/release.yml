@@ -1,4 +1,4 @@
-name: Publish new package
+name: Publish new release
 on:
   workflow_dispatch:
     inputs:
@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Check version input
         id: version-option
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@441359b1a30438de65712c2fbca0abe4816fa667
         with:
           result-encoding: string
           script: |
@@ -34,7 +34,7 @@ jobs:
             }
       - name: Check prerelease input
         id: prerelease-option
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@441359b1a30438de65712c2fbca0abe4816fa667
         with:
           result-encoding: string
           script: |
@@ -42,43 +42,32 @@ jobs:
               return ''
             } else if (['beta', 'alpha', 'rc'].includes('${{ github.event.inputs.prerelease }}')) {
               if ('${{ github.event.inputs.version }}' === 'prerelease') {
-                return '--preRelease'
+                return '--canary --preid ${{ github.event.inputs.prerelease }}'
               } else {
-                return '--preRelease=${{ github.event.inputs.prerelease }}'
+                return '--canary'
               }
             } else {
               core.setFailed('input version [${{ github.event.inputs.version }}] is not "beta", "alpha" or "rc"')
             }
       - name: Figure out npm tag option
         id: npmtag-option
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@441359b1a30438de65712c2fbca0abe4816fa667
         with:
           result-encoding: string
           script: |
             if ('${{ github.event.inputs.prerelease }}' === '') {
               return ''
             } else if (['beta', 'alpha', 'rc'].includes('${{ github.event.inputs.prerelease }}')) {
-              return '--tag ${{ github.event.inputs.prerelease }}'
+              return '--dist-tag ${{ github.event.inputs.prerelease }}'
             } else {
               core.setFailed('input version [${{ github.event.inputs.version }}] is not "beta", "alpha" or "rc"')
-            }
-      - name: Check draft input
-        id: draft-option
-        uses: actions/github-script@v3.1.0
-        with:
-          result-encoding: string
-          script: |
-            if (!['true', 'false'].includes('${{ github.event.inputs.draft }}')) {
-              core.setFailed('input draft [${{ github.event.inputs.draft }}] is not "true" or "false"')
-            } else {
-              return '${{ github.event.inputs.draft }}' === 'true' ? '--github.draft' : '--no-github.draft'
             }
       - name: Import BreeffyBot GPG Key
         env:
           BREEFFYBOT_GPG_KEY: ${{ secrets.BREEFFYBOT_GPG_KEY }}
         run: echo -e "$BREEFFYBOT_GPG_KEY" | gpg --import
       - name: Checkout source code
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97
         with:
           token: ${{ secrets.BREEFFYBOT_TOKEN }}
       - name: Setup git config
@@ -88,33 +77,19 @@ jobs:
           git config user.signingkey FD07D075138186E0 
           git config commit.gpgSign true
           git config tag.gpgSign true
-      - name: Setup Node.js
-        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
+      - name: Setup Node.js and npm
+        uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c
         with:
-          node-version: 14.x
-      - name: Cache yarn dependencies
-        uses: c-hive/gha-yarn-cache@f23816cdbc6d287b7982b4a08096db01a6329c12
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile --non-interactive
-      - name: Create release
-        run: yarn release -- ${{ steps.version-option.outputs.result }} ${{ steps.prerelease-option.outputs.result }} ${{ steps.draft-option.outputs.result }} --ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.BREEFFYBOT_TOKEN }}
-      - name: Publish to NPM Registry
-        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
-        with:
-          node-version: 14.x
+          node-version: '16.10.0'
+          cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
           scope: '@breeffy'
-      - run: npm publish --access public ${{ steps.npmtag-option.outputs.result }}
+      - name: Install dependencies
+        run: yarn install --immutable
+      - run: >
+          lerna publish --yes --no-verify-access --message "publish new release"
+          ${{ steps.npmtag-option.outputs.result }}
+          ${{ steps.prerelease-option.outputs.result }}
+          ${{ steps.version-option.outputs.result }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_BREEFFY_ORG_PUBLISH_TOKEN }}
-      - name: Publish to GitHub Registry
-        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867
-        with:
-          node-version: 14.x
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@breeffy'
-      - run: npm publish --access public ${{ steps.npmtag-option.outputs.result }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.BREEFFYBOT_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BREEFFY_ORG_AUTOMATION_TOKEN }}
