@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/utils",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Useful utility functions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

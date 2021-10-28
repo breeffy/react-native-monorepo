@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/elements",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "Essential UI components",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,7 +24,7 @@
     "react-native-svg": "*"
   },
   "dependencies": {
-    "@breeffy/hooks": "^0.0.1",
+    "@breeffy/hooks": "^0.5.0",
     "fast-deep-equal": "*"
   },
   "files": [
