@@ -1054,13 +1054,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@breeffy/calendars@^0.5.0-alpha.3, @breeffy/calendars@workspace:packages/calendars":
+"@breeffy/calendars@^0.5.0, @breeffy/calendars@workspace:packages/calendars":
   version: 0.0.0-use.local
   resolution: "@breeffy/calendars@workspace:packages/calendars"
   dependencies:
-    "@breeffy/invariants": ^0.0.1
-    "@breeffy/types": ^0.0.1
-    "@breeffy/utils": ^0.0.1
+    "@breeffy/invariants": ^0.5.0
+    "@breeffy/types": ^0.5.0
+    "@breeffy/utils": ^0.5.0
     "@types/luxon": ^1.25.0
     "@types/react": ^17.0.26
     "@types/react-native": ^0.65.2
@@ -1080,11 +1080,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/elements@^0.0.1, @breeffy/elements@workspace:packages/elements":
+"@breeffy/elements@^0.5.0, @breeffy/elements@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@breeffy/elements@workspace:packages/elements"
   dependencies:
-    "@breeffy/hooks": ^0.0.1
+    "@breeffy/hooks": ^0.5.0
     "@types/react": ^17.0.26
     "@types/react-native": ^0.65.2
     fast-deep-equal: "*"
@@ -1097,13 +1097,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/example@*, @breeffy/example@workspace:packages/example-app":
+"@breeffy/example@^0.5.0, @breeffy/example@workspace:packages/example-app":
   version: 0.0.0-use.local
   resolution: "@breeffy/example@workspace:packages/example-app"
   dependencies:
-    "@breeffy/calendars": ^0.5.0-alpha.3
-    "@breeffy/elements": ^0.0.1
-    "@breeffy/types": ^0.0.1
+    "@breeffy/calendars": ^0.5.0
+    "@breeffy/elements": ^0.5.0
+    "@breeffy/types": ^0.5.0
     "@react-native-community/datetimepicker": ^3.5.2
     "@react-native-community/slider": ^4.1.9
     "@react-navigation/native": ^6.0.4
@@ -1130,7 +1130,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/hooks@^0.0.1, @breeffy/hooks@workspace:packages/hooks":
+"@breeffy/hooks@^0.5.0, @breeffy/hooks@workspace:packages/hooks":
   version: 0.0.0-use.local
   resolution: "@breeffy/hooks@workspace:packages/hooks"
   dependencies:
@@ -1143,7 +1143,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/invariants@^0.0.1, @breeffy/invariants@workspace:packages/invariants":
+"@breeffy/invariants@^0.5.0, @breeffy/invariants@workspace:packages/invariants":
   version: 0.0.0-use.local
   resolution: "@breeffy/invariants@workspace:packages/invariants"
   languageName: unknown
@@ -1155,7 +1155,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
-    "@breeffy/example": "*"
+    "@breeffy/example": ^0.5.0
     "@react-native-async-storage/async-storage": =1.15.9
     "@react-native-community/eslint-config": ^2.0.0
     "@react-navigation/native": =6.0.4
@@ -1189,7 +1189,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
-    "@breeffy/example": "*"
+    "@breeffy/example": ^0.5.0
     "@react-native-async-storage/async-storage": =1.15.9
     "@react-native-community/eslint-config": ^2.0.0
     "@react-navigation/native": =6.0.4
@@ -1222,7 +1222,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.12.9
     "@babel/runtime": ^7.12.5
-    "@breeffy/example": "*"
+    "@breeffy/example": ^0.5.0
     "@react-native-async-storage/async-storage": =1.15.9
     "@react-native-community/eslint-config": ^2.0.0
     "@react-navigation/native": =6.0.4
@@ -1266,9 +1266,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@breeffy/pickers@workspace:packages/pickers"
   dependencies:
-    "@breeffy/invariants": ^0.0.1
-    "@breeffy/types": ^0.0.1
-    "@breeffy/utils": ^0.0.1
+    "@breeffy/invariants": ^0.5.0
+    "@breeffy/types": ^0.5.0
+    "@breeffy/utils": ^0.5.0
     "@types/luxon": ^1.25.0
     "@types/react": ^17.0.26
     "@types/react-native": ^0.65.9
@@ -1295,13 +1295,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@breeffy/types@^0.0.1, @breeffy/types@workspace:packages/types":
+"@breeffy/types@^0.5.0, @breeffy/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@breeffy/types@workspace:packages/types"
   languageName: unknown
   linkType: soft
 
-"@breeffy/utils@^0.0.1, @breeffy/utils@workspace:packages/utils":
+"@breeffy/utils@^0.5.0, @breeffy/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@breeffy/utils@workspace:packages/utils"
   languageName: unknown
