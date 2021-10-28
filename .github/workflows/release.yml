@@ -84,6 +84,10 @@ jobs:
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
           scope: '@breeffy'
+      - name: Yarn Version
+        run: yarn --version
+      - name: Current Working Directory
+        run: pwd
       - name: Install dependencies
         run: yarn install --immutable
       - run: >
