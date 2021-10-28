@@ -27,6 +27,7 @@
     "@types/react": "^17"
   },
   "scripts": {
+    "prepack": "yarn build",
     "dev:android": "lerna run dev:android --scope='@breeffy/mobile-0.66.1' --stream",
     "dev:ios": "lerna run dev:ios --scope='@breeffy/mobile-0.66.1' --stream",
     "dev:android:0.66.1": "lerna run dev:android --scope='@breeffy/mobile-0.66.1' --stream",
