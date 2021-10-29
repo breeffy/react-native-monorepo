@@ -1204,7 +1204,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.66.2
     react: =17.0.2
     react-native: =0.66.0
-    react-native-animateable-text: =0.8.0
+    react-native-animateable-text: =0.8.1
     react-native-gesture-handler: =1.10.3
     react-native-monorepo-tools: =1.1.0
     react-native-reanimated: =2.3.0-beta.3
@@ -1237,7 +1237,7 @@ __metadata:
     metro-react-native-babel-preset: ^0.66.2
     react: =17.0.2
     react-native: =0.66.1
-    react-native-animateable-text: =0.8.0
+    react-native-animateable-text: =0.8.1
     react-native-gesture-handler: =1.10.3
     react-native-monorepo-tools: =1.1.0
     react-native-reanimated: =2.3.0-beta.3
@@ -12641,7 +12641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-animateable-text@npm:*, react-native-animateable-text@npm:=0.8.0":
+"react-native-animateable-text@npm:*":
   version: 0.8.0
   resolution: "react-native-animateable-text@npm:0.8.0"
   peerDependencies:
@@ -12660,6 +12660,19 @@ __metadata:
     react-native: ">=0.64.0-rc.3"
     react-native-reanimated: "*"
   checksum: c02fb6fcca7fa53d23cae6091dd1e5c2fe469bfd931a73b85b7a28ec7336d188a1953e54e70e7ea27eb610a7dd8168d78dcba5c27b1d8f8590fa8bd66d3dd278
+  languageName: node
+  linkType: hard
+
+"react-native-animateable-text@npm:=0.8.1":
+  version: 0.8.1
+  resolution: "react-native-animateable-text@npm:0.8.1"
+  dependencies:
+    nullthrows: ^1.1.1
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.64.0-rc.3"
+    react-native-reanimated: "*"
+  checksum: f0fa72cbed5fdb0acefdd3e7a59d9edc617a3c6523e1b50902dde399fc073a302b998bf11a3f1d5537795d16f8284dfe8e7450a74068579db63a23fe69974450
   languageName: node
   linkType: hard
 
