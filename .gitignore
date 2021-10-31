@@ -1,3 +1,11 @@
+# Ignroe yarn v3 artifacts
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 # Ignore auto-generated Javascript files
 .vscode/
 dist/
