@@ -1,0 +1,6 @@
+branchName: short
+openDraftPR: true
+commentMessage: 'Branch [${branchName}](https://github.com/${repository.full_name}/tree/${branchName}) created. Open it in the [web editor](https://github.dev/${repository.full_name}/tree/${branchName}).'
+copyIssueDescriptionToPR: true
+copyIssueLabelsToPR: true
+copyIssueAssigneeToPR: true
