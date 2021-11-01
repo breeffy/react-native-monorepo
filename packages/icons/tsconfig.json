@@ -1,19 +1,11 @@
 {
+  "extends": "../../configs/typescript/tsconfig.package.json",
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "jsx": "react-native",
-    "lib": ["es2015"],
-    "strict": true,
-    "outDir": "dist",
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "declarationDir": "dist",
-    "declarationMap": true
+    "outDir": "lib",
+    "rootDir": "src"
   },
-  "include": ["src/**/*", "index.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
 }
