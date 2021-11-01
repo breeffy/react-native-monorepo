@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react-native';
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 
@@ -93,7 +92,7 @@ describe('test assertions in SvgIcon component', () => {
       let catchedAssertionError = false;
       try {
         // @ts-ignore
-        render(<SvgIcon icon={faCoffee} color="purple" foo="bar" />);
+        render(<SvgIcon icon={faCoffee} color='purple' foo='bar' />);
       } catch (error) {
         if (error instanceof AssertionError) {
           catchedAssertionError = true;

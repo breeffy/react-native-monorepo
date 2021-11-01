@@ -1,6 +1,5 @@
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
-import SvgIcon, { DEFAULT_SIZE } from '../src/components/SvgIcon';
-import React from 'react';
+import SvgIcon, { DEFAULT_SIZE } from '../components/SvgIcon';
 import renderer from 'react-test-renderer';
 import { StyleSheet } from 'react-native';
 
@@ -43,7 +42,7 @@ test.skip('renders with icon object prop', () => {
 test.skip('renders with mask and transform', () => {
   const tree = renderer
     .create(
-      <SvgIcon icon={faCircle} mask={faCoffee} transform="shrink-9 right-4" />
+      <SvgIcon icon={faCircle} mask={faCoffee} transform='shrink-9 right-4' />
     )
     .toJSON();
   // modify the clipPath and mask identifiers to be fixed, so they aren't regenerated each time and thus
@@ -72,7 +71,7 @@ test.skip('renders with mask and transform', () => {
 
 test.skip('renders transform equivalently when assigning prop as string or object', () => {
   const firstTree = renderer
-    .create(<SvgIcon icon={faCoffee} transform="shrink-9 right-4" />)
+    .create(<SvgIcon icon={faCoffee} transform='shrink-9 right-4' />)
     .toJSON();
   expect(firstTree).toMatchSnapshot();
 
