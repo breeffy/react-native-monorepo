@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 /** Converts array to union of array values */
 /** type Foo = ValuesOf<["key1", "key2"]>   */
