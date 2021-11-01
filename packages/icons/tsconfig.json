@@ -8,6 +8,11 @@
     "outDir": "lib",
     "rootDir": "src"
   },
+  "references": [
+    {
+      "path": "../invariants"
+    },
+  ],
   "exclude": [
     "node_modules",
     "lib"
