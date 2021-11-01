@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 
-import SvgIcon from '../src/components/SvgIcon';
-import { AssertionError } from '../src/assert';
+import { Icon } from '../components';
+import { AssertionError } from '../errors';
 
-const faCoffee: fontawesome.IconDefinition = {
+const faCoffee = {
   prefix: 'fas',
   iconName: 'coffee',
   icon: [
@@ -16,7 +16,7 @@ const faCoffee: fontawesome.IconDefinition = {
   ]
 };
 
-const faCircle: fontawesome.IconDefinition = {
+const faCircle = {
   prefix: 'fas',
   iconName: 'circle',
   icon: [
@@ -39,12 +39,12 @@ afterEach(() => {
   console.error.mockRestore();
 });
 
-describe('test assertions in SvgIcon component', () => {
+describe('test assertions in Icon component', () => {
   describe('when [prefix,iconName] is not registered in library', () => {
     test('assertion error is thrown', () => {
       let catchedAssertionError = false;
       try {
-        render(<SvgIcon icon={['fas', 'users']} />);
+        render(<Icon icon={['fas', 'users']} />);
       } catch (error) {
         if (error instanceof AssertionError) {
           catchedAssertionError = true;
@@ -59,7 +59,7 @@ describe('test assertions in SvgIcon component', () => {
       let catchedAssertionError = false;
       try {
         // @ts-ignore
-        render(<SvgIcon icon={faCoffee} height={32} width={32} />);
+        render(<Icon icon={faCoffee} height={32} width={32} />);
       } catch (error) {
         if (error instanceof AssertionError) {
           catchedAssertionError = true;
@@ -75,7 +75,7 @@ describe('test assertions in SvgIcon component', () => {
       let catchedAssertionError = false;
       try {
         // @ts-ignore
-        render(<SvgIcon icon={faCoffee} size={64} height={32} width={32} />);
+        render(<Icon icon={faCoffee} size={64} height={32} width={32} />);
       } catch (error) {
         if (error instanceof AssertionError) {
           catchedAssertionError = true;
@@ -92,7 +92,7 @@ describe('test assertions in SvgIcon component', () => {
       let catchedAssertionError = false;
       try {
         // @ts-ignore
-        render(<SvgIcon icon={faCoffee} color='purple' foo='bar' />);
+        render(<Icon icon={faCoffee} color='purple' foo='bar' />);
       } catch (error) {
         if (error instanceof AssertionError) {
           catchedAssertionError = true;

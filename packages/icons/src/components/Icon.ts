@@ -11,10 +11,9 @@ import {
   IconName,
   findIconDefinition
 } from '@fortawesome/fontawesome-svg-core';
-
+import { invariant } from '@breeffy/invariants';
 import { isObjectHasDefinedProperty, Key } from '../types';
-import { assert } from '../assert';
-import { Styles, Color } from 'react-native-svg';
+import type { Styles, Color } from 'react-native-svg';
 
 export const DEFAULT_SIZE = 16;
 export const DEFAULT_COLOR = '#000';
@@ -47,18 +46,16 @@ function normalizeIconArgs(icon: IconProp): IconLookup {
   return { prefix: 'fas', iconName: icon };
 }
 
-interface SvgIconProps<T> {
+interface IconProps {
   icon: IconProp;
-  // FIXME: I think something weird on resulting types of StyleProp<ExtendedViewStyle>
-  // FIXME: It's included some Recursive Array, I don't think it's supported by RN
-  style?: Styles | ReadonlyArray<Styles>;
+  style?: Styles | Styles[];
   size?: number;
   color?: Color;
   mask?: IconProp;
   transform?: string | Transform;
 }
 
-export default function SvgIcon({
+export const Icon = ({
   icon,
   mask,
   style = {},
@@ -66,13 +63,13 @@ export default function SvgIcon({
   color,
   transform,
   ...otherProps
-}: SvgIconProps<any>): JSX.Element | null {
+}: IconProps): JSX.Element | null => {
   // Here we test essential invariants
-  assert(
+  invariant(
     typeof icon !== undefined,
     `[ERROR]: property "icon" is required, but it is: ${icon}`
   );
-  assert(
+  invariant(
     Object.getOwnPropertyNames(otherProps).length === 0,
     `[ERROR]: properties [${Object.getOwnPropertyNames(
       otherProps
@@ -81,7 +78,7 @@ export default function SvgIcon({
 
   const iconLookup: IconLookup = normalizeIconArgs(icon);
 
-  assert(
+  invariant(
     findIconDefinition(iconLookup) !== undefined,
     `[ERROR]: can't find icon definition for [${iconLookup.prefix}, ${iconLookup.iconName}]`
   );
@@ -99,10 +96,11 @@ export default function SvgIcon({
     ...maskObject
   });
 
-  assert(
+  invariant(
     renderedIcon !== undefined || renderedIcon !== null,
-    `[ERROR]: icon for [${(iconLookup.prefix,
-    iconLookup.iconName)}] is undefined or null`
+    `[ERROR]: icon for [${
+      (iconLookup.prefix, iconLookup.iconName)
+    }] is undefined or null`
   );
 
   const { abstract } = renderedIcon;
@@ -132,7 +130,7 @@ export default function SvgIcon({
     style: finalStyle
   };
 
-  const props: SvgIconProps<any> = {
+  const props: IconProps = {
     icon,
     mask,
     size,
@@ -140,6 +138,4 @@ export default function SvgIcon({
   };
   const updatedProps = Object.assign({}, props, extraProps);
   return convert(React.createElement, abstract[0], updatedProps);
-}
-
-SvgIcon.displayName = 'SvgIcon';
+};

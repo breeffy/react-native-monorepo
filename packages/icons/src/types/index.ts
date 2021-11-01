@@ -64,9 +64,7 @@ export type ObjectWithDefinedProperties<
   T,
   K,
   O = ObjectAndNotArrayOrFunction<T>,
-  KS = UnionOfObjectKeys<O>,
-  R = Exclude<KS, K>
-  // KS = Exclude<UnionOfObjectKeys<O>, ValuesOf<K>   & K
+  KS = UnionOfObjectKeys<O>
 > = KS extends Key
   ? O extends { [key in KS]: any }
     ? K extends Array<KS>

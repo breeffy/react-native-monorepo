@@ -1,6 +1,10 @@
 {
   "extends": "../../configs/typescript/tsconfig.package.json",
   "compilerOptions": {
+    "types": [
+      "node",
+      "jest"
+    ],
     "outDir": "lib",
     "rootDir": "src"
   },
