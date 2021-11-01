@@ -1,0 +1,55 @@
+{
+  "preset": "conventionalcommits",
+  "parserOpts": {
+    "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+  },
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "releaseRules": [{ "scope": "no-release", "release": false }]
+      }
+    ],
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# Change Log"
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false,
+        "tarballDir": "."
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "package.json", "yarn.lock"]
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "ls breeffy-react-native-svg-icons-${nextRelease.version}.tgz"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "breeffy-react-native-svg-icons-*.tgz"
+          }
+        ],
+        "failTitle": "Generating GitHub release failed",
+        "labels": ["semantic-release", "github-release"],
+        "assignees": ["likern"],
+        "releasedLabels": ["resolved-in-release"]
+      }
+    ]
+  ]
+}

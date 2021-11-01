@@ -1,0 +1,62 @@
+name: tests on master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Run jest tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [10.x, 12.x, 13.x]
+        react: [16.9.x]
+        react-native-svg: [7.x, 8.x, 9.x, 10.x, 11.x, 12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: yarn install and test
+        run: |
+          yarn install
+          yarn upgrade react@${{ matrix.react }} react-dom@${{ matrix.react }} react-test-renderer@${{ matrix.react }} react-native-svg@${{ matrix.react-native-svg }}
+          yarn list react react-dom react-test-renderer react-native-svg
+          yarn test
+  # DO NOT PUBLISH PACKAGE AUTOMATICALLY
+  # release:
+  #   name: Create and publish package
+  #   runs-on: ubuntu-latest
+  #   needs: [test]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #     - name: Show current node version
+  #       run: node --version
+  #     - name: Install dependencies and local binaries
+  #       if: success()
+  #       run: yarn install
+  #     - name: Generate js, d.ts files in dist directory
+  #       if: success()
+  #       run: yarn dist
+  #     - name: Prepare package and publish to GitHub releases
+  #       if: success()
+  #       env:
+  #         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #       run: npx semantic-release
+  #     - name: Setup node with GitHub Packages registry
+  #       if: success()
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         registry-url: 'https://npm.pkg.github.com'
+  #     - name: Publish package to GitHub Packages
+  #       if: success()
+  #       run: npm publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
