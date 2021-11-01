@@ -1,93 +1,49 @@
 {
-  "name": "@breeffy/react-native-svg-icons",
+  "name": "@breeffy/icons",
   "version": "0.5.0",
-  "description": "React Native component for SVG icons",
-  "main": "dist/index.js",
-  "scripts": {
-    "build:index": "npx tsc -d --emitDeclarationOnly ./index.ts",
-    "test": "npx jest",
-    "prepack": "npx tsc",
-    "postpack": "npx rimraf dist/",
-    "release": "release-it",
-    "set.rnsvg": "yarn upgrade react-native-svg@$RNSVG_VERSION"
-  },
-  "types": "dist/index.d.ts",
-  "homepage": "https://github.com/breeffy/react-native-svg-icons.git",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/breeffy/react-native-svg-icons.git"
-  },
-  "contributors": [
-    "Victor Malov <malvikus@gmail.com>",
-    "Travis Chase <travis@fontawesome.com>",
-    "Rob Madole <rob@fontawesome.com>",
-    "Mike Wilkerson <mwilkerson@gmail.com>",
-    "Dizy <mhisf@vip.qq.com>"
-  ],
+  "description": "Icons UI components",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "devmode": "src/index.ts",
+  "author": "Victor Malov <victor.malov@breeffy.com> (https://github.com/likern)",
+  "repository": "https://github.com/breeffy/react-native-monorepo",
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/breeffy/react-native-monorepo/issues"
+  },
+  "homepage": "https://github.com/breeffy/react-native-monorepo#readme",
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2",
     "react": "*",
     "react-native": "*",
-    "react-native-svg": "*"
+    "react-native-svg": "*",
+    "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "@babel/preset-react": "^7.12.13",
-    "@babel/runtime": "^7.13.10",
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
-    "@fortawesome/fontawesome-svg-core": "^1.2.34",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/exec": "^5.0.0",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/npm": "^7.0.10",
-    "@testing-library/react-native": "^7.2.0",
-    "@types/assert": "^1.5.4",
-    "@types/humps": "^2.0.0",
-    "@types/jest": "^26.0.20",
-    "@types/react-native": "^0.63.51",
-    "@types/react-test-renderer": "^17.0.1",
-    "babel-core": "^7.0.0-bridge",
-    "babel-jest": "^25.1.0",
-    "conventional-changelog-conventionalcommits": "^4.5.0",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.65.2",
-    "react": "^17.0.1",
-    "react-native": "^0.61.5",
-    "react-native-svg": "^12.1.0",
-    "react-test-renderer": "^17.0.1",
-    "release-it": "^14.4.1",
-    "rimraf": "^3.0.2",
-    "semantic-release": "^17.4.2",
-    "typescript": "^4.2.3"
-  },
-  "dependencies": {
-    "humps": "^2.0.1"
+    "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2",
+    "@types/react": "^17.0.26",
+    "@types/react-native": "^0.66.1",
+    "react": "*",
+    "react-native-svg": "*"
   },
   "files": [
-    "dist/"
+    "lib"
   ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean:tsc": "rm -rf ./lib && rm -f tsconfig.tsbuildinfo",
+    "clean:npm": "rm -rf ./node_modules",
+    "clean:all": "yarn run clean:tsc && yarn run clean:npm"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "breeffy",
     "react-native",
-    "react-native-svg-icons",
-    "react-native-svg",
-    "icons"
-  ],
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
-    "npm": {
-      "publish": false
-    },
-    "github": {
-      "release": false
-    }
-  },
-  "packageManager": "yarn@3.0.2"
+    "android",
+    "icons",
+    "component",
+    "svg",
+    "ui"
+  ]
 }
