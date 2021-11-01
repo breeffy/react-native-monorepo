@@ -1,7 +1,7 @@
-import React from 'react';
 import humps from 'humps';
 import { Svg, Path, Rect, Defs, Mask, G, ClipPath } from 'react-native-svg';
-import { AbstractElement } from '@fortawesome/fontawesome-svg-core';
+import type React from 'react';
+import type { AbstractElement } from '@fortawesome/fontawesome-svg-core';
 
 const svgObjectMap = {
   svg: Svg,
