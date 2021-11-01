@@ -1,0 +1,20 @@
+{
+  "extends": "../../configs/typescript/tsconfig.package.json",
+  "compilerOptions": {
+    "types": [
+      "node",
+      "jest"
+    ],
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "references": [
+    {
+      "path": "../invariants"
+    },
+  ],
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
+}
