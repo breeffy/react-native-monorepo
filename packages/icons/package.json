@@ -13,10 +13,10 @@
   },
   "homepage": "https://github.com/breeffy/react-native-monorepo#readme",
   "peerDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2",
     "react": "*",
     "react-native": "*",
-    "react-native-svg": "*",
-    "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2"
+    "react-native-svg": "*"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2",
