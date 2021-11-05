@@ -7,10 +7,16 @@
   },
   "references": [
     {
+      "path": "../calendars"
+    },
+    {
+      "path": "../pickers"
+    },
+    {
       "path": "../elements"
     },
     {
-      "path": "../calendars"
+      "path": "../icons"
     }
   ],
   "exclude": [
