@@ -4,16 +4,19 @@ import { StyleSheet } from 'react-native';
 import {
   icon as makeIcon,
   parse,
+  findIconDefinition
+} from '@fortawesome/fontawesome-svg-core';
+import { invariant } from '@breeffy/invariants';
+import { isObjectHasDefinedProperty } from '../types';
+import type { Styles, Color } from 'react-native-svg';
+import type {
   IconProp,
   Transform,
   IconLookup,
   IconPrefix,
-  IconName,
-  findIconDefinition
+  IconName
 } from '@fortawesome/fontawesome-svg-core';
-import { invariant } from '@breeffy/invariants';
-import { isObjectHasDefinedProperty, Key } from '../types';
-import type { Styles, Color } from 'react-native-svg';
+import type { Key } from '../types';
 
 export const DEFAULT_SIZE = 16;
 export const DEFAULT_COLOR = '#000';
@@ -46,7 +49,7 @@ function normalizeIconArgs(icon: IconProp): IconLookup {
   return { prefix: 'fas', iconName: icon };
 }
 
-interface IconProps {
+export interface IconProps {
   icon: IconProp;
   style?: Styles | Styles[];
   size?: number;

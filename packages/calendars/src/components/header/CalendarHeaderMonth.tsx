@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Text, View, ViewStyle } from 'react-native';
+import { Text, View } from 'react-native';
 import { useCalendarInternal } from '../../hooks/useCalendarInternal';
 import {
   calendarHeaderThemeToTextStyle,
@@ -9,6 +9,7 @@ import { getMonthInterpolateConfig, getStartOfEveryMonth } from '../../utils';
 import { CalendarAnimatedHeader } from './CalendarAnimatedHeader';
 import { styles } from './styles';
 import { useCalendarTheme } from '../../hooks';
+import type { ViewStyle } from 'react-native';
 
 export interface CalendarHeaderMonthProps {
   height?: number;

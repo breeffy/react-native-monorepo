@@ -3,11 +3,9 @@ import Animated, {
   useSharedValue,
   cancelAnimation
 } from 'react-native-reanimated';
-import {
-  State,
-  PanGestureHandlerGestureEvent
-} from 'react-native-gesture-handler';
+import { State } from 'react-native-gesture-handler';
 import { snapPoint } from 'react-native-redash';
+import type { PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 
 type InteractivePanGestureHandlerContextType = {
   lastAnimatedPosition: number;

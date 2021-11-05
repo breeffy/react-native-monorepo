@@ -3,13 +3,12 @@ import Animated, {
   runOnJS,
   useAnimatedGestureHandler
 } from 'react-native-reanimated';
-import { CalendarDay, CalendarDayKind, CalendarDayProps } from './CalendarDay';
-import {
-  TapGestureHandler,
-  TapGestureHandlerGestureEvent
-} from 'react-native-gesture-handler';
+import { CalendarDay, CalendarDayKind } from './CalendarDay';
+import { TapGestureHandler } from 'react-native-gesture-handler';
 import isEqual from 'fast-deep-equal';
+import type { TapGestureHandlerGestureEvent } from 'react-native-gesture-handler';
 import type { ChangePropertyType } from '@breeffy/types';
+import type { CalendarDayProps } from './CalendarDay';
 
 export type CalendarPressableDayKind = CalendarDayProps['kind'];
 

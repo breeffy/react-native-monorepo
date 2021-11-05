@@ -1,9 +1,10 @@
-import { PropsWithChildren, useMemo } from 'react';
+import { useMemo } from 'react';
 import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle
 } from 'react-native-reanimated';
+import type { PropsWithChildren } from 'react';
 import type { CardItemProps } from '@breeffy/pickers';
 import type { PropsWithStyle } from '@breeffy/types-react-native';
 

@@ -1,7 +1,8 @@
 import { forwardRef, useCallback } from 'react';
-import { FlatListProps, View } from 'react-native';
+import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { FlatList } from 'react-native-gesture-handler';
+import type { FlatListProps } from 'react-native';
 import type { ScrollableCommon, ScrollableFlatListRef } from './types';
 
 export const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);

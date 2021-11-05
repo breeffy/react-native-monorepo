@@ -1,5 +1,7 @@
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { PropsWithChildren, useMemo } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useMemo } from 'react';
+import type { PropsWithChildren } from 'react';
+import type { ViewStyle } from 'react-native';
 
 export interface CalendarHeaderDecoratorProps {
   style?: ViewStyle;

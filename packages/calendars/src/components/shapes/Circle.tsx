@@ -1,5 +1,6 @@
 import { View } from 'react-native';
-import { Svg, Circle, Color } from 'react-native-svg';
+import { Svg, Circle } from 'react-native-svg';
+import type { Color } from 'react-native-svg';
 import type { ViewStyleProp } from '../../types';
 
 export type SvgCircleProps = { color?: Color } & ViewStyleProp;

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import type { PropsWithChildren } from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 export interface HeaderComponentWrapperProps {
   height: NonNullable<ViewStyle['height']>;

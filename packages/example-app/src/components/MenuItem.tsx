@@ -1,12 +1,5 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  StyleProp,
-  ViewStyle,
-  Pressable
-} from 'react-native';
+import { StyleSheet, View, Image, Text, Pressable } from 'react-native';
+import type { StyleProp, ViewStyle } from 'react-native';
 
 export interface MenuItemProps {
   title: string;
