@@ -26,7 +26,6 @@ export const Layout = <T extends {}>({
     return Children.map(arrayChildren, (child, index) => {
       const isLast = index === arrayChildren.length - 1;
       let childStyle: StyleProp<ViewStyle> = {};
-      console.log(`index [${index}]: ${flexDirection}`);
       if (!isLast) {
         if (flexDirection === 'column' || flexDirection === undefined) {
           childStyle = { marginBottom: gap };
