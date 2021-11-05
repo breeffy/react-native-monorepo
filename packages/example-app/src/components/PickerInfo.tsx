@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Text, View } from 'react-native';
 import AnimateableText from 'react-native-animateable-text';
-import { SharedValue, useAnimatedProps } from 'react-native-reanimated';
+import { useAnimatedProps } from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
 import type { ViewStyle, TextStyle, StyleProp } from 'react-native';
 import type { PropsWithStyle } from '@breeffy/types-react-native';
 

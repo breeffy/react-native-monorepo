@@ -3,18 +3,19 @@ import Animated, {
   useAnimatedReaction,
   useSharedValue
 } from 'react-native-reanimated';
-import {
-  ItemPicker,
+import { ItemPicker } from './ItemPicker';
+import { useItemSize } from '../hooks/useItemSize';
+import { cardReducer } from './utils';
+import { usePickerLayout } from '../hooks/usePickerLayout';
+import { interpolateWithRound } from '../worklets';
+import { useCallback, useMemo } from 'react';
+import type {
   ItemPickerProps,
   ItemPickerScrollComponentKind
 } from './ItemPicker';
-import { useItemSize } from '../hooks/useItemSize';
-import { Accumulator, cardReducer } from './utils';
-import { usePickerLayout } from '../hooks/usePickerLayout';
-import { interpolateWithRound } from '../worklets';
+import type { Accumulator } from './utils';
 import type { InterpolateConfig } from '../utils';
 import type { PickerItemProps } from '../components/itemPicker/types';
-import { useCallback, useMemo } from 'react';
 
 export interface ItemProps<T> extends PickerItemProps<T> {
   translates: number[];

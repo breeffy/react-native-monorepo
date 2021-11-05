@@ -1,5 +1,6 @@
-import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { dayOfWeekWidth } from '../../constants';
+import type { StyleProp, TextStyle } from 'react-native';
 
 export enum CalendarDayKind {
   DEFAULT,

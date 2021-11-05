@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Animated, {
   interpolate,
   scrollTo,
@@ -8,7 +8,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { HeaderComponentWrapper } from './HeaderComponentWrapper';
 import { useCalendarAnimated } from '../../hooks/useCalendarAnimated';
-import { PointPropType, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { PointPropType, StyleSheet } from 'react-native';
+import type { PropsWithChildren } from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
 import type { InterpolateConfig, InterpolateOutput } from '../../utils';
 
 export interface CalendarAnimatedHeaderProps {

@@ -9,6 +9,13 @@ import {
 import StorybookUIRoot from './storybook/Storybook';
 import type { RootStackParamList } from './types';
 
+/**
+ * Side-effect import, which registers FontAwesome icons
+ * as library. This allows to use these icons using simple
+ * icon names, without importing them directly.
+ */
+import './configs/fontAwesome';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 // @ts-ignore

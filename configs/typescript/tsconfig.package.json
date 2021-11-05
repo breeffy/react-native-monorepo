@@ -26,6 +26,8 @@
     "noStrictGenericChecks": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "isolatedModules": true,
+    "preserveValueImports": true,
     "importsNotUsedAsValues": "error"
   }
 }

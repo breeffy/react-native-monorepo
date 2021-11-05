@@ -1,13 +1,14 @@
-import {
-  ItemPicker,
+import { ItemPicker } from './ItemPicker';
+import { useItemSize } from '../hooks/useItemSize';
+import { cardReducer } from './utils';
+import { usePickerLayout } from '../hooks/usePickerLayout';
+import { useCallback, useMemo } from 'react';
+import type {
   ItemPickerProps,
   ItemPickerScrollComponentKind
 } from './ItemPicker';
-import { useItemSize } from '../hooks/useItemSize';
-import { Accumulator, cardReducer } from './utils';
-import { usePickerLayout } from '../hooks/usePickerLayout';
-import { useCallback, useMemo } from 'react';
 import type { PickerItemProps } from '../components/itemPicker/types';
+import type { Accumulator } from './utils';
 
 export interface CardItemProps<T> extends PickerItemProps<T> {
   translates: number[];

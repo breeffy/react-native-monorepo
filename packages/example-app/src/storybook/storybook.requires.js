@@ -31,6 +31,7 @@ const getStories = () => {
     require('../stories/Calendar.stories'),
     require('../stories/CardPicker.stories'),
     require('../stories/NumberPicker.stories'),
+    require('../stories/Icon.stories'),
     require('../stories/Toggle.stories'),
     require('../stories/ToggleWithState.stories')
   ];

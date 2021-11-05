@@ -4,13 +4,10 @@ import Animated, {
   useDerivedValue
 } from 'react-native-reanimated';
 import { getValueProgress, interpolateWithRound } from '../../../worklets';
-import { View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import { usePaddingLayout } from '../../../hooks/usePaddingLayout';
 import { ScrollableView } from './ScrollableView';
-import {
-  ScrollableFlatList,
-  ScrollableFlatListProps
-} from './ScrollableFlatList';
+import { ScrollableFlatList } from './ScrollableFlatList';
 import { usePagination } from '../../../hooks/usePagination';
 import { useScroll } from '../../../hooks/useScroll';
 import type { ScrollableCommon } from './types';
@@ -23,7 +20,9 @@ import type {
 import type { InterpolateConfig } from '../../../utils';
 import { itemsDistance } from '../../../pickers/utils';
 import { round } from 'react-native-redash';
+import type { ViewStyle } from 'react-native';
 import type { RequiredExcept } from '@breeffy/types';
+import type { ScrollableFlatListProps } from './ScrollableFlatList';
 
 interface ScrollableFlatList<T> extends ScrollableFlatListProps<T> {
   kind: 'flatlist';

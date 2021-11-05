@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
-import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { SvgCircle } from './components/shapes/Circle';
 import { dayOfWeekWidth } from './constants';
 import { calendarDayThemeToTextStyle } from './helpers';
 import { useCalendarTheme } from './hooks/useCalendarTheme';
+import type { StyleProp, TextStyle } from 'react-native';
 
 export enum CalendarDayKind {
   DEFAULT,

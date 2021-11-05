@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 // import { Toggle } from '@breeffy/react-native-ui-elements';
-import { ToggleWithState, ToggleWithStateProps } from '@breeffy/elements';
+import { ToggleWithState } from '@breeffy/elements';
+import type { ToggleWithStateProps } from '@breeffy/elements';
 // import { MenuItem } from '../components';
 // import { styles } from '../styles';
 // import { Icons } from '../components';

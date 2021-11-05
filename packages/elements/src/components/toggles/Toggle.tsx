@@ -1,14 +1,14 @@
 import { memo, useMemo, useRef, useState } from 'react';
-import {
+import { Animated } from 'react-native';
+import { usePrevious } from '@breeffy/hooks';
+import { Svg, Rect, Circle } from 'react-native-svg';
+import isEqual from 'fast-deep-equal';
+import type {
   TouchableOpacityProps,
-  Animated,
   ViewProps,
   ViewStyle,
   StyleProp
 } from 'react-native';
-import { usePrevious } from '@breeffy/hooks';
-import { Svg, Rect, Circle } from 'react-native-svg';
-import isEqual from 'fast-deep-equal';
 
 export enum ToggleType {
   ENABLED,

@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useMemo, useRef, useState } from 'react';
-import { StyleSheet, FlatListProps } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, {
   runOnJS,
   useDerivedValue,
@@ -11,10 +11,7 @@ import {
 } from 'react-native-gesture-handler';
 import { DateTime } from 'luxon';
 import { CalendarProvider } from './contexts/external';
-import {
-  CalendarInternalContextInterface,
-  CalendarInternalProvider
-} from './contexts/internal';
+import { CalendarInternalProvider } from './contexts/internal';
 import { CalendarAnimatedProvider } from './contexts/animated';
 import { CalendarDaysOfWeekHeader } from './components/CalendarDaysOfWeekHeader';
 import { calendarYearAndMonthToMonths } from './helpers';
@@ -24,6 +21,10 @@ import { CalendarHeaderMonth } from './components/header/CalendarHeaderMonth';
 import { CalendarHeaderYear } from './components/header/CalendarHeaderYear';
 import { CalendarHeaderDecorator } from './components/header/CalendarHeaderDecorator';
 import { CalendarDayKind } from './CalendarDay';
+import { CalendarThemeProvider } from './contexts/theme';
+import { useCalendarInterval, useSelectedDates } from './hooks';
+import { CalendarThemeLight } from './themes';
+import type { FlatListProps } from 'react-native';
 import type { CalendarAnimatedContextInterface } from './contexts/animated';
 import type {
   CalendarCurrentAnimatedMonthFromCommonEra,
@@ -38,9 +39,7 @@ import type {
   CalendarTheme,
   CalendarPerformanceProps
 } from './types';
-import { CalendarThemeProvider } from './contexts/theme';
-import { useCalendarInterval, useSelectedDates } from './hooks';
-import { CalendarThemeLight } from './themes';
+import type { CalendarInternalContextInterface } from './contexts/internal';
 
 // @ts-expect-error
 const AnimatedTapGestureHandler: typeof TapGestureHandler =

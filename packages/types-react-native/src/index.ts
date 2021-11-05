@@ -1,1 +1,1 @@
-export type { PropsWithStyle } from './styles';
+export type { PropsWithStyle, PropsWithSpreadStyle } from './styles';
