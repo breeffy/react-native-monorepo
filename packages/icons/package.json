@@ -54,9 +54,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "installConfig": {
-    "hoistingLimits": "workspaces"
-  },
   "keywords": [
     "breeffy",
     "react-native",
