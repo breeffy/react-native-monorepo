@@ -12,6 +12,9 @@
     {
       "path": "../invariants"
     },
+    {
+      "path": "../utils"
+    },
   ],
   "exclude": [
     "node_modules",

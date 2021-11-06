@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@breeffy/invariants": "=0.5.0",
+    "@breeffy/utils": "=0.5.0",
     "humps": "=2.0.1"
   },
   "devDependencies": {
