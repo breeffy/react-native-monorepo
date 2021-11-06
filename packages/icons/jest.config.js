@@ -1,5 +1,6 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
   preset: 'react-native',
-  roots: ['<rootDir>/src/__tests__'],
-  modulePathIgnorePatterns: ['<rootDir>/examples']
+  roots: ['<rootDir>/src/'],
+  testEnvironment: 'node'
 };
