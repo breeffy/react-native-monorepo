@@ -38,6 +38,9 @@ function convert(
         case 'xmlns':
           delete element.attributes[key];
           break;
+        case 'focusable':
+          acc.attrs[key] = val === 'true' ? true : false;
+          break;
         default:
           if (
             key.indexOf('aria-') === 0 ||
