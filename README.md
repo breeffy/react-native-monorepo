@@ -4,11 +4,12 @@
 
 ## Components
 
-| Name          |                                Package                                 | Description                                       |
-| ------------- | :--------------------------------------------------------------------: | ------------------------------------------------- |
-| **Calendars** | [@breeffy/calendars](https://www.npmjs.com/package/@breeffy/calendars) | Performant calendars with gestures and animations |
-| **Pickers**   |   [@breeffy/pickers](https://www.npmjs.com/package/@breeffy/pickers)   | Wheel pickers, swipers, carousels                 |
-| **Elements**  |  [@breeffy/elements](https://www.npmjs.com/package/@breeffy/elements)  | **Toggle** and other essential components         |
+| Name          |                                Package                                 | Description                                                             |
+| ------------- | :--------------------------------------------------------------------: | ----------------------------------------------------------------------- |
+| **Calendars** | [@breeffy/calendars](https://www.npmjs.com/package/@breeffy/calendars) | Performant calendars with gestures and animations                       |
+| **Pickers**   |   [@breeffy/pickers](https://www.npmjs.com/package/@breeffy/pickers)   | Wheel pickers, swipers, carousels                                       |
+| **Icons**     |     [@breeffy/icons](https://www.npmjs.com/package/@breeffy/icons)     | **Icon** component to show [FontAwesome](https://fontawesome.com) icons |
+| **Elements**  |  [@breeffy/elements](https://www.npmjs.com/package/@breeffy/elements)  | **Toggle** and other essential components                               |
 
 ## Storybook
 
