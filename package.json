@@ -38,6 +38,7 @@
     "dev:android:0.65.1": "lerna run dev:android --scope='@breeffy/mobile-0.65.1' --stream",
     "dev:ios:0.65.1": "lerna run dev:ios --scope='@breeffy/mobile-0.65.1' --stream",
     "build": "lerna run build --stream",
+    "test": "lerna run test --scope='@breeffy/icons' --stream -- --colors",
     "clean:tsc": "lerna run clean:tsc --parallel",
     "clean:npm": "lerna run clean:npm --parallel && rm -rf node_modules/",
     "clean:all": "yarn run clean:tsc && yarn run clean:npm",

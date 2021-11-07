@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { invariant } from '@breeffy/invariants';
 import { isObjectHasDefinedProperty } from '../types';
-import type { Styles, Color } from 'react-native-svg';
+import type { Styles, Color, NumberProp } from 'react-native-svg';
 import type {
   IconProp,
   Transform,
@@ -16,10 +16,12 @@ import type {
   IconPrefix,
   IconName
 } from '@fortawesome/fontawesome-svg-core';
+import type { ExtraProps } from '../converter';
 import type { Key } from '../types';
 
 export const DEFAULT_SIZE = 16;
 export const DEFAULT_COLOR = '#000';
+export const DEFAULT_SECONDARY_OPACITY = 0.4;
 
 function objectWithProperty(key: Key, value: any): object {
   return (Array.isArray(value) && value.length > 0) ||
@@ -54,6 +56,8 @@ export interface IconProps {
   style?: Styles | Styles[];
   size?: number;
   color?: Color;
+  secondaryColor?: Color;
+  secondaryOpacity?: NumberProp;
   mask?: IconProp;
   transform?: string | Transform;
 }
@@ -64,6 +68,8 @@ export const Icon = ({
   style = {},
   size = DEFAULT_SIZE,
   color,
+  secondaryColor,
+  secondaryOpacity = DEFAULT_SECONDARY_OPACITY,
   transform,
   ...otherProps
 }: IconProps): JSX.Element | null => {
@@ -126,10 +132,15 @@ export const Icon = ({
     finalColor = color;
   }
 
-  const extraProps = {
+  let finalSecondaryColor: Color =
+    secondaryColor === undefined ? finalColor : secondaryColor;
+
+  const extraProps: ExtraProps = {
     height: size,
     width: size,
     fill: finalColor,
+    secondaryFill: finalSecondaryColor,
+    secondaryOpacity: secondaryOpacity,
     style: finalStyle
   };
 

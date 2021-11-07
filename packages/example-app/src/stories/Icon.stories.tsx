@@ -59,6 +59,25 @@ export const IconBasic: IconStory = _args => (
       <Icon icon={['far', 'circle-check']} color='orange' />
       <Icon icon={['far', 'file-image']} color='blue' />
     </Layout>
+    <Layout<IconProps>
+      gap={Settings.gap}
+      style={styles.rowLayout}
+      childProps={{ size: 36, color: 'orange' }}
+    >
+      <Icon icon={['fad', 'acorn']} />
+      <Icon icon={['fad', 'acorn']} secondaryOpacity={0.8} />
+      <Icon
+        icon={['fad', 'acorn']}
+        color='green'
+        secondaryColor='orange'
+        secondaryOpacity={0.8}
+      />
+      <Icon
+        icon={['fad', 'acorn']}
+        secondaryColor='green'
+        secondaryOpacity={0.8}
+      />
+    </Layout>
   </Layout>
 );
 
