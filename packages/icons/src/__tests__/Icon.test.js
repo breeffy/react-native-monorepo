@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import renderer from 'react-test-renderer';
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 import { Icon } from '..';
-import { DEFAULT_SIZE } from '../components/Icon';
+import { DEFAULT_SIZE, DEFAULT_SECONDARY_OPACITY } from '../components/Icon';
 
 jest.spyOn(React, 'createElement');
 
@@ -86,7 +86,7 @@ function getActualFillColorHex(element) {
   return null;
 }
 
-fontawesome.library.add(faCoffee, faCircle);
+fontawesome.library.add(faCoffee, faCircle, faAcorn);
 
 test.skip('renders with icon specified as array', () => {
   const tree = renderer.create(<Icon icon={['fas', 'coffee']} />).toJSON();
@@ -299,7 +299,7 @@ describe('when style is given an array and not an object', () => {
   });
 });
 
-describe.skip('duotone support', () => {
+describe('duotone support', () => {
   describe('when NO secondary color or opacity are given', () => {
     test('use the primary color at 40% opacity as the secondary color', () => {
       const styles = StyleSheet.create({
@@ -335,7 +335,7 @@ describe.skip('duotone support', () => {
     });
   });
   describe('when secondary color is given, but no secondary opacity', () => {
-    test('use the given secondary color, with opacity set to 1', () => {
+    test('use the given secondary color, with default secondary opacity', () => {
       const styles = StyleSheet.create({
         icon: {
           color: 'blue'
@@ -348,7 +348,9 @@ describe.skip('duotone support', () => {
         .toJSON();
       const secondaryLayer = tree.children[0].children[0].children[0];
       expect(getActualFillColorHex(secondaryLayer)).toEqual(redHex);
-      expect(secondaryLayer.props.fillOpacity).toEqual(1);
+      expect(secondaryLayer.props.fillOpacity).toEqual(
+        DEFAULT_SECONDARY_OPACITY
+      );
     });
   });
   describe('when secondary color and secondary opacity are given', () => {
