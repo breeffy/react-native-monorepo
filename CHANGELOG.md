@@ -1,3 +1,5 @@
+> **Legend:** :boom: _Breaking Change_ | :fire: _Major Feature_ | :rocket: _Feature_ | :bug: _Bug_
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -8,6 +10,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/breeffy/react-native-calendar/compare/v0.5.0...HEAD)
 
 > No changes
+
+## [v0.6.0](https://github.com/breeffy/react-native-calendar/compare/v0.5.0...v0.6.0)
+
+## Packages
+
+### @breeffy/icons
+
+- :fire: **New:** **Icon** component to show [FontAwesome](https://fontawesome.com) icons. Supports **duotone** icons.
+
+### @breeffy/elements
+
+- :rocket: **New:** **Layout** component to easily build grid-like layouts. It's usage can be found in [Icon](https://github.com/breeffy/react-native-monorepo/blob/d5e040d0d4a4a1aed7625062ccf44ecf88374367/packages/example-app/src/stories/Icon.stories.tsx#L25) story.
+
+### @breeffy/utils
+
+- :rocket: **New:** `enableLogging` function to enable logging for debugging purposes.
+- :rocket: **New:** `configureLogger` logger factory to print debug information (_disabled_ in release builds)
+
+## Storybook
+
+- :fire: **Add:** preview **Icon** component.
+
+## License
+
+Add [MIT license mention](https://github.com/breeffy/react-native-monorepo/blob/d5e040d0d4a4a1aed7625062ccf44ecf88374367/LICENSE#L183) for code derived from [react-native-fontawesome](https://github.com/FortAwesome/react-native-fontawesome).
 
 ## [v0.5.0](https://github.com/breeffy/react-native-calendar/compare/v0.4.1...v0.5.0)
 
