@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/icons",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Icons UI components",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -18,8 +18,8 @@
     "react-native-svg": "*"
   },
   "dependencies": {
-    "@breeffy/invariants": "=0.5.0",
-    "@breeffy/utils": "=0.5.0",
+    "@breeffy/invariants": "^0.6.0",
+    "@breeffy/utils": "^0.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.3.0-beta2",
     "humps": "=2.0.1"
   },

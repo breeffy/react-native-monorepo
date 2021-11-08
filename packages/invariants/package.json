@@ -1,6 +1,6 @@
 {
   "name": "@breeffy/invariants",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Assertion TypeScript functions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
