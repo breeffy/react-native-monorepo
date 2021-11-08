@@ -28,7 +28,7 @@
   },
   "scripts": {
     "prepack": "yarn build",
-    "version": "yarn install && git stage yarn.lock",
+    "version": "YARN_ENABLE_IMMUTABLE_INSTALLS='false' yarn install && git stage yarn.lock",
     "dev:android": "lerna run dev:android --scope='@breeffy/mobile-0.66.1' --stream",
     "dev:ios": "lerna run dev:ios --scope='@breeffy/mobile-0.66.1' --stream",
     "dev:android:0.66.1": "lerna run dev:android --scope='@breeffy/mobile-0.66.1' --stream",
