@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { invariant } from '@breeffy/invariants';
 import { isObjectHasDefinedProperty } from '../types';
+import type { ViewStyle } from 'react-native';
 import type { Styles, Color, NumberProp } from 'react-native-svg';
 import type {
   IconProp,
@@ -60,6 +61,7 @@ export interface IconProps {
   secondaryOpacity?: NumberProp;
   mask?: IconProp;
   transform?: string | Transform;
+  testID?: ViewStyle['testID'];
 }
 
 export const Icon = ({
@@ -71,6 +73,7 @@ export const Icon = ({
   secondaryColor,
   secondaryOpacity = DEFAULT_SECONDARY_OPACITY,
   transform,
+  testID,
   ...otherProps
 }: IconProps): JSX.Element | null => {
   // Here we test essential invariants
