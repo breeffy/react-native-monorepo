@@ -1,4 +1,11 @@
-import { forwardRef, useCallback, useMemo, useRef, useState } from 'react';
+import {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import { StyleSheet } from 'react-native';
 import Animated, {
   runOnJS,
@@ -24,7 +31,9 @@ import { CalendarDayKind } from './CalendarDay';
 import { CalendarThemeProvider } from './contexts/theme';
 import { useCalendarInterval, useSelectedDates } from './hooks';
 import { CalendarThemeLight } from './themes';
+import type { ForwardedRef } from 'react';
 import type { FlatListProps } from 'react-native';
+import type { FlatList as RNGestureHandlerFlatList } from 'react-native-gesture-handler';
 import type { CalendarAnimatedContextInterface } from './contexts/animated';
 import type {
   CalendarCurrentAnimatedMonthFromCommonEra,
@@ -109,6 +118,11 @@ export type CalendarProps = {
   performanceProps?: CalendarPerformanceProps;
 
   /**
+   * Reference to internal animated FlatList
+   */
+  animatedFlatListRef?: ForwardedRef<RNGestureHandlerFlatList<any>>;
+
+  /**
    * Callback is called when state of a day changes,
    * i.e. it's selected / unselected.
    *
@@ -133,6 +147,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       theme = CalendarThemeLight,
       performanceProps,
       style: _containerStyle,
+      animatedFlatListRef,
       onDayStateChange
     }: CalendarProps,
     ref
@@ -256,10 +271,14 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       [selectDate, deselectDate, onDayStateChange]
     );
 
-    // useImperativeHandle(ref, () => ({
-    //   select: selectDate,
-    //   deselect: deselectDate
-    // }));
+    useImperativeHandle(
+      ref,
+      () => ({
+        select: selectDate,
+        deselect: deselectDate
+      }),
+      [selectDate, deselectDate]
+    );
 
     const contentWrapperRef = useRef<typeof AnimatedTapGestureHandler>(null);
 
@@ -329,7 +348,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
 
                 <CalendarDaysOfWeekHeader />
                 <CalendarScrollableMonths
-                  ref={ref}
+                  ref={animatedFlatListRef}
                   scrollMode={scrollMode}
                   scrollModeDeceleration={scrollModeDeceleration}
                   activeCalendarDay={activeCalendarDay}
