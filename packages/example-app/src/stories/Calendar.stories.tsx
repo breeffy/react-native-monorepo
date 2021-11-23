@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Calendar } from '@breeffy/calendars';
 import type { CalendarMethods } from '@breeffy/calendars';
 import type { ComponentStory, ComponentMeta } from '@storybook/react-native';
@@ -70,3 +70,22 @@ CalendarWithRef.args = {
   ...CalendarMeta.args
 };
 CalendarWithRef.storyName = 'set tomorrow using ref';
+
+export const CalendarWithSelectedDates: CalendarStory = args => {
+  const initialSelectedDates = useMemo(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return [
+      {
+        year: tomorrow.getFullYear(),
+        month: tomorrow.getMonth() + 1,
+        day: tomorrow.getDate()
+      }
+    ];
+  }, []);
+  return <Calendar {...args} initialSelectedDates={initialSelectedDates} />;
+};
+CalendarWithSelectedDates.args = {
+  ...CalendarMeta.args
+};
+CalendarWithSelectedDates.storyName = 'set tomorrow using prop';
