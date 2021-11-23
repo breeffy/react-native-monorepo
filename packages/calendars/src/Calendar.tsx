@@ -71,6 +71,14 @@ export type CalendarProps = {
   initialCalendarYearAndMonth?: CalendarYearAndMonth;
 
   /**
+   * Initial selected dates.
+   *
+   * If `selectionMode` is `singleDay` only array with one date is allowed.
+   * @defaultValue `[]`
+   */
+  initialSelectedDates?: CalendarDate[];
+
+  /**
    * Amount of months before initial year and month,
    * which will be shown in a calendar.
    * @defaultValue `50`
@@ -138,6 +146,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
   (
     {
       initialCalendarYearAndMonth: _initialCalendarYearAndMonth,
+      initialSelectedDates = [],
       monthsBefore = 50,
       monthsAfter = 50,
       selectionMode = 'singleDay',
@@ -256,8 +265,10 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       ]
     );
 
-    const [selectedDates, selectDate, deselectDate] =
-      useSelectedDates(selectionMode);
+    const [selectedDates, selectDate, deselectDate] = useSelectedDates(
+      selectionMode,
+      initialSelectedDates
+    );
 
     const onCalendarDayStateChange = useCallback(
       (day: CalendarDate, calendarKind: CalendarDayKind) => {
