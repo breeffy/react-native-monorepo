@@ -99,6 +99,13 @@ export type CalendarProps = {
   selectionMode?: CalendarSelectionMode;
 
   /**
+   * If calendar has only one (last) selected date,
+   * can we unselect it by tapping on this date?
+   * @defaultValue `true`
+   */
+  allowDeselectLastSelectedDate?: boolean;
+
+  /**
    * How much months can be scrolled over.
    * @defaultValue `multipleMonths`
    */
@@ -115,6 +122,7 @@ export type CalendarProps = {
    * If provided, will be highlighted in active color.
    */
   activeCalendarDay?: CalendarDate;
+
   /**
    * Theme object to customize calendar appearance
    */
@@ -153,6 +161,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       scrollMode = 'oneMonth',
       scrollModeDeceleration = 'normal',
       activeCalendarDay: _activeCalendarDay,
+      allowDeselectLastSelectedDate = true,
       theme = CalendarThemeLight,
       performanceProps,
       style: _containerStyle,
@@ -265,21 +274,28 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
       ]
     );
 
-    const [selectedDates, selectDate, deselectDate] = useSelectedDates(
-      selectionMode,
-      initialSelectedDates
-    );
+    const [selectedDates, isLastSelectedDate, selectDate, deselectDate] =
+      useSelectedDates(selectionMode, initialSelectedDates);
 
     const onCalendarDayStateChange = useCallback(
       (day: CalendarDate, calendarKind: CalendarDayKind) => {
         if (calendarKind === CalendarDayKind.SELECTED) {
           selectDate(day);
+          onDayStateChange?.(day, calendarKind);
         } else if (calendarKind === CalendarDayKind.DEFAULT) {
-          deselectDate(day);
+          deselectDate(day, allowDeselectLastSelectedDate);
+          if (allowDeselectLastSelectedDate || !isLastSelectedDate) {
+            onDayStateChange?.(day, calendarKind);
+          }
         }
-        onDayStateChange?.(day, calendarKind);
       },
-      [selectDate, deselectDate, onDayStateChange]
+      [
+        allowDeselectLastSelectedDate,
+        isLastSelectedDate,
+        selectDate,
+        deselectDate,
+        onDayStateChange
+      ]
     );
 
     useImperativeHandle(
@@ -308,6 +324,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
         selectDate: selectDate,
         deselectDate: deselectDate,
         selectedDates: selectedDates,
+        allowDeselectLastSelectedDate: allowDeselectLastSelectedDate,
         monthsBefore,
         monthsAfter,
         startCalendarYearAndMonth: startCalendarYearAndMonth,
@@ -323,6 +340,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
         selectDate,
         deselectDate,
         selectedDates,
+        allowDeselectLastSelectedDate,
         monthsBefore,
         monthsAfter,
         startCalendarYearAndMonth,

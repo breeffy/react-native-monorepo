@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { invariant } from '@breeffy/invariants';
 import { isCalendarDatesEqual } from '../helpers';
 import type { CalendarDate, CalendarSelectionMode } from '../types';
@@ -10,8 +10,12 @@ export const useSelectedDates = (
   initialSelectedDates: CalendarDate[]
 ): [
   selectedDates: SelectedDates,
+  isLastSelectedDate: boolean,
   selectDate: (day: CalendarDate) => void,
-  deselectDate: (day: CalendarDate) => void
+  deselectDate: (
+    day: CalendarDate,
+    allowDeselectLastSelectedDate?: boolean
+  ) => void
 ] => {
   invariant(
     selectionMode === 'multipleDays' ||
@@ -23,6 +27,11 @@ export const useSelectedDates = (
 
   const [selectedDates, setSelectedDates] =
     useState<SelectedDates>(initialSelectedDates);
+
+  const isLastSelectedDate = useMemo(() => {
+    return selectedDates.length === 1;
+  }, [selectedDates]);
+
   const selectDate = useCallback(
     (day: CalendarDate) => {
       if (selectionMode === 'singleDay') {
@@ -34,11 +43,19 @@ export const useSelectedDates = (
     [selectionMode]
   );
 
-  const deselectDate = useCallback((day: CalendarDate) => {
-    setSelectedDates(prevSelectedDates =>
-      prevSelectedDates.filter(it => !isCalendarDatesEqual(it, day))
-    );
-  }, []);
+  const deselectDate = useCallback(
+    (day: CalendarDate, allowDeselectLastSelectedDate: boolean = true) => {
+      setSelectedDates(prevSelectedDates => {
+        const allowDeselect =
+          allowDeselectLastSelectedDate || !isLastSelectedDate;
+        if (allowDeselect) {
+          return prevSelectedDates.filter(it => !isCalendarDatesEqual(it, day));
+        }
+        return prevSelectedDates;
+      });
+    },
+    [isLastSelectedDate]
+  );
 
-  return [selectedDates, selectDate, deselectDate];
+  return [selectedDates, isLastSelectedDate, selectDate, deselectDate];
 };
