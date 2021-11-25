@@ -9,10 +9,6 @@ on:
       prerelease:
         description: 'beta, alpha or rc prerelease'
         required: false
-      draft:
-        description: 'github release type: true or false'
-        required: true
-        default: 'true'
 
 jobs:
   release-package:
