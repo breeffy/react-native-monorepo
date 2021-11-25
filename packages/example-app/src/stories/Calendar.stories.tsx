@@ -35,7 +35,8 @@ const CalendarMeta: ComponentMeta<typeof Calendar> = {
     monthsBefore: 24,
     monthsAfter: 24,
     scrollMode: 'oneMonth',
-    selectionMode: 'singleDay'
+    selectionMode: 'singleDay',
+    allowDeselectLastSelectedDate: true
   }
 };
 
