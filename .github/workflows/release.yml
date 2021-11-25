@@ -3,12 +3,20 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'prerelease, patch, minor or major version'
+        description: 'Select published version'
         required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prerelease
         default: 'patch'
       prerelease:
-        description: 'beta, alpha or rc prerelease'
-        required: false
+        description: 'Is prerelease published?'
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   release-package:
