@@ -63,11 +63,11 @@ export type NumberPickerProps<T> = Omit<
    * If element of items array has type **string**
    * this function is called to convert to number
    */
-  convertItemToNumber?: (item: T) => number;
+  convertItemToNumber?: (item: T & string) => number;
   currentValue: Animated.SharedValue<number>;
 };
 
-export const NumberPicker = <T extends number | string>(
+export const NumberPicker = <T extends number | string = number | string>(
   props: NumberPickerProps<T>
 ) => {
   const {
@@ -88,10 +88,6 @@ export const NumberPicker = <T extends number | string>(
     convertItemToNumber
   } = props;
 
-  const itemPickerProps = useMemo(() => {
-    return { ...props, convertItemToNumber: undefined };
-  }, [props]);
-
   const numberItems = useMemo(() => {
     return items.map(it => {
       if (typeof it === 'number') {
@@ -109,6 +105,10 @@ export const NumberPicker = <T extends number | string>(
       );
     });
   }, [items, convertItemToNumber]);
+
+  const itemPickerProps = useMemo(() => {
+    return { ...props, convertItemToNumber: undefined };
+  }, [props]);
 
   const currentIndex = useSharedValue<number>(initialIndex);
 
