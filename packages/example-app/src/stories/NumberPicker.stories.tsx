@@ -6,6 +6,13 @@ import { PickerDetails } from '../components/PickerInfo';
 import type { ComponentStory, ComponentMeta } from '@storybook/react-native';
 import type { NumberPickerProps } from '@breeffy/pickers';
 
+const NumberFormat = new Intl.NumberFormat('en-US', {
+  style: 'decimal',
+  signDisplay: 'never',
+  useGrouping: false,
+  minimumIntegerDigits: 2
+});
+
 const NumberPickerMeta: ComponentMeta<typeof NumberPicker> = {
   title: 'NumberPicker',
   component: NumberPicker,
@@ -57,7 +64,7 @@ const NumberPickerMeta: ComponentMeta<typeof NumberPicker> = {
 export default NumberPickerMeta;
 
 type NumberPickerStory = ComponentStory<typeof NumberPicker>;
-type RenderItemCallback = NumberPickerProps<number>['renderItem'];
+type RenderItemCallback = NumberPickerProps<number | string>['renderItem'];
 
 const Template: NumberPickerStory = args => {
   const value = useSharedValue(0);
@@ -65,7 +72,7 @@ const Template: NumberPickerStory = args => {
   const rawIndex = useSharedValue(0);
 
   const keyExtractor = useCallback(
-    (_: number, index: number) => `${index}`,
+    (_: number | string, index: number) => `${index}`,
     []
   );
 
@@ -98,3 +105,11 @@ NumberPickerStoryOne.args = {
   ...NumberPickerMeta.args
 };
 NumberPickerStoryOne.storyName = 'horizontal';
+
+export const NumberPickerWithStringItem: NumberPickerStory = Template.bind({});
+NumberPickerWithStringItem.args = {
+  ...NumberPickerMeta.args,
+  items: NumberPickerKind.Hours.map(it => NumberFormat.format(it)),
+  convertItemToNumber: item => Number.parseInt(item, 10)
+};
+NumberPickerWithStringItem.storyName = 'with string items';
