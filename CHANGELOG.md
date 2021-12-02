@@ -7,9 +7,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/breeffy/react-native-monorepo/compare/v0.6.2...HEAD)
+## [Unreleased](https://github.com/breeffy/react-native-monorepo/compare/v0.8.0...HEAD)
 
 > No changes
+
+## [v0.7.0](https://github.com/breeffy/react-native-monorepo/compare/v0.6.2...v0.7.0)
+
+## Packages
+
+### @breeffy/calendars
+
+- :rocket: **New:** `initialSelectedDates` property to pass initial selected dates [136](https://github.com/breeffy/react-native-monorepo/issues/136)
+- :rocket: **New:** `allowDeselectLastSelectedDate` to enable unselection of last selected date [138](https://github.com/breeffy/react-native-monorepo/issues/138)
+
+## Storybook
+
+- :rocket: **Add:** Showcase `initialSelectedDates` calendar property
 
 ## [v0.6.2](https://github.com/breeffy/react-native-monorepo/compare/v0.6.1...v0.6.2)
 
