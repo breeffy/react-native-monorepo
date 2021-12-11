@@ -2,10 +2,11 @@ import { DateTime } from 'luxon';
 import type { TextStyle } from 'react-native';
 import type {
   CalendarDate,
+  CalendarDisabledRange,
   CalendarMonth,
   CalendarWeek,
   CalendarYearAndMonth
-} from './types/public';
+} from './types';
 import type {
   CalendarDaysOfWeekTheme,
   CalendarDayTheme,
@@ -163,6 +164,54 @@ export const isCalendarWeek = (
   daysRange: CalendarDate[]
 ): daysRange is CalendarWeek => {
   return daysRange.length === 7;
+};
+
+export const isCalendarDateInDisabledRange = (
+  date: CalendarDate,
+  range: CalendarDisabledRange
+) => {
+  const [startDate, endDate] = range;
+  if (startDate === undefined && endDate !== undefined) {
+    if (date.year > endDate.year) {
+      return false;
+    } else if (date.month > endDate.month) {
+      return false;
+    } else if (date.day >= endDate.day) {
+      return false;
+    }
+  } else if (startDate !== undefined && endDate === undefined) {
+    if (date.year < startDate.year) {
+      return false;
+    } else if (date.month < startDate.month) {
+      return false;
+    } else if (date.day < startDate.day) {
+      return false;
+    }
+  } else if (startDate !== undefined && endDate !== undefined) {
+    if (date.year < startDate.year || date.year > endDate.year) {
+      return false;
+    } else if (date.month < startDate.month || date.month > endDate.month) {
+      return false;
+    } else if (date.day < startDate.day || date.day >= endDate.day) {
+      return false;
+    }
+  }
+  return true;
+};
+
+export const isCalendarDateInDisabledRanges = (
+  date: CalendarDate,
+  ranges: CalendarDisabledRange[]
+) => {
+  let isInAnyRange = false;
+  for (const range of ranges) {
+    const isInRange = isCalendarDateInDisabledRange(date, range);
+    if (isInRange) {
+      isInAnyRange = true;
+      break;
+    }
+  }
+  return isInAnyRange;
 };
 
 export const calendarYearAndMonthToMonths = (

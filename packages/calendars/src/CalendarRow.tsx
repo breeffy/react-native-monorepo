@@ -9,15 +9,17 @@ import {
   dateTimeArraysDifference,
   getCalendarDateFromId,
   getIdFromCalendarDate,
+  isCalendarDateInDisabledRanges,
   isCalendarDatesEqual,
   isCalendarWeeksEqual,
   isCalendarYearAndMonthEqual
 } from './helpers';
 import type {
   CalendarDate,
+  CalendarDisabledRange,
   CalendarWeek,
   CalendarYearAndMonth
-} from './types/public';
+} from './types';
 import type { ViewStyleProp } from './types/props';
 
 export type CalendarRowProps = {
@@ -25,6 +27,7 @@ export type CalendarRowProps = {
   calendarYearAndMonth: CalendarYearAndMonth;
   activeCalendarDay: CalendarDate;
   selectedDates: CalendarDate[];
+  disabledDateRanges: CalendarDisabledRange[];
   onCalendarDayPress?: (day: CalendarDate, kind: CalendarDayKind) => void;
 } & ViewStyleProp;
 
@@ -33,6 +36,7 @@ const CalendarRowComponent = ({
   calendarYearAndMonth,
   activeCalendarDay,
   selectedDates: _selectedDates,
+  disabledDateRanges,
   style,
   onCalendarDayPress: _onCalendarDayPress
 }: CalendarRowProps) => {
@@ -70,7 +74,12 @@ const CalendarRowComponent = ({
       {calendarWeek.map(dayOfWeek => {
         const id = getIdFromCalendarDate(dayOfWeek);
         let kind = CalendarDayKind.DISABLED;
-        if (dayOfWeek.month === calendarYearAndMonth.month) {
+
+        const isDisabled =
+          disabledDateRanges.length > 0 &&
+          isCalendarDateInDisabledRanges(dayOfWeek, disabledDateRanges);
+
+        if (!isDisabled && dayOfWeek.month === calendarYearAndMonth.month) {
           /**
            * All days are CalendarDayKind.DEFAULT by default.
            * Later adjusting selected and active days.

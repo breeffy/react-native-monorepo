@@ -11,13 +11,18 @@ import {
   isCalendarYearAndMonthEqual,
   monthContainsSomeDate
 } from '../helpers';
-import type { CalendarDate, CalendarYearAndMonth } from '../types';
+import type {
+  CalendarDate,
+  CalendarYearAndMonth,
+  CalendarDisabledRange
+} from '../types';
 import type { CalendarDayKind } from '../CalendarDay';
 
 export interface CalendarMonthProps {
   calendarYearAndMonth: CalendarYearAndMonth;
   activeCalendarDay: CalendarDate;
   selectedDates: CalendarDate[];
+  disabledDateRanges: CalendarDisabledRange[];
   onCalendarDayPress?: (day: CalendarDate, kind: CalendarDayKind) => void;
 }
 
@@ -25,6 +30,7 @@ const CalendarMonthComponent = ({
   calendarYearAndMonth,
   activeCalendarDay,
   selectedDates,
+  disabledDateRanges,
   onCalendarDayPress
 }: CalendarMonthProps) => {
   // console.log(
@@ -84,6 +90,7 @@ const CalendarMonthComponent = ({
             calendarYearAndMonth={calendarYearAndMonth}
             activeCalendarDay={activeCalendarDay}
             selectedDates={selectedDates}
+            disabledDateRanges={disabledDateRanges}
             onCalendarDayPress={onCalendarDayPress}
           />
         );

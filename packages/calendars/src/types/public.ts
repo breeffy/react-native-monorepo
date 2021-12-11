@@ -35,6 +35,11 @@ export type CalendarWeek = [
   CalendarDate
 ];
 
+export type CalendarDisabledRange = [
+  startDateInclusive?: CalendarDate,
+  endDateExclusive?: CalendarDate
+];
+
 export interface CalendarMethods {
   /**
    * Select specific date on calendar.
