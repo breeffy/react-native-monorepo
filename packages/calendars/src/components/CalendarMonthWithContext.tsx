@@ -13,14 +13,19 @@ export interface CalendarMonthWithContextProps {
 export const CalendarMonthWithContext = ({
   calendarYearAndMonth
 }: CalendarMonthWithContextProps) => {
-  const { activeCalendarDay, selectedDates, onCalendarDayStateChange } =
-    useCalendarInternal();
+  const {
+    activeCalendarDay,
+    selectedDates,
+    disabledDateRanges,
+    onCalendarDayStateChange
+  } = useCalendarInternal();
 
   return (
     <CalendarMonth
       calendarYearAndMonth={calendarYearAndMonth}
       activeCalendarDay={activeCalendarDay}
       selectedDates={selectedDates}
+      disabledDateRanges={disabledDateRanges}
       onCalendarDayPress={onCalendarDayStateChange}
     />
   );

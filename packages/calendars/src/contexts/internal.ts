@@ -3,7 +3,8 @@ import type { Interval } from 'luxon';
 import type {
   CalendarDate,
   CalendarYearAndMonth,
-  CalendarCurrentAnimatedMonthFromCommonEra
+  CalendarCurrentAnimatedMonthFromCommonEra,
+  CalendarDisabledRange
 } from '../types';
 import type { CalendarDayKind } from '../CalendarDay';
 
@@ -18,6 +19,7 @@ export interface CalendarInternalContextInterface {
   deselectDate: (day: CalendarDate) => void;
   onCalendarDayStateChange: (day: CalendarDate, kind: CalendarDayKind) => void;
   selectedDates: CalendarDate[];
+  disabledDateRanges: CalendarDisabledRange[];
   monthsBefore: number;
   monthsAfter: number;
 }

@@ -15,7 +15,8 @@ export type {
   CalendarStartMonthFromCommonEra,
   CalendarWeek,
   CalendarYear,
-  CalendarYearAndMonth
+  CalendarYearAndMonth,
+  CalendarDisabledRange
 } from './public';
 export type { ViewStyleProp, WithStyleProp } from './props';
 export type {

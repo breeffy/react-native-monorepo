@@ -46,7 +46,8 @@ import type {
   ViewStyleProp,
   CalendarSelectionMode,
   CalendarTheme,
-  CalendarPerformanceProps
+  CalendarPerformanceProps,
+  CalendarDisabledRange
 } from './types';
 import type { CalendarInternalContextInterface } from './contexts/internal';
 
@@ -74,9 +75,25 @@ export type CalendarProps = {
    * Initial selected dates.
    *
    * If `selectionMode` is `singleDay` only array with one date is allowed.
+   *
+   * If any date from this range falls into `disabledDateRanges` ranges,
+   * it **becomes disabled** and **will not be selected**.
    * @defaultValue `[]`
    */
   initialSelectedDates?: CalendarDate[];
+
+  /**
+   * Ranges of dates which will be shown as **disabled**.
+   * They appear with greyed color, unresponsive (can't be selected or unselected).
+   *
+   * If `startDateInclusive` is set as `undefined` all dates up until `endDateExclusive` **become disabled**.
+   *
+   * If `endDateExclusive` is set as `undefined` all dates after `startDateInclusive` (including this date) **become disabled**.
+   *
+   * If both `startDateInclusive` and `endDateExclusive` are set as `undefined` **all dates become disabled**.
+   * @defaultValue `[]`
+   */
+  disabledDateRanges?: CalendarDisabledRange[];
 
   /**
    * Amount of months before initial year and month,
@@ -119,7 +136,10 @@ export type CalendarProps = {
 
   /**
    * Active (current) calendar day.
-   * If provided, will be highlighted in active color.
+   * If provided, it will be highlighted in active color.
+   *
+   * If date falls into `disabledDateRanges` ranges,
+   * it **becomes disabled** and **will not be active**.
    */
   activeCalendarDay?: CalendarDate;
 
@@ -155,6 +175,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
     {
       initialCalendarYearAndMonth: _initialCalendarYearAndMonth,
       initialSelectedDates = [],
+      disabledDateRanges = [],
       monthsBefore = 50,
       monthsAfter = 50,
       selectionMode = 'singleDay',
@@ -324,6 +345,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
         selectDate: selectDate,
         deselectDate: deselectDate,
         selectedDates: selectedDates,
+        disabledDateRanges: disabledDateRanges,
         allowDeselectLastSelectedDate: allowDeselectLastSelectedDate,
         monthsBefore,
         monthsAfter,
@@ -340,6 +362,7 @@ export const Calendar = forwardRef<CalendarMethods, CalendarProps>(
         selectDate,
         deselectDate,
         selectedDates,
+        disabledDateRanges,
         allowDeselectLastSelectedDate,
         monthsBefore,
         monthsAfter,
