@@ -49,6 +49,14 @@ const Template: CalendarStory = args => (
   <Calendar scrollModeDeceleration='fast' {...args} />
 );
 
+export const CalendarScrollingFreeze: CalendarStory = Template.bind({});
+CalendarScrollingFreeze.args = {
+  ...CalendarMeta.args,
+  scrollMode: 'anyOffset',
+  scrollModeDeceleration: 'normal'
+};
+CalendarScrollingFreeze.storyName = 'freeze';
+
 export const CalendarScrollOneMonth: CalendarStory = Template.bind({});
 CalendarScrollOneMonth.args = {
   ...CalendarMeta.args
