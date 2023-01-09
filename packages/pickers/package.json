@@ -22,7 +22,7 @@
   "dependencies": {
     "@breeffy/invariants": "^0.9.0",
     "@breeffy/utils": "^0.9.0",
-    "luxon": "^1.25.0",
+    "luxon": "^2.5.2",
     "react-native-redash": "^16.2.2"
   },
   "devDependencies": {
